@@ -1,7 +1,8 @@
 {
   "name": "ClientApp",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }
