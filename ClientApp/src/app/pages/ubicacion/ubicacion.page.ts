@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { LoadingController } from "@ionic/angular";
+import { Router, ActivatedRoute, Params } from "@angular/router";
+
 declare var google;
 @Component({
   selector: "app-ubicacion",
@@ -11,7 +13,8 @@ export class UbicacionPage implements OnInit {
   mapRef = null;
   constructor(
     private geolocation: Geolocation,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -27,7 +30,7 @@ export class UbicacionPage implements OnInit {
     // create map
     this.mapRef = new google.maps.Map(mapEle, {
       center: myLatLng,
-      zoom: 12,
+      zoom: 15,
     });
     google.maps.event.addListenerOnce(this.mapRef, "idle", () => {
       // loaded
@@ -43,7 +46,11 @@ export class UbicacionPage implements OnInit {
       },
       zoom: 8,
       map: this.mapRef,
-      title: "Hello World!",
+      title: "Ubicación",
+      icon: {
+        url: "https://image.flaticon.com/icons/svg/1476/1476763.svg", // url
+        scaledSize: new google.maps.Size(50, 50), // size
+      },
     });
   }
   private async getLocation() {
@@ -52,5 +59,8 @@ export class UbicacionPage implements OnInit {
       lat: rta.coords.latitude,
       lng: rta.coords.longitude,
     };
+  }
+  getMenu() {
+    this.router.navigateByUrl("/inicio");
   }
 }

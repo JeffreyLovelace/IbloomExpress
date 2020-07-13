@@ -1,9 +1,56 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>inicio</ion-title>
+    <ion-title>Ibloom Express</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-slides
+    class="slide-padding"
+    pager="true"
+    autoplay="true"
+    loop="true"
+    speed="3000"
+  >
+    <ion-slide *ngFor="let story of topStories">
+      <div class="container">
+        <ion-img src="{{story.picture}}"></ion-img>
+      </div>
+    </ion-slide>
+  </ion-slides>
 
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Qué desea llevar?</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4" *ngFor="let c of [1,1,1,1,1,1,1];">
+            <ion-img src="/assets/logo-amtrak.png"></ion-img>
+            <p>Restaurante</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Promociones</ion-card-title>
+    </ion-card-header>
+    <ion-slides class="slide-padding" pager="true">
+      <ion-slide *ngFor="let story of topStories">
+        <div class="container">
+          <ion-img src="{{story.picture}}"></ion-img>
+        </div>
+      </ion-slide>
+    </ion-slides>
+    <div class="sub-headers">
+      <p>Latest News</p>
+    </div>
+  </ion-card>
 </ion-content>
