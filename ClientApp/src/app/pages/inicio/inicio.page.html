@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>Ibloom Express</ion-title>
     <ion-buttons slot="start">
-      <ion-menu-button menu="main-menu"></ion-menu-button>
+      <ion-menu-button menu="main-menu" mode="ios"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -11,9 +11,7 @@
   <ion-slides
     class="slide-padding"
     pager="true"
-    autoplay="true"
-    loop="true"
-    speed="3000"
+    (ionSlideDidChange)="slideChanged()"
   >
     <ion-slide *ngFor="let story of topStories">
       <div class="container">
@@ -30,7 +28,10 @@
       <ion-grid>
         <ion-row>
           <ion-col size="4" *ngFor="let c of [1,1,1,1,1,1,1];">
-            <ion-img src="/assets/logo-amtrak.png"></ion-img>
+            <ion-img
+              src="/assets/logo-amtrak.png"
+              [routerLink]="['/comercios']"
+            ></ion-img>
             <p>Restaurante</p>
           </ion-col>
         </ion-row>
@@ -49,8 +50,5 @@
         </div>
       </ion-slide>
     </ion-slides>
-    <div class="sub-headers">
-      <p>Latest News</p>
-    </div>
   </ion-card>
 </ion-content>

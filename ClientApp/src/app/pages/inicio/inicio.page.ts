@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { IonSlides } from "@ionic/angular";
 
 @Component({
@@ -7,7 +7,9 @@ import { IonSlides } from "@ionic/angular";
   styleUrls: ["./inicio.page.scss"],
 })
 export class InicioPage implements OnInit {
+  @ViewChild("slides") slides;
   topStories: any;
+
   constructor() {
     this.topStories = [
       {
@@ -36,6 +38,10 @@ export class InicioPage implements OnInit {
       },
     ];
   }
-
+  slideChanged() {
+    this.slides.nativeElement.getActiveIndex().then((index) => {
+      console.log(index);
+    });
+  }
   ngOnInit() {}
 }
