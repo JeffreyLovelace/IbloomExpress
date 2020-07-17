@@ -40,6 +40,26 @@ const routes: Routes = [
     path: 'comercios',
     loadChildren: () => import('./pages/comercios/comercios.module').then( m => m.ComerciosPageModule)
   },
+  {
+    path: 'platos',
+    loadChildren: () => import('./pages/platos/platos.module').then( m => m.PlatosPageModule)
+  },
+  {
+    path: 'detalleproducto',
+    loadChildren: () => import('./pages/detalleproducto/detalleproducto.module').then( m => m.DetalleproductoPageModule)
+  },
+  {
+    path: 'carrito',
+    loadChildren: () => import('./pages/carrito/carrito.module').then( m => m.CarritoPageModule)
+  },
+  {
+    path: 'pedido',
+    loadChildren: () => import('./pages/pedido/pedido.module').then( m => m.PedidoPageModule)
+  },
+  {
+    path: 'detallecomercio',
+    loadChildren: () => import('./pages/detallecomercio/detallecomercio.module').then( m => m.DetallecomercioPageModule)
+  },
 ];
 
 @NgModule({

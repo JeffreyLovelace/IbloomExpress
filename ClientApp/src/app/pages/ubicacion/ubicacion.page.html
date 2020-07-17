@@ -1,12 +1,15 @@
-<ion-header>
+<ion-header mode="ios">
   <ion-toolbar>
-    <ion-title>ubicacion</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">ubicacion</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div id="map"></div>
-  <ion-button color="light" mode="ios" expand="block" shape="round"
+  <ion-button mode="ios" expand="block" shape="round" fill="outline"
     >Mis direcciones</ion-button
   >
   <ion-button mode="ios" expand="block" shape="round" (click)="getMenu()"

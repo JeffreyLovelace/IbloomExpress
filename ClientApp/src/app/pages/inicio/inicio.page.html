@@ -1,9 +1,35 @@
-<ion-header>
+<ion-header mode="ios">
   <ion-toolbar>
-    <ion-title>Ibloom Express</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu" mode="ios"></ion-menu-button>
     </ion-buttons>
+    <ion-buttons slot="primary" routerLink="/carrito">
+      <ion-button>
+        <ion-icon
+          slot="icon-only"
+          ios="cart-outline"
+          md="cart-outline"
+        ></ion-icon>
+        <ion-badge color="danger">1 </ion-badge>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon
+          slot="icon-only"
+          ios="search-outline"
+          md="search-sharp"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>
+      <ion-select interface="popover">
+        <ion-select-option value="nes">NES12321</ion-select-option>
+        <ion-select-option value="n64">Nintendo64</ion-select-option>
+        <ion-select-option value="ps">PlayStation</ion-select-option>
+      </ion-select>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 

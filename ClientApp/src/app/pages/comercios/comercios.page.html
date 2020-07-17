@@ -1,39 +1,128 @@
-<ion-header>
+<ion-header mode="ios">
   <ion-toolbar>
-    <ion-title>comercios</ion-title>
+    <ion-button fill="clear" (click)="back()">
+      <ion-icon slot="start" name="arrow-back-outline" color="dark"></ion-icon>
+    </ion-button>
+    <ion-buttons slot="primary" routerLink="/carrito">
+      <ion-button>
+        <ion-icon
+          slot="icon-only"
+          ios="cart-outline"
+          md="cart-outline"
+        ></ion-icon>
+        <ion-badge color="danger">1 </ion-badge>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon
+          slot="icon-only"
+          ios="search-outline"
+          md="search-sharp"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Tipo de negocio
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card class="action-card">
+<ion-content [fullscreen]="true">
+  <ion-header mode="ios" collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large"> Tipo de negocio </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-searchbar mode="ios"></ion-searchbar>
+
+  <ion-card routerLink="/platos">
     <img class="header-img" src="/assets/card-top-img.png" />
-    <ion-card-header>
-      <ion-card-title>Restaurant</ion-card-title>
-    </ion-card-header>
     <ion-card-content>
-      Descripcion Destaurtanr Here's a small
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-button size="small">open</ion-button>
-          </ion-col>
-          <ion-col>
-            <ion-button fill="clear">
-              <ion-icon
-                mode="ios"
-                slot="icon-only"
-                name="stopwatch-outline"
-              ></ion-icon>
-              10bs</ion-button
-            >
-            <ion-button fill="clear">
-              <ion-icon mode="ios" slot="icon-only" name="bicycle-outline">
-                > </ion-icon
-              >10-45
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+      <ion-item slot="start" lines="none">
+        <ion-avatar slot="start">
+          <img src="/assets/card-top-img.png" />
+        </ion-avatar>
+
+        <ion-label>
+          <h1>Buerger King Obrajes</h1>
+
+          <ion-button fill="clear">
+            <ion-icon
+              mode="ios"
+              slot="icon-only"
+              name="stopwatch-outline"
+            ></ion-icon
+            >10bs</ion-button
+          >
+          <ion-button fill="clear">
+            <ion-icon mode="ios" slot="icon-only" name="bicycle-outline">
+              > </ion-icon
+            >10-45
+          </ion-button>
+          <ion-button slot="end" size="small">Abierto</ion-button>
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card routerLink="/platos">
+    <img class="header-img" src="/assets/card-top-img.png" />
+    <ion-card-content>
+      <ion-item slot="start" lines="none">
+        <ion-avatar slot="start">
+          <img src="/assets/card-top-img.png" />
+        </ion-avatar>
+
+        <ion-label>
+          <h1>Buerger King Obrajes</h1>
+
+          <ion-button fill="clear">
+            <ion-icon
+              mode="ios"
+              slot="icon-only"
+              name="stopwatch-outline"
+            ></ion-icon
+            >10bs</ion-button
+          >
+          <ion-button fill="clear">
+            <ion-icon mode="ios" slot="icon-only" name="bicycle-outline">
+              > </ion-icon
+            >10-45
+          </ion-button>
+          <ion-button slot="end" size="small">Abierto</ion-button>
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card routerLink="/platos">
+    <img class="header-img" src="/assets/card-top-img.png" />
+    <ion-card-content>
+      <ion-item slot="start" lines="none">
+        <ion-avatar slot="start">
+          <img src="/assets/card-top-img.png" />
+        </ion-avatar>
+
+        <ion-label>
+          <h1>Buerger King Obrajes</h1>
+
+          <ion-button fill="clear">
+            <ion-icon
+              mode="ios"
+              slot="icon-only"
+              name="stopwatch-outline"
+            ></ion-icon
+            >10bs</ion-button
+          >
+          <ion-button fill="clear">
+            <ion-icon mode="ios" slot="icon-only" name="bicycle-outline">
+              > </ion-icon
+            >10-45
+          </ion-button>
+          <ion-button slot="end" size="small">Abierto</ion-button>
+        </ion-label>
+      </ion-item>
     </ion-card-content>
   </ion-card>
 </ion-content>

@@ -1,0 +1,26 @@
+.item ion-thumbnail {
+  min-width: 5rem;
+  min-height: 5rem;
+  img {
+    max-width: 5rem;
+    min-width: 5rem;
+  }
+}
+.myColor {
+  color: red;
+}
+
+.position {
+  top: -80%;
+}
+
+ion-toolbar {
+  --background-color: transparent;
+  --ion-color-base: transparent !important;
+}
+.item-avatar {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100px !important; //any size
+  max-height: 100px !important; //any size
+}

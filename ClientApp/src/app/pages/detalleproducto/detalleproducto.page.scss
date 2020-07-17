@@ -1,0 +1,19 @@
+.red:before {
+  color: red;
+}
+
+.green:before {
+  color: green;
+}
+
+.flex_row {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+}
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
