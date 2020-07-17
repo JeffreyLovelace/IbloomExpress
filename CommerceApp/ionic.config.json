@@ -1,0 +1,7 @@
+{
+  "name": "CommerceApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
