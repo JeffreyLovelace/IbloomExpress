@@ -1,10 +1,14 @@
 <ion-content>
+  <hr />
+  <hr />
+  <hr />
+  <hr />
+  <hr />
+  <hr />
+  <hr />
+  <hr />
   <div class="center">
-    <img
-      src="https://image.flaticon.com/icons/png/512/1559/1559861.png"
-      alt="logo"
-    />
-    <h1 class="titulo">Inicio de sesión</h1>
+    <img class="header-img" src="/assets/banner.png" />
   </div>
   <hr />
   <hr />
@@ -27,6 +31,21 @@
       shape="round"
       (click)="onSubmit()"
       >Iniciar sesión</ion-button
+    >
+    <p slot="end" color="primary">Olvidó su contraseña?</p>
+    <hr />
+    <hr />
+    <hr />
+    <hr />
+    <ion-button
+      mode="ios"
+      expand="block"
+      type="submit"
+      shape="round"
+      fill="outline"
+    >
+      <ion-icon name="logo-whatsapp" slot="start"></ion-icon
+      >Contactanos</ion-button
     >
   </form>
 </ion-content>
