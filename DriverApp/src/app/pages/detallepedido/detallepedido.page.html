@@ -1,0 +1,96 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Peiddo 123
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header mode="ios" collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large"> Peiddo 123</ion-title>
+    </ion-toolbar>
+    <ion-toolbar>
+      <ion-title mode="md">Para, Juan carlos</ion-title>
+      <ion-button fill="clear" slot="end">
+        <ion-icon slot="icon-only" name="logo-whatsapp">
+          >
+        </ion-icon>
+      </ion-button>
+    </ion-toolbar>
+  </ion-header>
+  <div id="map"></div>
+  <ion-list>
+    <ion-item slot="start" lines="none">
+      <ion-avatar slot="start">
+        <img src="/assets/card-top-img.png" />
+      </ion-avatar>
+      <ion-label>
+        <h1>Comercio</h1>
+
+        <ion-button fill="clear">
+          <ion-icon mode="ios" slot="icon-only" name="bicycle-outline">
+            > </ion-icon
+          >10-45
+        </ion-button>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+      <h2>Pedido</h2>
+    </ion-list-header>
+    <ion-item>
+      <ion-label> Precio pedido </ion-label>
+      <p slot="end" color="success">
+        <ion-text>Bs. 40</ion-text>
+      </p>
+    </ion-item>
+    <ion-item>
+      <ion-label> Precio delivery </ion-label>
+      <p slot="end" color="success">
+        <ion-text>Bs. 18</ion-text>
+      </p>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item>
+      <ion-label> <h1>Total</h1> </ion-label>
+      <p slot="end" color="success">
+        <ion-text color="success">Bs. 58</ion-text>
+      </p>
+    </ion-item>
+    <ion-item>
+      <ion-label> Detalle para el conductor </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-fab vertical="center" horizontal="start" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="flag-outline"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-list side="top">
+      <ion-fab-button><ion-icon name="map-outline"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+
+    <ion-fab-list side="end">
+      <ion-fab-button><ion-icon name="logo-google"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button
+      mode="ios"
+      expand="block"
+      type="submit"
+      shape="round"
+      (click)="presentActionSheet()"
+      >Espera</ion-button
+    >
+  </ion-toolbar>
+</ion-footer>

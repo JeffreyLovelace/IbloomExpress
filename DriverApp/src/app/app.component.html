@@ -1,0 +1,44 @@
+<ion-app>
+  <ion-menu side="start" menuId="main-menu" contentId="main">
+    <ion-content>
+      <div class="menu-header-bg"></div>
+      <div class="header-content">
+        <img src="/assets/logo-amtrak.png" alt="" />
+        <ion-label>
+          <h2>
+            Jeffsito
+          </h2>
+          <p>+591 75824901</p>
+        </ion-label>
+      </div>
+
+      <ion-list lines="none" class="menu-items">
+        <ion-item>
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          <ion-label>Perfil</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="list-outline" slot="start"></ion-icon>
+          <ion-label>Historial</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="hand-right-outline" slot="start"></ion-icon>
+          <ion-label>Solicitudes</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="car-outline" slot="start"></ion-icon>
+          <ion-label>En camino</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="logo-whatsapp" slot="start"></ion-icon>
+          <ion-label>Contactar</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+
+    <ion-toolbar>
+      <img class="header-img" src="/assets/banner.png" />
+    </ion-toolbar>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app>
