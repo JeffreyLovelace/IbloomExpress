@@ -1,14 +1,21 @@
 import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
-
+import { AuthGuard } from "./guards/auth.guard";
 const routes: Routes = [
   {
     path: "tabs",
     loadChildren: () =>
       import("./tabs/tabs.module").then((m) => m.TabsPageModule),
+    canActivate: [AuthGuard],
   },
   {
     path: "",
+    loadChildren: () =>
+      import("./tabs/tabs.module").then((m) => m.TabsPageModule),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "login",
     loadChildren: () =>
       import("./pages/login/login.module").then((m) => m.LoginPageModule),
   },
@@ -19,6 +26,7 @@ const routes: Routes = [
       import("./pages/historial/historial.module").then(
         (m) => m.HistorialPageModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: "nuevoproducto",
@@ -26,6 +34,7 @@ const routes: Routes = [
       import("./pages/nuevoproducto/nuevoproducto.module").then(
         (m) => m.NuevoproductoPageModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: "detallepedido",
@@ -33,6 +42,7 @@ const routes: Routes = [
       import("./pages/detallepedido/detallepedido.module").then(
         (m) => m.DetallepedidoPageModule
       ),
+    canActivate: [AuthGuard],
   },
 ];
 @NgModule({

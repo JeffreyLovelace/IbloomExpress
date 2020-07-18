@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { AuthService } from "../../services/auth.service";
 import { AlertController } from "@ionic/angular";
 import { Router } from "@angular/router";
 @Component({
@@ -6,13 +7,20 @@ import { Router } from "@angular/router";
   templateUrl: "./login.page.html",
   styleUrls: ["./login.page.scss"],
 })
-export class LoginPage implements OnInit {
-  user = { email: null, password: null };
+export class LoginPage {
+  credentials = {
+    email: "comercio@gmail.com",
+    password: "comercio",
+    remember_me: true,
+  };
 
-  constructor(private router: Router) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private alertCtrl: AlertController
+  ) {}
 
-  ngOnInit() {}
-  onSubmit() {
-    this.router.navigateByUrl("/tabs");
+  login() {
+    this.auth.login1(this.credentials);
   }
 }
