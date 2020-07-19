@@ -4,9 +4,10 @@ import { Storage } from "@ionic/storage";
 import { BehaviorSubject, Observable, from, of } from "rxjs";
 import { take, map, switchMap } from "rxjs/operators";
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { AlertController } from "@ionic/angular";
+import { environment } from "../../environments/environment";
 
 const helper = new JwtHelperService();
 const TOKEN_KEY = "access_token";
@@ -16,6 +17,8 @@ const TOKEN_KEY = "access_token";
 })
 export class AuthService {
   public user: Observable<any>;
+  servidor = environment.url;
+  public rol = null;
   private userData = new BehaviorSubject(null);
   authenticationState = new BehaviorSubject(false);
   token = null;
@@ -66,36 +69,66 @@ export class AuthService {
     remember_me: boolean;
   }) {
     return this.http
-      .post("http://177.222.52.26:8000/api/auth/login", credentials)
-      .subscribe(async (res) => {
-        if (res) {
-          this.router.navigateByUrl("/tabs");
-          this.token = res[TOKEN_KEY];
-          return this.storage
-            .set(TOKEN_KEY, `Bearer ${res[TOKEN_KEY]}`)
-            .then((res) => {
-              this.authenticationState.next(true);
+      .post(`${this.servidor}/api/auth/login`, credentials)
+      .subscribe(
+        async (res) => {
+          if (res) {
+            this.verificarRol();
+            this.token = res[TOKEN_KEY];
+            return this.storage
+              .set(TOKEN_KEY, `Bearer ${res[TOKEN_KEY]}`)
+              .then((res) => {
+                this.authenticationState.next(true);
+              });
+          } else {
+            const alert = await this.alertCtrl.create({
+              mode: "ios",
+              header: "Error de inicio de sesión",
+              message: "Credenciales incorrectas.",
+              buttons: ["Aceptar"],
             });
-        } else {
-          const alert = await this.alertCtrl.create({
-            mode: "ios",
-            header: "Error de inicio de sesión",
-            message: "Credenciales incorrectas.",
-            buttons: ["Aceptar"],
-          });
-          await alert.present();
-        }
-      });
+            await alert.present();
+          }
+        },
+        (error) => this.presentAlert("Credenciales incorrectas.")
+      );
   }
-
-  getUser() {
-    return this.userData.getValue();
+  getUser(token): Observable<any> {
+    let headers = new HttpHeaders().set("Authorization", token);
+    return this.http.get(this.servidor + "/api/auth/user", {
+      headers: headers,
+    });
   }
-
+  verificarRol() {
+    this.storage.get(TOKEN_KEY).then((res) => {
+      if (res) {
+        this.getUser(res).subscribe((response) => {
+          if (response.name == "comercio") {
+            this.router.navigateByUrl("/tabs");
+          } else {
+            this.logout();
+            this.presentAlert("No puede ingresar a esta aplicación");
+          }
+        });
+      }
+    });
+  }
   logout() {
     this.storage.remove(TOKEN_KEY).then(() => {
-      this.router.navigateByUrl("/");
+      this.router.navigateByUrl("/login");
       this.userData.next(null);
     });
+  }
+  async presentAlert(Mensaje) {
+    const alert = await this.alertCtrl.create({
+      mode: "ios",
+      cssClass: "my-custom-class",
+      header: "Error",
+
+      message: Mensaje,
+      buttons: ["OK"],
+    });
+
+    await alert.present();
   }
 }
