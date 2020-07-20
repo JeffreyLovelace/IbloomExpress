@@ -14,9 +14,10 @@ export class Tab3Page {
   public promocion: boolean = false;
   idcomercio = null;
   corrreo = null;
+  correo = null;
   id = null;
   telefono = null;
-  nombre = null;
+  nombre;
   fotoLogo = null;
   fotoBaner = null;
   envio = null;
@@ -31,13 +32,21 @@ export class Tab3Page {
     private authService: AuthService,
     private storage: Storage
   ) {
-    this.get();
+    this.getUser();
+  }
+  getUser() {
+    this.storage.get(TOKEN_KEY).then((res) => {
+      this.authService.getUser(res).subscribe((response) => {
+        this.correo = response.email;
+        this.get();
+      });
+    });
   }
   get() {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.comercioService.get(res).subscribe((data) => {
         for (let datos of data) {
-          if (datos.correo == "comercio@gmail.com") {
+          if (datos.correo == this.correo) {
             this.corrreo = datos.correo;
             this.idcomercio = null;
 
