@@ -17,7 +17,7 @@ export class Tab1Page {
     this.storage.get(TOKEN_KEY).then((res) => {
       if (res) {
         this.authService.getUser(res).subscribe((response) => {
-          console.log(response.name);
+          console.log(response);
         });
       }
     });

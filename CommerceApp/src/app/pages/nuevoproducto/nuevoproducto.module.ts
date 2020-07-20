@@ -1,20 +1,22 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 
-import { IonicModule } from '@ionic/angular';
+import { IonicModule } from "@ionic/angular";
 
-import { NuevoproductoPageRoutingModule } from './nuevoproducto-routing.module';
+import { NuevoproductoPageRoutingModule } from "./nuevoproducto-routing.module";
 
-import { NuevoproductoPage } from './nuevoproducto.page';
+import { NuevoproductoPage } from "./nuevoproducto.page";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    NuevoproductoPageRoutingModule
+    ReactiveFormsModule,
+    NuevoproductoPageRoutingModule,
   ],
-  declarations: [NuevoproductoPage]
+  declarations: [NuevoproductoPage],
 })
 export class NuevoproductoPageModule {}

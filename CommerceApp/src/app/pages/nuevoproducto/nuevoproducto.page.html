@@ -16,31 +16,46 @@
     </ion-toolbar>
   </ion-header>
 
-  <form #form="ngForm" (ngSubmit)="logForm(form)" novalidate>
+  <form [formGroup]="formGroup" (ngSubmit)="save()">
     <ion-item>
       <ion-label floating>Foto</ion-label>
-      <ion-input type="file" [id]="pic"></ion-input>
+      <ion-input
+        type="file"
+        (change)="onFileChange($event)"
+        name="foto"
+        class="form-control"
+      ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Nombre</ion-label>
-      <ion-input type="text" required></ion-input>
+      <ion-input formControlName="nombre" type="text" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Descripción</ion-label>
-      <ion-textarea></ion-textarea>
+      <ion-textarea
+        formControlName="descripcion"
+        type="text"
+        required
+      ></ion-textarea>
     </ion-item>
     <ion-item>
-      <ion-label>Producto normal</ion-label>
-      <ion-toggle slot="end"></ion-toggle>
+      <ion-label>Precio</ion-label>
+      <ion-textarea
+        formControlName="precio"
+        type="number"
+        required
+      ></ion-textarea>
     </ion-item>
+
     <ion-item>
       <ion-label>Promoción</ion-label>
-      <ion-toggle slot="end"></ion-toggle>
+      <ion-toggle
+        [(ngModel)]="promocion"
+        formControlName="promocion"
+        slot="end"
+      ></ion-toggle>
     </ion-item>
-    <ion-item>
-      <ion-label>Complemento</ion-label>
-      <ion-toggle slot="end"></ion-toggle>
-    </ion-item>
+
     <hr />
     <hr />
     <ion-button mode="ios" expand="block" type="submit" shape="round"

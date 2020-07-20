@@ -10,7 +10,14 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { IonicStorageModule } from "@ionic/storage";
 import { HttpClientModule } from "@angular/common/http";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
+import { CommonModule } from "@angular/common";
+import { RouterModule } from "@angular/router";
+import { Camera } from "@ionic-native/Camera/ngx";
+import { File } from "@ionic-native/File/ngx";
+import { WebView } from "@ionic-native/ionic-webview/ngx";
+import { FilePath } from "@ionic-native/file-path/ngx";
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -20,6 +27,10 @@ import { HttpClientModule } from "@angular/common/http";
     AppRoutingModule,
     IonicStorageModule.forRoot(),
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+    RouterModule,
   ],
   providers: [
     StatusBar,
