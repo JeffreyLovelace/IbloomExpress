@@ -4,7 +4,7 @@
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Mi información
+      Mi Datos
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,12 +12,53 @@
 <ion-content [fullscreen]="true">
   <ion-header mode="ios" collapse="condense">
     <ion-toolbar>
-      <ion-title size="large"> Mi información</ion-title>
+      <ion-title size="large"> Mi Datos</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <img class="header-img" src="/assets/card-top-img.png" />
-  <ion-input placeholder="Enter Input"></ion-input>
-  <ion-input placeholder="Enter Input"></ion-input>
-  <ion-input placeholder="Enter Input"></ion-input>
+  <ion-item>
+    <ion-label position="stacked">Correo</ion-label>
+    <ion-input
+      type="email"
+      placeholder="Email"
+      [(ngModel)]="corrreo"
+    ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Celular</ion-label>
+    <ion-input placeholder="telefono" [(ngModel)]="telefono"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Nombre</ion-label>
+    <ion-input placeholder="nombre" [(ngModel)]="nombre"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Envío</ion-label>
+    <ion-input placeholder="envio" [(ngModel)]="envio"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Dirección</ion-label>
+    <ion-input placeholder="direccion" [(ngModel)]="direccion"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Referencia</ion-label>
+    <ion-input [(ngModel)]="referencia"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Mínimo de compra (BS.)</ion-label>
+    <ion-input
+      placeholder="precioMinimo"
+      [(ngModel)]="precioMinimo"
+    ></ion-input>
+  </ion-item>
+  <ion-button
+    mode="ios"
+    expand="block"
+    type="submit"
+    shape="round"
+    fill="outline"
+  >
+    Actualizar información</ion-button
+  >
 </ion-content>
