@@ -25,7 +25,10 @@ import { FilePath } from "@ionic-native/file-path/ngx";
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    IonicStorageModule.forRoot(),
+    IonicStorageModule.forRoot({
+      name: "__mydb",
+      driverOrder: ["indexeddb", "sqlite", "websql"],
+    }),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
