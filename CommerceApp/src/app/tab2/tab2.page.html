@@ -16,16 +16,14 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-list>
+  <ion-list *ngFor="let combo of combos">
     <ion-item>
       <ion-thumbnail slot="start">
-        <img
-          src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-        />
+        <img src="http://177.222.52.26:8000/imagenes/{{ combo.foto }}" />
       </ion-thumbnail>
 
       <ion-label>
-        <h2>Nombre del producto</h2>
+        <h2>{{combo.nombre}}</h2>
         <h3>descripcion del producto</h3>
       </ion-label>
 
