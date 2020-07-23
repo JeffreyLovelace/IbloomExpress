@@ -52,7 +52,7 @@ export class NuevoproductoPage {
     formData.append("descripcion", this.formGroup.get("descripcion").value);
     formData.append("precio", this.formGroup.get("precio").value);
     formData.append("foto", this.formGroup.get("foto").value);
-    formData.append("estadoEliminado", "0");
+    formData.append("estadoEliminado", "1");
     if (this.promocion == true) {
       formData.append("promocion", "1");
     } else {
