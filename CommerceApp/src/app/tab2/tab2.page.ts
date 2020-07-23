@@ -110,7 +110,6 @@ export class Tab2Page {
         },
         {
           type: "text",
-
           value: precio,
           placeholder: "Precio",
         },
