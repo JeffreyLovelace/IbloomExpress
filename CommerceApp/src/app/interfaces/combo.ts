@@ -1,5 +1,7 @@
 export class Combo {
   constructor(
+    public id: number,
+
     public id_comercio: number,
     public nombre: string,
     public descripcion: string,

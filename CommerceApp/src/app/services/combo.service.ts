@@ -34,4 +34,10 @@ export class ComboService {
     let headers = new HttpHeaders().set("Authorization", token);
     return this.http.get(`${this.servidor}/api/combo`, { headers: headers });
   }
+  edit(data, token, id_combo) {
+    let headers = new HttpHeaders().set("Authorization", token);
+    return this.http.put(`${this.servidor}/api/combo/` + id_combo, data, {
+      headers: headers,
+    });
+  }
 }
