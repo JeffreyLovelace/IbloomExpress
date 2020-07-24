@@ -7,7 +7,7 @@ import { StatusBar } from "@ionic-native/status-bar/ngx";
 import { AuthService } from "./services/auth.service";
 import { Storage } from "@ionic/storage";
 import { Router } from "@angular/router";
-const TOKEN_KEY = "access_token_client";
+const TOKEN_KEY = "access_token";
 @Component({
   selector: "app-root",
   templateUrl: "app.component.html",
@@ -39,12 +39,12 @@ export class AppComponent {
         this.storage.get(TOKEN_KEY).then((res) => {
           if (res) {
             this.authService.getUser(res).subscribe((response) => {
-              //    if (response.name == "comercio") {
-              this.router.navigate(["inicio"]);
-              // } else {
-              //    this.authService.logout();
-              //    this.presentAlert();
-              //  }
+              if (response.id_rol == "1") {
+                this.router.navigate(["ubicacion"]);
+              } else {
+                this.authService.logout();
+                this.presentAlert();
+              }
             });
           }
         });

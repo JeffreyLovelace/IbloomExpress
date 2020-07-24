@@ -11,7 +11,7 @@ import { environment } from "../../environments/environment";
 import { GooglePlus } from "@ionic-native/google-plus/ngx";
 import { auth } from "firebase";
 const helper = new JwtHelperService();
-const TOKEN_KEY = "access_token_client";
+const TOKEN_KEY = "access_token";
 
 @Injectable({
   providedIn: "root",
@@ -77,6 +77,8 @@ export class AuthService {
           if (res) {
             this.verificarRol();
             this.token = res[TOKEN_KEY];
+            console.log(res);
+
             return this.storage
               .set(TOKEN_KEY, `Bearer ${res[TOKEN_KEY]}`)
               .then((res) => {
@@ -105,12 +107,12 @@ export class AuthService {
     this.storage.get(TOKEN_KEY).then((res) => {
       if (res) {
         this.getUser(res).subscribe((response) => {
-          // if (response.name == "comercio") {
-          this.router.navigateByUrl("/inicio");
-          /* } else {
+          if (response.id_rol == "1") {
+            this.router.navigateByUrl("/inicio");
+          } else {
             this.logout();
             this.presentAlert("No puede ingresar a esta aplicación");
-          }*/
+          }
         });
       }
     });

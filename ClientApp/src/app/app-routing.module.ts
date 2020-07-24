@@ -10,7 +10,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "",
+    path: "inicio",
     loadChildren: () =>
       import("./pages/inicio/inicio.module").then((m) => m.InicioPageModule),
     canActivate: [AuthGuard],
@@ -22,6 +22,14 @@ const routes: Routes = [
   },
   {
     path: "ubicacion",
+    loadChildren: () =>
+      import("./pages/ubicacion/ubicacion.module").then(
+        (m) => m.UbicacionPageModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "",
     loadChildren: () =>
       import("./pages/ubicacion/ubicacion.module").then(
         (m) => m.UbicacionPageModule
