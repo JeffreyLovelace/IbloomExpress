@@ -25,6 +25,9 @@ export class PlatosPage {
     private comboService: ComboService,
     private storage: Storage
   ) {
+    this.id = this.activatedRoute.snapshot.params["id"];
+    this.nombre = this.activatedRoute.snapshot.params["nombre"];
+
     this.getCombos();
   }
 

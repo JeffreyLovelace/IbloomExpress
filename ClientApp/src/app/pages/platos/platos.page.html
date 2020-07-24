@@ -1,8 +1,8 @@
 <ion-header mode="ios">
   <ion-toolbar translucent>
-    <ion-button fill="clear" (click)="back()">
-      <ion-icon slot="start" name="arrow-back-outline" color="dark"></ion-icon>
-    </ion-button>
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-buttons slot="primary" routerLink="/carrito">
       <ion-button>
         <ion-icon
@@ -23,7 +23,7 @@
       </ion-button>
     </ion-buttons>
     <ion-title>
-      Comercio
+      {{nombre}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -31,7 +31,7 @@
 <ion-content [fullscreen]="true">
   <ion-header mode="ios" collapse="condense">
     <ion-toolbar>
-      <ion-title size="large"> Comercio</ion-title>
+      <ion-title size="large"> {{nombre}}</ion-title>
       <ion-buttons slot="end" routerLink="/detallecomercio">
         <ion-button>
           <ion-icon
@@ -90,18 +90,20 @@
     <ion-searchbar mode="ios"></ion-searchbar>
 
     <div *ngFor="let combo of combos">
-      <ion-list>
-        <ion-item>
-          <ion-thumbnail slot="end">
-            <img src="{{servidor}}/imagenes/{{ combo.foto }}" />
-          </ion-thumbnail>
-          <ion-label>
-            <h2><strong>{{combo.nombre}}</strong></h2>
-            <h2>{{combo.descripcion}}</h2>
-            <h2>Precio: Bs. {{combo.precio}}</h2>
-          </ion-label>
-        </ion-item>
-      </ion-list>
+      <div *ngIf="combo.id_comercio == id">
+        <ion-list>
+          <ion-item>
+            <ion-thumbnail slot="end">
+              <img src="{{servidor}}/imagenes/{{ combo.foto }}" />
+            </ion-thumbnail>
+            <ion-label>
+              <h2><strong>{{combo.nombre}}</strong></h2>
+              <h2>{{combo.descripcion}}</h2>
+              <h2>Precio: Bs. {{combo.precio}}</h2>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
     </div>
   </div>
   <ion-list *ngIf="segmentModel === 'promociones'"></ion-list>

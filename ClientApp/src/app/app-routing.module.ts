@@ -59,7 +59,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "platos",
+    path: "platos/:id/:nombre",
     loadChildren: () =>
       import("./pages/platos/platos.module").then((m) => m.PlatosPageModule),
     canActivate: [AuthGuard],

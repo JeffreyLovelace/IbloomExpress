@@ -36,34 +36,36 @@
   </ion-header>
   <ion-searchbar mode="ios"></ion-searchbar>
   <div *ngFor="let comercio of comercios">
-    <ion-card routerLink="/platos">
-      <img class="header-img" src="/assets/card-top-img.png" />
-      <ion-card-content>
-        <ion-item lines="none">
-          <ion-avatar slot="start">
-            <img src="/assets/card-top-img.png" />
-          </ion-avatar>
+    <div *ngIf="comercio.id_tipoComercio == id">
+      <ion-card routerLink="/platos/{{comercio.id}}/{{comercio.nombre}}">
+        <img class="header-img" src="/assets/card-top-img.png" />
+        <ion-card-content>
+          <ion-item lines="none">
+            <ion-avatar slot="start">
+              <img src="/assets/card-top-img.png" />
+            </ion-avatar>
 
-          <ion-label>
-            <h1>{{comercio.nombre}}</h1>
+            <ion-label>
+              <h1>{{comercio.nombre}}</h1>
 
-            <ion-button fill="clear">
-              <ion-icon
-                mode="ios"
-                slot="icon-only"
-                name="stopwatch-outline"
-              ></ion-icon
-              >10</ion-button
-            >
-            <ion-button fill="clear">
-              <ion-icon mode="ios" slot="icon-only" name="bicycle-outline">
-                > </ion-icon
-              >Bs. {{comercio.envio}}
-            </ion-button>
-            <ion-button slot="end" size="small">Abierto</ion-button>
-          </ion-label>
-        </ion-item>
-      </ion-card-content>
-    </ion-card>
+              <ion-button fill="clear">
+                <ion-icon
+                  mode="ios"
+                  slot="icon-only"
+                  name="stopwatch-outline"
+                ></ion-icon
+                >10</ion-button
+              >
+              <ion-button fill="clear">
+                <ion-icon mode="ios" slot="icon-only" name="bicycle-outline">
+                  > </ion-icon
+                >Bs. {{comercio.envio}}
+              </ion-button>
+              <ion-button slot="end" size="small">Abierto</ion-button>
+            </ion-label>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
 </ion-content>
