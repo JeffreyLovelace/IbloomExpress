@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { LoadingController } from "@ionic/angular";
 import { Router, ActivatedRoute, Params } from "@angular/router";
+import { LocationAccuracy } from "@ionic-native/location-accuracy/ngx";
+
 import {
   NativeGeocoder,
   NativeGeocoderResult,
@@ -22,8 +24,11 @@ export class UbicacionPage implements OnInit {
     private geolocation: Geolocation,
     private loadingCtrl: LoadingController,
     private router: Router,
-    private nativeGeocoder: NativeGeocoder
-  ) {}
+    private nativeGeocoder: NativeGeocoder,
+    private locationAccuracy: LocationAccuracy
+  ) {
+    this.enableLocation();
+  }
 
   ngOnInit() {
     this.loadMap();
@@ -98,5 +103,18 @@ export class UbicacionPage implements OnInit {
 
         this.address = "Dirección no disponible!";
       });
+  }
+  enableLocation() {
+    // the accuracy option will be ignored by iOS
+    this.locationAccuracy
+      .request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY)
+      .then(
+        () => {
+          console.log("Request successful");
+        },
+        (error) => {
+          console.log("Error requesting location permissions", error);
+        }
+      );
   }
 }
