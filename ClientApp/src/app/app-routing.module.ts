@@ -51,7 +51,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "comercios",
+    path: "comercios/:id/:nombre",
     loadChildren: () =>
       import("./pages/comercios/comercios.module").then(
         (m) => m.ComerciosPageModule
@@ -91,6 +91,11 @@ const routes: Routes = [
         (m) => m.DetallecomercioPageModule
       ),
     canActivate: [AuthGuard],
+  },
+  {
+    path: "perfil",
+    loadChildren: () =>
+      import("./pages/perfil/perfil.module").then((m) => m.PerfilPageModule),
   },
 ];
 

@@ -23,7 +23,7 @@
       </ion-button>
     </ion-buttons>
     <ion-title>
-      Tipo de negocio
+      {{nombre}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -31,98 +31,39 @@
 <ion-content [fullscreen]="true">
   <ion-header mode="ios" collapse="condense">
     <ion-toolbar>
-      <ion-title size="large"> Tipo de negocio </ion-title>
+      <ion-title size="large"> {{nombre}} </ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-searchbar mode="ios"></ion-searchbar>
+  <div *ngFor="let comercio of comercios">
+    <ion-card routerLink="/platos">
+      <img class="header-img" src="/assets/card-top-img.png" />
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-avatar slot="start">
+            <img src="/assets/card-top-img.png" />
+          </ion-avatar>
 
-  <ion-card routerLink="/platos">
-    <img class="header-img" src="/assets/card-top-img.png" />
-    <ion-card-content>
-      <ion-item slot="start" lines="none">
-        <ion-avatar slot="start">
-          <img src="/assets/card-top-img.png" />
-        </ion-avatar>
+          <ion-label>
+            <h1>{{comercio.nombre}}</h1>
 
-        <ion-label>
-          <h1>Buerger King Obrajes</h1>
-
-          <ion-button fill="clear">
-            <ion-icon
-              mode="ios"
-              slot="icon-only"
-              name="stopwatch-outline"
-            ></ion-icon
-            >10bs</ion-button
-          >
-          <ion-button fill="clear">
-            <ion-icon mode="ios" slot="icon-only" name="bicycle-outline">
-              > </ion-icon
-            >10-45
-          </ion-button>
-          <ion-button slot="end" size="small">Abierto</ion-button>
-        </ion-label>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card routerLink="/platos">
-    <img class="header-img" src="/assets/card-top-img.png" />
-    <ion-card-content>
-      <ion-item slot="start" lines="none">
-        <ion-avatar slot="start">
-          <img src="/assets/card-top-img.png" />
-        </ion-avatar>
-
-        <ion-label>
-          <h1>Buerger King Obrajes</h1>
-
-          <ion-button fill="clear">
-            <ion-icon
-              mode="ios"
-              slot="icon-only"
-              name="stopwatch-outline"
-            ></ion-icon
-            >10bs</ion-button
-          >
-          <ion-button fill="clear">
-            <ion-icon mode="ios" slot="icon-only" name="bicycle-outline">
-              > </ion-icon
-            >10-45
-          </ion-button>
-          <ion-button slot="end" size="small">Abierto</ion-button>
-        </ion-label>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card routerLink="/platos">
-    <img class="header-img" src="/assets/card-top-img.png" />
-    <ion-card-content>
-      <ion-item slot="start" lines="none">
-        <ion-avatar slot="start">
-          <img src="/assets/card-top-img.png" />
-        </ion-avatar>
-
-        <ion-label>
-          <h1>Buerger King Obrajes</h1>
-
-          <ion-button fill="clear">
-            <ion-icon
-              mode="ios"
-              slot="icon-only"
-              name="stopwatch-outline"
-            ></ion-icon
-            >10bs</ion-button
-          >
-          <ion-button fill="clear">
-            <ion-icon mode="ios" slot="icon-only" name="bicycle-outline">
-              > </ion-icon
-            >10-45
-          </ion-button>
-          <ion-button slot="end" size="small">Abierto</ion-button>
-        </ion-label>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
+            <ion-button fill="clear">
+              <ion-icon
+                mode="ios"
+                slot="icon-only"
+                name="stopwatch-outline"
+              ></ion-icon
+              >10</ion-button
+            >
+            <ion-button fill="clear">
+              <ion-icon mode="ios" slot="icon-only" name="bicycle-outline">
+                > </ion-icon
+              >Bs. {{comercio.envio}}
+            </ion-button>
+            <ion-button slot="end" size="small">Abierto</ion-button>
+          </ion-label>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
