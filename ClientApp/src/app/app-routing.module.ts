@@ -59,13 +59,13 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "platos/:id/:nombre",
+    path: "platos/:id/:nombre/:fotoLogo/:fotoBaner/:envio/:precioMinimo",
     loadChildren: () =>
       import("./pages/platos/platos.module").then((m) => m.PlatosPageModule),
     canActivate: [AuthGuard],
   },
   {
-    path: "detalleproducto",
+    path: "detalleproducto/:id",
     loadChildren: () =>
       import("./pages/detalleproducto/detalleproducto.module").then(
         (m) => m.DetalleproductoPageModule
@@ -85,7 +85,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "detallecomercio",
+    path: "detallecomercio/:id",
     loadChildren: () =>
       import("./pages/detallecomercio/detallecomercio.module").then(
         (m) => m.DetallecomercioPageModule

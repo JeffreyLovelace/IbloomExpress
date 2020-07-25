@@ -31,4 +31,10 @@ export class ComboService {
       headers: headers,
     });
   }
+  detail(token, id): Observable<any> {
+    let headers = new HttpHeaders().set("Authorization", token);
+    return this.http.get(`${this.servidor}/api/combo/` + id, {
+      headers: headers,
+    });
+  }
 }

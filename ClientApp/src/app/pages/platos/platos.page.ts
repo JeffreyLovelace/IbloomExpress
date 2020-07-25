@@ -14,7 +14,10 @@ const TOKEN_KEY = "access_token";
 export class PlatosPage {
   servidor = environment.url;
   searchText;
-
+  fotoLogo;
+  fotoBaner;
+  envio;
+  precioMinimo;
   id = null;
   nombre = null;
   combos: Combo[];
@@ -27,6 +30,10 @@ export class PlatosPage {
   ) {
     this.id = this.activatedRoute.snapshot.params["id"];
     this.nombre = this.activatedRoute.snapshot.params["nombre"];
+    this.fotoLogo = this.activatedRoute.snapshot.params["fotoLogo"];
+    this.fotoBaner = this.activatedRoute.snapshot.params["fotoBaner"];
+    this.envio = this.activatedRoute.snapshot.params["envio"];
+    this.precioMinimo = this.activatedRoute.snapshot.params["precioMinimo"];
 
     this.getCombos();
   }

@@ -37,7 +37,9 @@
   <ion-searchbar mode="ios"></ion-searchbar>
   <div *ngFor="let comercio of comercios">
     <div *ngIf="comercio.id_tipoComercio == id">
-      <ion-card routerLink="/platos/{{comercio.id}}/{{comercio.nombre}}">
+      <ion-card
+        routerLink="/platos/{{comercio.id}}/{{comercio.nombre}}/{{comercio.fotoLogo}}/{{comercio.fotoBaner}}/{{comercio.envio}}/{{comercio.precioMinimo}}"
+      >
         <img class="header-img" src="/assets/card-top-img.png" />
         <ion-card-content>
           <ion-item lines="none">

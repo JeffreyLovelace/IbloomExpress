@@ -32,7 +32,7 @@
   <ion-header mode="ios" collapse="condense">
     <ion-toolbar>
       <ion-title size="large"> {{nombre}}</ion-title>
-      <ion-buttons slot="end" routerLink="/detallecomercio">
+      <ion-buttons slot="end" routerLink="/detallecomercio/{{id}}">
         <ion-button>
           <ion-icon
             slot="icon-only"
@@ -43,11 +43,11 @@
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-  <img class="position" src="/assets/card-top-img.png" />
+  <img class="position" src="{{servidor}}/imagenes/{{ fotoBaner }}" />
   <ion-list>
     <ion-item slot="start" lines="none">
       <ion-avatar slot="start">
-        <img src="/assets/card-top-img.png" />
+        <img src="{{servidor}}/imagenes/{{ fotoLogo }}" />
       </ion-avatar>
       <ion-label>
         <ion-button fill="clear">
@@ -56,17 +56,17 @@
             slot="icon-only"
             name="stopwatch-outline"
           ></ion-icon
-          >10bs</ion-button
+          >{{envio}}</ion-button
         >
         <ion-button fill="clear">
           <ion-icon mode="ios" slot="icon-only" name="bicycle-outline">
             > </ion-icon
-          >10-45
+          >time
         </ion-button>
         <ion-button fill="clear">
           <ion-icon mode="ios" slot="icon-only" name="cash-outline">
             > </ion-icon
-          >Minimo Bs 20
+          >Minimo {{precioMinimo}}
         </ion-button>
       </ion-label>
     </ion-item>
@@ -80,7 +80,7 @@
     (ionChange)="segmentChanged($event)"
   >
     <ion-segment-button value="productos">
-      <ion-label>Productos</ion-label>
+      <ion-label>Combos</ion-label>
     </ion-segment-button>
     <ion-segment-button value="promociones">
       <ion-label>Promociones</ion-label>
@@ -92,7 +92,7 @@
     <div *ngFor="let combo of combos">
       <div *ngIf="combo.id_comercio == id">
         <ion-list>
-          <ion-item>
+          <ion-item routerLink="/detalleproducto/{{combo.id}}">
             <ion-thumbnail slot="end">
               <img src="{{servidor}}/imagenes/{{ combo.foto }}" />
             </ion-thumbnail>
