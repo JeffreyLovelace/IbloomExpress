@@ -24,28 +24,27 @@ export class AppComponent {
     public alertController: AlertController
   ) {
     this.initializeApp();
+    this.verificar();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
+      //this.verificar();
+
       this.statusBar.styleLightContent();
+
       this.splashScreen.hide();
-      this.verificar();
     });
   }
   verificar() {
-    this.authService.authenticationState.subscribe((state) => {
-      if (state) {
-        this.storage.get(TOKEN_KEY).then((res) => {
-          if (res) {
-            this.authService.getUser(res).subscribe((response) => {
-              if (response.id_rol == "1") {
-                this.router.navigate(["ubicacion"]);
-              } else {
-                this.authService.logout();
-                this.presentAlert();
-              }
-            });
+    this.storage.get(TOKEN_KEY).then((res) => {
+      if (res) {
+        this.authService.getUser(res).subscribe((response) => {
+          if (response.id_rol == "1") {
+            this.router.navigate(["ubicacion"]);
+          } else {
+            this.authService.logout();
+            this.presentAlert();
           }
         });
       } else {
@@ -53,6 +52,7 @@ export class AppComponent {
       }
     });
   }
+
   async presentAlert() {
     const alert = await this.alertController.create({
       mode: "ios",

@@ -5,6 +5,9 @@ import { ComboService } from "../../services/combo.service";
 import { Storage } from "@ionic/storage";
 import { Router, ActivatedRoute } from "@angular/router";
 import { environment } from "../../../environments/environment";
+import { Location } from "@angular/common";
+import { AlertController } from "@ionic/angular";
+
 const TOKEN_KEY = "access_token";
 @Component({
   selector: "app-platos",
@@ -28,7 +31,9 @@ export class PlatosPage {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private comboService: ComboService,
-    private storage: Storage
+    private storage: Storage,
+    private location: Location,
+    private alertController: AlertController
   ) {
     this.id = this.activatedRoute.snapshot.params["id"];
     this.nombre = this.activatedRoute.snapshot.params["nombre"];
@@ -47,7 +52,14 @@ export class PlatosPage {
   }
 
   back() {
-    this.router.navigateByUrl("/comercios");
+    this.storage.get("pedido").then((val) => {
+      if (val) {
+        this.presentAlertConfirm();
+      } else {
+        this.router.navigateByUrl("/inicio");
+      }
+      // this.id_pedido = val;
+    });
   }
   getCombos() {
     this.storage.get(TOKEN_KEY).then((res) => {
@@ -69,5 +81,34 @@ export class PlatosPage {
       }
       // this.id_pedido = val;
     });
+  }
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      mode: "ios",
+      cssClass: "my-custom-class",
+
+      header: "Su pedido se cancelara",
+      subHeader: "Desea continuar?",
+
+      buttons: [
+        {
+          text: "No",
+          role: "cancel",
+          cssClass: "secondary",
+          handler: (blah) => {
+            console.log("Confirm Cancel: blah");
+          },
+        },
+        {
+          text: "Si, continuar",
+          handler: () => {
+            this.storage.remove("pedido");
+            this.router.navigateByUrl("/inicio");
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }

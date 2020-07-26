@@ -42,29 +42,17 @@
       >
         <img class="header-img" src="/assets/card-top-img.png" />
         <ion-card-content>
-          <ion-item lines="none">
-            <ion-avatar slot="start">
+          <ion-item>
+            <ion-thumbnail slot="start">
               <img src="/assets/card-top-img.png" />
-            </ion-avatar>
+            </ion-thumbnail>
 
             <ion-label>
-              <h1>{{comercio.nombre}}</h1>
-
-              <ion-button fill="clear">
-                <ion-icon
-                  mode="ios"
-                  slot="icon-only"
-                  name="stopwatch-outline"
-                ></ion-icon
-                >10</ion-button
-              >
-              <ion-button fill="clear">
-                <ion-icon mode="ios" slot="icon-only" name="bicycle-outline">
-                  > </ion-icon
-                >Bs. {{comercio.envio}}
-              </ion-button>
-              <ion-button slot="end" size="small">Abierto</ion-button>
+              <h2><strong>{{comercio.nombre}}</strong></h2>
+              <p>Envío Bs. {{comercio.envio}}</p>
+              <p>tiempo min.</p>
             </ion-label>
+            <ion-button slot="end" size="small">Abierto</ion-button>
           </ion-item>
         </ion-card-content>
       </ion-card>

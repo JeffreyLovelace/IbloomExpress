@@ -1,8 +1,11 @@
 <ion-header mode="ios">
   <ion-toolbar translucent>
-    <ion-buttons slot="start" mode="md">
+    <ion-buttons slot="start" mode="md" *ngIf="!pedido">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <ion-button fill="clear" (click)="back()" *ngIf="pedido">
+      <ion-icon slot="start" name="arrow-back-outline" color="dark"></ion-icon>
+    </ion-button>
     <ion-buttons slot="primary" routerLink="/carrito">
       <ion-button>
         <ion-icon

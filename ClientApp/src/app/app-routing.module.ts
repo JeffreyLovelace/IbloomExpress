@@ -20,6 +20,7 @@ const routes: Routes = [
     loadChildren: () =>
       import("./pages/login/login.module").then((m) => m.LoginPageModule),
   },
+
   {
     path: "ubicacion",
     loadChildren: () =>
@@ -28,14 +29,7 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuard],
   },
-  {
-    path: "",
-    loadChildren: () =>
-      import("./pages/ubicacion/ubicacion.module").then(
-        (m) => m.UbicacionPageModule
-      ),
-    canActivate: [AuthGuard],
-  },
+
   {
     path: "registro",
     loadChildren: () =>
