@@ -10,7 +10,7 @@
           ios="cart-outline"
           md="cart-outline"
         ></ion-icon>
-        <ion-badge color="danger">1 </ion-badge>
+        <ion-badge *ngIf="c>0" color="danger">{{c}} </ion-badge>
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
@@ -48,7 +48,7 @@
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Qué desea llevar?</ion-card-title>
+      <ion-card-title>{{nombre}}, qué desea pedir?</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-grid>

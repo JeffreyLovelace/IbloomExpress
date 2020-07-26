@@ -35,13 +35,17 @@
     </ion-toolbar>
   </ion-header>
   <div *ngFor="let pedido of pedidos">
-    <div>
-      <ion-list>
-        <ion-item>
-          <ion-label>Pedido número: <strong>{{pedido.id}}</strong></ion-label>
-          <ion-badge color="warning" slot="end">Espera</ion-badge>
-        </ion-item>
-      </ion-list>
+    <div *ngIf="pedido.id_cliente == id_client">
+      <div *ngIf="pedido.id_estado==1">
+        <ion-list>
+          <ion-item>
+            <ion-label>Pedido número: <strong>{{pedido.id}}</strong></ion-label>
+            <ion-badge *ngIf="pedido.id_estado==1" color="warning" slot="end"
+              >Espera</ion-badge
+            >
+          </ion-item>
+        </ion-list>
+      </div>
     </div>
   </div>
 </ion-content>

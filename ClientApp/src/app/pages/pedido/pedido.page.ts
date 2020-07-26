@@ -7,7 +7,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { environment } from "../../../environments/environment";
 import { ComercioService } from "../../services/comercio.service";
 import { PedidoService } from "../../services/pedido.service";
-
+import { ModalController } from "@ionic/angular";
 import { OrdenService } from "../../services/orden.service";
 
 import { Pedido } from "../../interfaces/pedido";
@@ -48,7 +48,8 @@ export class PedidoPage {
     private comercioService: ComercioService,
     private comboService: ComboService,
     private pedidoService: PedidoService,
-    private ordenService: OrdenService
+    private ordenService: OrdenService,
+    private modalController: ModalController
   ) {
     this.getOrden();
     this.storage.get("pedido").then((val) => {
@@ -107,6 +108,13 @@ export class PedidoPage {
           console.log(res);
           this.getOrden();
         });
+    });
+  }
+  dismiss() {
+    // using the injected ModalController this page
+    // can "dismiss" itself and optionally pass back data
+    this.modalController.dismiss({
+      dismissed: true,
     });
   }
 }

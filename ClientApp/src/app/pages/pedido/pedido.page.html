@@ -1,27 +1,15 @@
 <ion-header mode="ios">
   <ion-toolbar>
-    <ion-buttons slot="start" mode="md">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-buttons slot="primary" routerLink="/carrito">
-      <ion-button>
+    <ion-buttons slot="start" (click)="dismiss()">
+      <ion-button mode="md">
         <ion-icon
           slot="icon-only"
-          ios="cart-outline"
-          md="cart-outline"
-        ></ion-icon>
-        <ion-badge color="danger">1 </ion-badge>
-      </ion-button>
-    </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon
-          slot="icon-only"
-          ios="search-outline"
-          md="search-sharp"
+          ios="close-outline"
+          md="close-outline"
         ></ion-icon>
       </ion-button>
     </ion-buttons>
+
     <ion-title>
       Mi pedido
     </ion-title>
@@ -29,12 +17,6 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header mode="ios" collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large"> Mi pedido </ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <ion-list>
     <ion-item slot="start" lines="none">
       <ion-thumbnail slot="start">
@@ -100,11 +82,17 @@
       </p>
     </ion-item>
   </ion-list>
+  <ion-button
+    mode="ios"
+    expand="block"
+    shape="round"
+    fill="outline"
+    (click)="dismiss()"
+    >Seguir agregando</ion-button
+  >
 </ion-content>
-<ion-footer routerLink="/carrito" line="none">
+<ion-footer routerLink="/confirmarpedido" line="none" (click)="dismiss()">
   <ion-toolbar>
-    <ion-button mode="ios" expand="block" (click)="confirmar()" shape="round"
-      >Continuar</ion-button
-    >
+    <ion-button mode="ios" expand="block" shape="round">Continuar</ion-button>
   </ion-toolbar>
 </ion-footer>

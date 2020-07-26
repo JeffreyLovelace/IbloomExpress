@@ -109,7 +109,7 @@
   </div>
   <ion-list *ngIf="segmentModel === 'promociones'"></ion-list>
 </ion-content>
-<ion-footer routerLink="/pedido" class="myColor" line="none" *ngIf="pedido">
+<ion-footer (click)="presentModal()" class="myColor" line="none" *ngIf="pedido">
   <ion-toolbar>
     <ion-button mode="ios" expand="full" type="submit">
       Pedido Bs. 300

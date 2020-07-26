@@ -7,7 +7,8 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { environment } from "../../../environments/environment";
 import { Location } from "@angular/common";
 import { AlertController } from "@ionic/angular";
-
+import { ModalController } from "@ionic/angular";
+import { PedidoPage } from "../../pages/pedido/pedido.page";
 const TOKEN_KEY = "access_token";
 @Component({
   selector: "app-platos",
@@ -33,7 +34,8 @@ export class PlatosPage {
     private comboService: ComboService,
     private storage: Storage,
     private location: Location,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private modalController: ModalController
   ) {
     this.id = this.activatedRoute.snapshot.params["id"];
     this.nombre = this.activatedRoute.snapshot.params["nombre"];
@@ -110,5 +112,17 @@ export class PlatosPage {
     });
 
     await alert.present();
+  }
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: PedidoPage,
+      cssClass: "my-custom-class",
+      componentProps: {
+        firstName: "Douglas",
+        lastName: "Adams",
+        middleInitial: "N",
+      },
+    });
+    return await modal.present();
   }
 }

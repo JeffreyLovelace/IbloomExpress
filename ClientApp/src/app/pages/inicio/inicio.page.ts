@@ -4,6 +4,11 @@ import { Tipocomercio } from "../../interfaces/tipocomercio";
 import { NegocioService } from "../../services/negocio.service";
 import { Storage } from "@ionic/storage";
 import { Router, ActivatedRoute } from "@angular/router";
+import { AuthService } from "../../services/auth.service";
+import { ClienteService } from "../../services/cliente.service";
+import { PedidoService } from "../../services/pedido.service";
+import { Pedido } from "../../interfaces/pedido";
+
 const TOKEN_KEY = "access_token";
 
 @Component({
@@ -11,19 +16,25 @@ const TOKEN_KEY = "access_token";
   templateUrl: "./inicio.page.html",
   styleUrls: ["./inicio.page.scss"],
 })
-export class InicioPage implements OnInit {
+export class InicioPage {
   @ViewChild("slides") slides;
+  pedidos: Pedido[];
+  c = 0;
   topStories: any;
   tipocomercios: Tipocomercio[];
   id = null;
   nombre = null;
-
+  id_client;
   constructor(
     private negocioService: NegocioService,
     private storage: Storage,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService,
+    private clienteService: ClienteService,
+    private pedidoService: PedidoService
   ) {
     this.getNegocios();
+
     this.topStories = [
       {
         title: "Exploring San Francisco",
@@ -51,7 +62,10 @@ export class InicioPage implements OnInit {
       },
     ];
   }
-
+  ionViewWillEnter() {
+    this.c = 0;
+    this.getUser();
+  }
   getNegocios() {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.negocioService.get(res).subscribe((data: Tipocomercio[]) => {
@@ -65,5 +79,44 @@ export class InicioPage implements OnInit {
       console.log(index);
     });
   }
-  ngOnInit() {}
+  getUser() {
+    this.storage.get(TOKEN_KEY).then((res) => {
+      this.authService.getUser(res).subscribe((data) => {
+        console.log(data);
+
+        this.getCliente(data.email);
+      });
+    });
+  }
+  getCliente(correo) {
+    this.storage.get(TOKEN_KEY).then((res) => {
+      this.clienteService.get(res).subscribe((data) => {
+        for (let cliente of data) {
+          if (cliente.correo == correo) {
+            this.id_client = cliente.id;
+
+            this.nombre = cliente.pNombre;
+            this.getCantidad();
+          }
+        }
+        console.log(data);
+      });
+    });
+  }
+
+  getCantidad() {
+    this.storage.get(TOKEN_KEY).then((res) => {
+      this.pedidoService.get(res).subscribe((data: Pedido[]) => {
+        this.pedidos = data;
+        console.log(this.id_client);
+
+        for (let pedido of this.pedidos) {
+          if (pedido.id_cliente == this.id_client && pedido.id_estado == "1") {
+            this.c = this.c + 1;
+          }
+        }
+        console.log("cantidad" + this.c);
+      });
+    });
+  }
 }
