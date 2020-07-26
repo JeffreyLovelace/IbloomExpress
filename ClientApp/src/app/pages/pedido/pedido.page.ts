@@ -1,4 +1,19 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { IonSlides } from "@ionic/angular";
+import { Combo } from "../../interfaces/combo";
+import { ComboService } from "../../services/combo.service";
+import { Storage } from "@ionic/storage";
+import { Router, ActivatedRoute } from "@angular/router";
+import { environment } from "../../../environments/environment";
+import { ComercioService } from "../../services/comercio.service";
+import { PedidoService } from "../../services/pedido.service";
+
+import { OrdenService } from "../../services/orden.service";
+
+import { Pedido } from "../../interfaces/pedido";
+import { Orden } from "../../interfaces/orden";
+
+const TOKEN_KEY = "access_token";
 
 @Component({
   selector: "app-pedido",
@@ -7,13 +22,73 @@ import { Component, OnInit } from "@angular/core";
 })
 export class PedidoPage {
   currentNumber = 1;
-  constructor() {}
-
-  increment() {
-    this.currentNumber++;
+  id = null;
+  combos: Combo[];
+  ordenes: Orden[];
+  pedido1;
+  precio;
+  total;
+  descripcion;
+  id_pedido;
+  orden1 = {
+    precio: null,
+  };
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private storage: Storage,
+    private comercioService: ComercioService,
+    private comboService: ComboService,
+    private pedidoService: PedidoService,
+    private ordenService: OrdenService
+  ) {
+    this.getOrden();
+    this.storage.get("pedido").then((val) => {
+      this.id_pedido = val;
+    });
   }
 
-  decrement() {
-    this.currentNumber--;
+  getOrden() {
+    this.storage.get(TOKEN_KEY).then((res) => {
+      this.ordenService.get(res).subscribe((data: Orden[]) => {
+        this.ordenes = data;
+
+        console.log(this.ordenes);
+      });
+    });
+  }
+
+  increment(id, precio1) {
+    precio1++;
+    this.orden1 = {
+      precio: precio1,
+    };
+    this.storage.get(TOKEN_KEY).then((res) => {
+      this.ordenService.edit(this.orden1, res, id).subscribe((res) => {
+        console.log(res);
+        this.getOrden();
+      });
+    });
+
+    //  this.total = this.currentNumber * this.precio;
+  }
+
+  decrement(id, precio1) {
+    precio1--;
+    this.orden1 = {
+      precio: precio1,
+    };
+    this.storage.get(TOKEN_KEY).then((res) => {
+      this.ordenService.edit(this.orden1, res, id).subscribe((res) => {
+        console.log(res);
+        this.getOrden();
+      });
+    });
+  }
+  confirmar() {
+    this.storage.remove("pedido").then(() => {
+      // this.router.navigateByUrl("/login");
+      console.log("pedido confirmado");
+    });
   }
 }

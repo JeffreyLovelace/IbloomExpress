@@ -19,6 +19,8 @@ export class PlatosPage {
   envio;
   precioMinimo;
   id = null;
+  id_pedido;
+  pedido;
   nombre = null;
   combos: Combo[];
   segmentModel = "productos";
@@ -53,6 +55,19 @@ export class PlatosPage {
         this.combos = data;
         console.log(data);
       });
+    });
+  }
+  ionViewWillEnter() {
+    console.log("ionViewWillEnter");
+    this.storage.get("pedido").then((val) => {
+      if (val) {
+        console.log("hay pedido");
+        this.pedido = true;
+      } else {
+        console.log("no hay pedido");
+        this.pedido = false;
+      }
+      // this.id_pedido = val;
     });
   }
 }

@@ -23,7 +23,7 @@
       </ion-button>
     </ion-buttons>
     <ion-title>
-      Detalles del Pedido
+      Pedido
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -31,7 +31,7 @@
 <ion-content [fullscreen]="true">
   <ion-header mode="ios" collapse="condense">
     <ion-toolbar>
-      <ion-title size="large"> Detalles del Pedido </ion-title>
+      <ion-title size="large"> Pedido </ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -58,29 +58,38 @@
       </ion-label>
     </ion-item>
   </ion-list>
+  <div *ngFor="let orden of ordenes">
+    <div *ngIf="orden.id_pedido==id_pedido">
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <ion-button
+              color="danger"
+              (click)="decrement(orden.id,orden.precio)"
+            >
+              <ion-icon name="remove-outline"></ion-icon>
+            </ion-button>
+            <ion-button color="light">
+              <h2>
+                {{orden.precio}}
+              </h2></ion-button
+            >
 
-  <ion-list>
-    <ion-item>
-      <ion-label>
-        <ion-button color="danger" (click)="decrement()">
-          <ion-icon name="remove-outline"></ion-icon>
-        </ion-button>
-        <ion-button color="light">
-          <h2>
-            {{currentNumber}}
-          </h2></ion-button
-        >
-
-        <ion-button color="success" (click)="increment()">
-          <ion-icon name="add-outline"></ion-icon>
-        </ion-button>
-      </ion-label>
-      <ion-label> Pokémon Yellow </ion-label>
-      <p slot="end" color="success">
-        <ion-text color="success">Bs. 40</ion-text>
-      </p>
-    </ion-item>
-  </ion-list>
+            <ion-button
+              color="success"
+              (click)="increment(orden.id,orden.precio)"
+            >
+              <ion-icon name="add-outline"></ion-icon>
+            </ion-button>
+          </ion-label>
+          <ion-label> Pokémon Yellow </ion-label>
+          <p slot="end" color="success">
+            <ion-text color="success">Bs. {{orden.id_pedido}}</ion-text>
+          </p>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
   <ion-list>
     <ion-item>
       <ion-label> <h1>Total</h1> </ion-label>
@@ -90,9 +99,9 @@
     </ion-item>
   </ion-list>
 </ion-content>
-<ion-footer routerLink="/" line="none">
+<ion-footer routerLink="/carrito" line="none">
   <ion-toolbar>
-    <ion-button mode="ios" expand="block" type="submit" shape="round"
+    <ion-button mode="ios" expand="block" (click)="confirmar()" shape="round"
       >Continuar</ion-button
     >
   </ion-toolbar>
