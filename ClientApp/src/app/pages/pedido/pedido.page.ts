@@ -25,7 +25,15 @@ export class PedidoPage {
   id = null;
   combos: Combo[];
   ordenes: Orden[];
-  pedido1;
+  pedido1 = {
+    id_cliente: null,
+    id_estado: null,
+    latitud: null,
+    longitud: null,
+    nit: null,
+    razonSocial: null,
+    total: null,
+  };
   precio;
   total;
   descripcion;
@@ -89,6 +97,16 @@ export class PedidoPage {
     this.storage.remove("pedido").then(() => {
       // this.router.navigateByUrl("/login");
       console.log("pedido confirmado");
+    });
+  }
+  updatePedido() {
+    this.storage.get(TOKEN_KEY).then((res) => {
+      this.pedidoService
+        .edit(this.pedido1, res, this.id_pedido)
+        .subscribe((res) => {
+          console.log(res);
+          this.getOrden();
+        });
     });
   }
 }

@@ -23,7 +23,7 @@
       </ion-button>
     </ion-buttons>
     <ion-title>
-      Pedido
+      Mi pedido
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -31,31 +31,33 @@
 <ion-content [fullscreen]="true">
   <ion-header mode="ios" collapse="condense">
     <ion-toolbar>
-      <ion-title size="large"> Pedido </ion-title>
+      <ion-title size="large"> Mi pedido </ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-list>
     <ion-item slot="start" lines="none">
-      <ion-avatar slot="start">
+      <ion-thumbnail slot="start">
         <img src="/assets/card-top-img.png" />
-      </ion-avatar>
+      </ion-thumbnail>
       <ion-label>
-        <h1>Nombre</h1>
-        <ion-button fill="clear">
-          <ion-icon
-            mode="ios"
-            slot="icon-only"
-            name="stopwatch-outline"
-          ></ion-icon
-          >10bs</ion-button
-        >
-        <ion-button fill="clear">
-          <ion-icon mode="ios" slot="icon-only" name="bicycle-outline">
-            > </ion-icon
-          >10-45
-        </ion-button>
+        <h1><strong>Nombre comercio -as</strong></h1>
+        <p></p>
       </ion-label>
+    </ion-item>
+    <ion-item slot="start" lines="none">
+      <ion-button fill="clear">
+        <ion-icon mode="ios" slot="icon-only" name="bicycle"></ion-icon>Envío
+        Bs. 10
+      </ion-button>
+      <ion-button fill="clear">
+        <ion-icon mode="ios" slot="icon-only" name="stopwatch"> > </ion-icon
+        >10-45 min
+      </ion-button>
+      <ion-button fill="clear">
+        <ion-icon mode="ios" slot="icon-only" name="cash"> > </ion-icon>Bs. 20
+        mínimo
+      </ion-button>
     </ion-item>
   </ion-list>
   <div *ngFor="let orden of ordenes">

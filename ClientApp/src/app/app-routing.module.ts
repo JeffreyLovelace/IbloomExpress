@@ -90,6 +90,15 @@ const routes: Routes = [
     path: "perfil",
     loadChildren: () =>
       import("./pages/perfil/perfil.module").then((m) => m.PerfilPageModule),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "confirmarpedido",
+    loadChildren: () =>
+      import("./pages/confirmarpedido/confirmarpedido.module").then(
+        (m) => m.ConfirmarpedidoPageModule
+      ),
+    canActivate: [AuthGuard],
   },
 ];
 

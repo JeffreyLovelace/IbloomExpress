@@ -1,9 +1,75 @@
-<ion-header>
+<ion-header mode="ios">
   <ion-toolbar>
-    <ion-title>perfil</ion-title>
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary" routerLink="/carrito">
+      <ion-button>
+        <ion-icon
+          slot="icon-only"
+          ios="cart-outline"
+          md="cart-outline"
+        ></ion-icon>
+        <ion-badge color="danger">1 </ion-badge>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon
+          slot="icon-only"
+          ios="search-outline"
+          md="search-sharp"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Mi cuenta
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content [fullscreen]="true">
+  <ion-header mode="ios" collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large"> Mi cuenta </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-avatar class="avatar">
+    <img
+      src="http://www.precision-spine.com/wp-content/uploads/2015/09/person-icon.png"
+    />
+  </ion-avatar>
+  <ion-row>
+    <ion-col>
+      <div class="ion-text-center">
+        <h2><strong>Nombre aPELLIDO</strong></h2>
+        cORREO@ASD
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-list mode="ios">
+    <ion-list-header>
+      Mis datos
+    </ion-list-header>
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Apellido</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Celular</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Correo</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Cumpleaños</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+  </ion-list>
 </ion-content>
