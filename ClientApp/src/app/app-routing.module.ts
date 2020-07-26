@@ -20,6 +20,7 @@ const routes: Routes = [
     loadChildren: () =>
       import("./pages/login/login.module").then((m) => m.LoginPageModule),
   },
+
   {
     path: "ubicacion",
     loadChildren: () =>
@@ -28,14 +29,7 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuard],
   },
-  {
-    path: "",
-    loadChildren: () =>
-      import("./pages/ubicacion/ubicacion.module").then(
-        (m) => m.UbicacionPageModule
-      ),
-    canActivate: [AuthGuard],
-  },
+
   {
     path: "registro",
     loadChildren: () =>
@@ -51,7 +45,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "comercios",
+    path: "comercios/:id/:nombre",
     loadChildren: () =>
       import("./pages/comercios/comercios.module").then(
         (m) => m.ComerciosPageModule
@@ -59,13 +53,13 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "platos",
+    path: "platos/:id/:nombre/:fotoLogo/:fotoBaner/:envio/:precioMinimo",
     loadChildren: () =>
       import("./pages/platos/platos.module").then((m) => m.PlatosPageModule),
     canActivate: [AuthGuard],
   },
   {
-    path: "detalleproducto",
+    path: "detalleproducto/:id",
     loadChildren: () =>
       import("./pages/detalleproducto/detalleproducto.module").then(
         (m) => m.DetalleproductoPageModule
@@ -85,10 +79,24 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "detallecomercio",
+    path: "detallecomercio/:id",
     loadChildren: () =>
       import("./pages/detallecomercio/detallecomercio.module").then(
         (m) => m.DetallecomercioPageModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "perfil",
+    loadChildren: () =>
+      import("./pages/perfil/perfil.module").then((m) => m.PerfilPageModule),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "confirmarpedido",
+    loadChildren: () =>
+      import("./pages/confirmarpedido/confirmarpedido.module").then(
+        (m) => m.ConfirmarpedidoPageModule
       ),
     canActivate: [AuthGuard],
   },

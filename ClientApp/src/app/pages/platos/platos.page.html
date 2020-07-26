@@ -1,6 +1,9 @@
 <ion-header mode="ios">
   <ion-toolbar translucent>
-    <ion-button fill="clear" (click)="back()">
+    <ion-buttons slot="start" mode="md" *ngIf="!pedido">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-button fill="clear" (click)="back()" *ngIf="pedido">
       <ion-icon slot="start" name="arrow-back-outline" color="dark"></ion-icon>
     </ion-button>
     <ion-buttons slot="primary" routerLink="/carrito">
@@ -23,7 +26,7 @@
       </ion-button>
     </ion-buttons>
     <ion-title>
-      Comercio
+      {{nombre}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -31,23 +34,23 @@
 <ion-content [fullscreen]="true">
   <ion-header mode="ios" collapse="condense">
     <ion-toolbar>
-      <ion-title size="large"> Comercio</ion-title>
-      <ion-buttons slot="end" routerLink="/detallecomercio">
+      <ion-title size="large"> {{nombre}}</ion-title>
+      <ion-buttons slot="end" routerLink="/detallecomercio/{{id}}">
         <ion-button>
           <ion-icon
             slot="icon-only"
-            ios="alert-circle-outline"
-            md="alert-circle-outline"
+            ios="alert-circle"
+            md="alert-circle"
           ></ion-icon>
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-  <img class="position" src="/assets/card-top-img.png" />
+  <img class="position" src="{{servidor}}/imagenes/{{ fotoBaner }}" />
   <ion-list>
     <ion-item slot="start" lines="none">
       <ion-avatar slot="start">
-        <img src="/assets/card-top-img.png" />
+        <img src="{{servidor}}/imagenes/{{ fotoLogo }}" />
       </ion-avatar>
       <ion-label>
         <ion-button fill="clear">
@@ -56,17 +59,15 @@
             slot="icon-only"
             name="stopwatch-outline"
           ></ion-icon
-          >10bs</ion-button
+          >{{envio}}</ion-button
         >
         <ion-button fill="clear">
-          <ion-icon mode="ios" slot="icon-only" name="bicycle-outline">
-            > </ion-icon
-          >10-45
+          <ion-icon mode="ios" slot="icon-only" name="bicycle"> > </ion-icon
+          >time
         </ion-button>
         <ion-button fill="clear">
-          <ion-icon mode="ios" slot="icon-only" name="cash-outline">
-            > </ion-icon
-          >Minimo Bs 20
+          <ion-icon mode="ios" slot="icon-only" name="cash"> > </ion-icon>Minimo
+          {{precioMinimo}}
         </ion-button>
       </ion-label>
     </ion-item>
@@ -80,106 +81,35 @@
     (ionChange)="segmentChanged($event)"
   >
     <ion-segment-button value="productos">
-      <ion-label>Productos</ion-label>
+      <ion-label>Combos</ion-label>
     </ion-segment-button>
     <ion-segment-button value="promociones">
       <ion-label>Promociones</ion-label>
     </ion-segment-button>
   </ion-segment>
-  <ion-list *ngIf="segmentModel === 'productos'">
+  <div *ngIf="segmentModel === 'productos'">
     <ion-searchbar mode="ios"></ion-searchbar>
 
-    <ion-item>
-      <ion-thumbnail slot="end">
-        <img
-          src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-        />
-      </ion-thumbnail>
-      <ion-label>
-        <h2>Han</h2>
-        <h3>Look, kid...</h3>
-        <p>I've got enough on my plate as it is, and I...</p>
-        <h3>Look, kid...</h3>
-        <h3>Look, kid...</h3></ion-label
-      >
-    </ion-item>
-
-    <ion-item routerLink="/detalleproducto">
-      <ion-thumbnail slot="end">
-        <img
-          src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-        />
-      </ion-thumbnail>
-      <ion-label>
-        <h2>Han</h2>
-        <h3>Look, kid...</h3>
-        <p>I've got enough on my plate as it is, and I...</p>
-        <h3>Look, kid...</h3>
-        <h3>Look, kid...</h3></ion-label
-      >
-    </ion-item>
-
-    <ion-item routerLink="/detalleproducto">
-      <ion-thumbnail slot="end">
-        <img
-          src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-        />
-      </ion-thumbnail>
-      <ion-label>
-        <h2>Han</h2>
-        <h3>Look, kid...</h3>
-        <p>I've got enough on my plate as it is, and I...</p>
-        <h3>Look, kid...</h3>
-        <h3>Look, kid...</h3></ion-label
-      >
-    </ion-item>
-    <ion-item routerLink="/detalleproducto">
-      <ion-thumbnail slot="end">
-        <img
-          src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-        />
-      </ion-thumbnail>
-      <ion-label>
-        <h2>Han</h2>
-        <h3>Look, kid...</h3>
-        <p>I've got enough on my plate as it is, and I...</p>
-        <h3>Look, kid...</h3>
-        <h3>Look, kid...</h3></ion-label
-      >
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail slot="end">
-        <img
-          src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-        />
-      </ion-thumbnail>
-      <ion-label>
-        <h2>Han</h2>
-        <h3>Look, kid...</h3>
-        <p>I've got enough on my plate as it is, and I...</p>
-        <h3>Look, kid...</h3>
-        <h3>Look, kid...</h3></ion-label
-      >
-    </ion-item>
-
-    <ion-item>
-      <ion-thumbnail slot="end">
-        <img
-          src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-        />
-      </ion-thumbnail>
-      <ion-label>
-        <h2>Han</h2>
-        <h3>Look, kid...</h3>
-        <p>I've got enough on my plate as it is, and I...</p>
-        <h3>Look, kid...</h3>
-        <h3>Look, kid...</h3></ion-label
-      >
-    </ion-item>
-  </ion-list>
+    <div *ngFor="let combo of combos">
+      <div *ngIf="combo.id_comercio == id">
+        <ion-list>
+          <ion-item routerLink="/detalleproducto/{{combo.id}}">
+            <ion-thumbnail slot="end">
+              <img src="{{servidor}}/imagenes/{{ combo.foto }}" />
+            </ion-thumbnail>
+            <ion-label>
+              <h2><strong>{{combo.nombre}}</strong></h2>
+              <h2>{{combo.descripcion}}</h2>
+              <h2>Precio: Bs. {{combo.precio}}</h2>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+  </div>
   <ion-list *ngIf="segmentModel === 'promociones'"></ion-list>
 </ion-content>
-<ion-footer routerLink="/pedido" class="myColor" line="none">
+<ion-footer routerLink="/pedido" class="myColor" line="none" *ngIf="pedido">
   <ion-toolbar>
     <ion-button mode="ios" expand="full" type="submit">
       Pedido Bs. 300

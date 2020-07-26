@@ -14,6 +14,7 @@ import { NativeGeocoder } from "@ionic-native/native-geocoder/ngx";
 import { firebaseConfig } from "../environments/environment";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
+import { LocationAccuracy } from "@ionic-native/location-accuracy/ngx";
 
 import { Storage, IonicStorageModule } from "@ionic/storage";
 import { JwtModule, JWT_OPTIONS } from "@auth0/angular-jwt";
@@ -43,6 +44,7 @@ import { HttpClientModule } from "@angular/common/http";
     SplashScreen,
     Geolocation,
     NativeGeocoder,
+    LocationAccuracy,
 
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],

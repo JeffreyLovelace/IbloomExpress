@@ -22,35 +22,36 @@
         ></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>
-      Tipo de negocio
-    </ion-title>
+    <ion-title>Detalles </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header mode="ios" collapse="condense">
     <ion-toolbar>
-      <ion-title size="large"> Combo 2 </ion-title>
+      <ion-title size="large"> Detalles </ion-title>
     </ion-toolbar>
   </ion-header>
 
   <img class="header-img" src="/assets/card-top-img.png" />
-  <ion-list>
+  <ion-list *ngFor="let combo of combos">
     <ion-item slot="start" lines="none">
       <ion-label>
-        <h1>Buerger King doble</h1>
-        <p>Bs. 32</p>
+        <h1>{{combo.nombre}}</h1>
+        <p>Bs. {{combo.precio}}</p>
       </ion-label>
     </ion-item>
   </ion-list>
   <ion-item>
-    <ion-textarea placeholder="Enter a description"></ion-textarea>
+    <ion-textarea
+      [(ngModel)]="descripcion"
+      placeholder="Enter a description"
+    ></ion-textarea>
   </ion-item>
   <hr />
   <hr />
   <ion-list style="text-align: center;" mode="ios">
-    <ion-button color="danger" (click)="decrement()">
+    <ion-button color="danger" (click)="decrement()" *ngIf="currentNumber > 1">
       <ion-icon name="remove-outline"></ion-icon>
     </ion-button>
     <ion-button color="light">
@@ -67,7 +68,13 @@
   <hr />
   <hr />
   <hr />
-  <ion-button mode="ios" expand="block" type="submit" shape="round"
-    >Agregar Bs. 300</ion-button
-  >
+  <ion-button
+    mode="ios"
+    expand="block"
+    type="submit"
+    shape="round"
+    (click)="verificar()"
+    >Agregar Bs. {{total}}
+    <ion-back-button></ion-back-button>
+  </ion-button>
 </ion-content>

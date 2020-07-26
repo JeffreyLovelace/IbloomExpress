@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 
 import { AlertController } from "@ionic/angular";
 import { Router } from "@angular/router";
+import { Storage } from "@ionic/storage";
 
 import { AuthService } from "../../services/auth.service";
 import { GooglePlus } from "@ionic-native/google-plus/ngx";
@@ -21,7 +22,8 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private googlePlus: GooglePlus
+    private googlePlus: GooglePlus,
+    private storage: Storage
   ) {}
 
   ngOnInit() {}
