@@ -9,28 +9,43 @@ import { StatusBar } from "@ionic-native/status-bar/ngx";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
+import { NativeGeocoder } from "@ionic-native/native-geocoder/ngx";
 
-import {firebaseConfig} from "../environments/environment";
-import {AngularFireModule} from "@angular/fire";
-import {AngularFireAuthModule} from "@angular/fire/auth";
+import { firebaseConfig } from "../environments/environment";
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from "@angular/fire/auth";
 
+import { Storage, IonicStorageModule } from "@ionic/storage";
+import { JwtModule, JWT_OPTIONS } from "@auth0/angular-jwt";
 
-import {GooglePlus} from "@ionic-native/google-plus/ngx";
+import { GooglePlus } from "@ionic-native/google-plus/ngx";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
-  AngularFireModule.initializeApp(firebaseConfig),
-  AngularFireAuthModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    IonicStorageModule.forRoot({
+      name: "__mydb",
+      driverOrder: ["indexeddb", "sqlite", "websql"],
+    }),
+
+    AngularFireAuthModule,
+    HttpClientModule,
+  ],
   providers: [
     GooglePlus,
     StatusBar,
     SplashScreen,
     Geolocation,
+    NativeGeocoder,
+
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-

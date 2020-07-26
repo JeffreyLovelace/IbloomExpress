@@ -1,0 +1,11 @@
+.my-custom-class {
+  --background: #e5e5e5;
+}
+.alert-wrapper {
+  background: #e5e5e5;
+}
+
+/* Works - pass "my-custom-class" in cssClass to increase specificity */
+.my-custom-class .alert-wrapper {
+  background: #e5e5e5;
+}

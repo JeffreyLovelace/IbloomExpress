@@ -1,16 +1,19 @@
 import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
+import { AuthGuard } from "./guards/auth.guard";
 
 const routes: Routes = [
   {
     path: "home",
     loadChildren: () =>
       import("./home/home.module").then((m) => m.HomePageModule),
+    canActivate: [AuthGuard],
   },
   {
-    path: "",
-    redirectTo: "login",
-    pathMatch: "full",
+    path: "inicio",
+    loadChildren: () =>
+      import("./pages/inicio/inicio.module").then((m) => m.InicioPageModule),
+    canActivate: [AuthGuard],
   },
   {
     path: "login",
@@ -23,6 +26,15 @@ const routes: Routes = [
       import("./pages/ubicacion/ubicacion.module").then(
         (m) => m.UbicacionPageModule
       ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "",
+    loadChildren: () =>
+      import("./pages/ubicacion/ubicacion.module").then(
+        (m) => m.UbicacionPageModule
+      ),
+    canActivate: [AuthGuard],
   },
   {
     path: "registro",
@@ -30,35 +42,55 @@ const routes: Routes = [
       import("./pages/registro/registro.module").then(
         (m) => m.RegistroPageModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: "inicio",
     loadChildren: () =>
       import("./pages/inicio/inicio.module").then((m) => m.InicioPageModule),
+    canActivate: [AuthGuard],
   },
   {
-    path: 'comercios',
-    loadChildren: () => import('./pages/comercios/comercios.module').then( m => m.ComerciosPageModule)
+    path: "comercios",
+    loadChildren: () =>
+      import("./pages/comercios/comercios.module").then(
+        (m) => m.ComerciosPageModule
+      ),
+    canActivate: [AuthGuard],
   },
   {
-    path: 'platos',
-    loadChildren: () => import('./pages/platos/platos.module').then( m => m.PlatosPageModule)
+    path: "platos",
+    loadChildren: () =>
+      import("./pages/platos/platos.module").then((m) => m.PlatosPageModule),
+    canActivate: [AuthGuard],
   },
   {
-    path: 'detalleproducto',
-    loadChildren: () => import('./pages/detalleproducto/detalleproducto.module').then( m => m.DetalleproductoPageModule)
+    path: "detalleproducto",
+    loadChildren: () =>
+      import("./pages/detalleproducto/detalleproducto.module").then(
+        (m) => m.DetalleproductoPageModule
+      ),
+    canActivate: [AuthGuard],
   },
   {
-    path: 'carrito',
-    loadChildren: () => import('./pages/carrito/carrito.module').then( m => m.CarritoPageModule)
+    path: "carrito",
+    loadChildren: () =>
+      import("./pages/carrito/carrito.module").then((m) => m.CarritoPageModule),
+    canActivate: [AuthGuard],
   },
   {
-    path: 'pedido',
-    loadChildren: () => import('./pages/pedido/pedido.module').then( m => m.PedidoPageModule)
+    path: "pedido",
+    loadChildren: () =>
+      import("./pages/pedido/pedido.module").then((m) => m.PedidoPageModule),
+    canActivate: [AuthGuard],
   },
   {
-    path: 'detallecomercio',
-    loadChildren: () => import('./pages/detallecomercio/detallecomercio.module').then( m => m.DetallecomercioPageModule)
+    path: "detallecomercio",
+    loadChildren: () =>
+      import("./pages/detallecomercio/detallecomercio.module").then(
+        (m) => m.DetallecomercioPageModule
+      ),
+    canActivate: [AuthGuard],
   },
 ];
 

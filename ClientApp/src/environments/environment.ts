@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  url: "http://177.222.52.26:8000",
 };
 
 /*
@@ -21,5 +22,5 @@ export const firebaseConfig = {
   projectId: "login-f2e0f",
   storageBucket: "login-f2e0f.appspot.com",
   messagingSenderId: "827377395656",
-  appId: "1:827377395656:web:66c59c6ad826ca8e6e02fd"
+  appId: "1:827377395656:web:66c59c6ad826ca8e6e02fd",
 };

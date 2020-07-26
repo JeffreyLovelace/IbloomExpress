@@ -2,6 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { LoadingController } from "@ionic/angular";
 import { Router, ActivatedRoute, Params } from "@angular/router";
+import {
+  NativeGeocoder,
+  NativeGeocoderResult,
+  NativeGeocoderOptions,
+} from "@ionic-native/native-geocoder/ngx";
 
 declare var google;
 @Component({
@@ -11,10 +16,13 @@ declare var google;
 })
 export class UbicacionPage implements OnInit {
   mapRef = null;
+  address: string;
+
   constructor(
     private geolocation: Geolocation,
     private loadingCtrl: LoadingController,
-    private router: Router
+    private router: Router,
+    private nativeGeocoder: NativeGeocoder
   ) {}
 
   ngOnInit() {
@@ -36,6 +44,7 @@ export class UbicacionPage implements OnInit {
       // loaded
       loading.dismiss();
       this.addMarker(myLatLng.lat, myLatLng.lng);
+      this.getAddressFromCoords(myLatLng.lat, myLatLng.lng);
     });
   }
   private addMarker(lat: number, lng: number) {
@@ -62,5 +71,32 @@ export class UbicacionPage implements OnInit {
   }
   getMenu() {
     this.router.navigateByUrl("/inicio");
+  }
+  getAddressFromCoords(lattitude, longitude) {
+    console.log("getAddressFromCoords " + lattitude + " " + longitude);
+    let options: NativeGeocoderOptions = {
+      useLocale: true,
+      maxResults: 5,
+    };
+
+    this.nativeGeocoder
+      .reverseGeocode(lattitude, longitude, options)
+      .then((result: NativeGeocoderResult[]) => {
+        this.address = "";
+        let responseAddress = [];
+        for (let [key, value] of Object.entries(result[0])) {
+          if (value.length > 0) responseAddress.push(value);
+        }
+        responseAddress.reverse();
+        for (let value of responseAddress) {
+          this.address += value + ", ";
+        }
+        this.address = this.address.slice(0, -2);
+      })
+      .catch((error: any) => {
+        console.log(error);
+
+        this.address = "Dirección no disponible!";
+      });
   }
 }

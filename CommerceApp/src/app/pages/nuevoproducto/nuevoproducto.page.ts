@@ -4,6 +4,8 @@ import { ComboService } from "../../services/combo.service";
 import { AuthService } from "../../services/auth.service";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { Storage } from "@ionic/storage";
+import { ComercioService } from "../../services/comercio.service";
+
 import {
   FormBuilder,
   FormControl,
@@ -22,6 +24,7 @@ export class NuevoproductoPage {
   combos: Combo[];
   public promocion: boolean = false;
   idcomercio = null;
+  correo = null;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -29,7 +32,8 @@ export class NuevoproductoPage {
     private comboService: ComboService,
     private authService: AuthService,
     private storage: Storage,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public comercioService: ComercioService
   ) {
     this.getUser();
     this.get();
@@ -48,7 +52,7 @@ export class NuevoproductoPage {
     formData.append("descripcion", this.formGroup.get("descripcion").value);
     formData.append("precio", this.formGroup.get("precio").value);
     formData.append("foto", this.formGroup.get("foto").value);
-    formData.append("estadoEliminado", "0");
+    formData.append("estadoEliminado", "1");
     if (this.promocion == true) {
       formData.append("promocion", "1");
     } else {
@@ -67,7 +71,8 @@ export class NuevoproductoPage {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.authService.getUser(res).subscribe((response) => {
         console.log(response.id);
-        this.idcomercio = response.id;
+        this.correo = response.email;
+        this.getId();
       });
     });
   }
@@ -97,5 +102,18 @@ export class NuevoproductoPage {
       duration: 2000,
     });
     toast.present();
+  }
+
+  getId() {
+    this.storage.get(TOKEN_KEY).then((res) => {
+      this.comercioService.get(res).subscribe((data) => {
+        for (let datos of data) {
+          if (datos.correo == this.correo) {
+            this.idcomercio = datos.id;
+            this.get();
+          }
+        }
+      });
+    });
   }
 }
