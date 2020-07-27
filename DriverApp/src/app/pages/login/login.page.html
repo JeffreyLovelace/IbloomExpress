@@ -13,14 +13,25 @@
   <hr />
   <hr />
   <form>
-    <ion-item>
-      <ion-label position="floating">Correo</ion-label>
-      <ion-input type="email"></ion-input>
+    <ion-item lines="none">
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input
+        type="email"
+        placeholder="Email"
+        name="email"
+        [(ngModel)]="credentials.email"
+      ></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input type="password"></ion-input>
+    <ion-item lines="none">
+      <ion-label position="stacked">Password</ion-label>
+      <ion-input
+        type="password"
+        placeholder="Password"
+        name="password"
+        [(ngModel)]="credentials.password"
+      >
+      </ion-input>
     </ion-item>
     <hr />
     <hr />
@@ -29,7 +40,7 @@
       expand="block"
       type="submit"
       shape="round"
-      (click)="onSubmit()"
+      (click)="login()"
       >Iniciar sesión</ion-button
     >
     <p slot="end" color="primary">Olvidó su contraseña?</p>
@@ -37,15 +48,5 @@
     <hr />
     <hr />
     <hr />
-    <ion-button
-      mode="ios"
-      expand="block"
-      type="submit"
-      shape="round"
-      fill="outline"
-    >
-      <ion-icon name="logo-whatsapp" slot="start"></ion-icon
-      >Contactanos</ion-button
-    >
   </form>
 </ion-content>
