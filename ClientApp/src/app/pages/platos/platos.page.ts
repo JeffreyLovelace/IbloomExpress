@@ -9,6 +9,7 @@ import { Location } from "@angular/common";
 import { AlertController } from "@ionic/angular";
 import { ModalController } from "@ionic/angular";
 import { PedidoPage } from "../../pages/pedido/pedido.page";
+import { Platform } from "@ionic/angular";
 const TOKEN_KEY = "access_token";
 @Component({
   selector: "app-platos",
@@ -35,7 +36,8 @@ export class PlatosPage {
     private storage: Storage,
     private location: Location,
     private alertController: AlertController,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private platform: Platform
   ) {
     this.id = this.activatedRoute.snapshot.params["id"];
     this.nombre = this.activatedRoute.snapshot.params["nombre"];
@@ -44,6 +46,7 @@ export class PlatosPage {
     this.envio = this.activatedRoute.snapshot.params["envio"];
     this.precioMinimo = this.activatedRoute.snapshot.params["precioMinimo"];
 
+    console.log(this.router.url);
     this.getCombos();
   }
 
@@ -57,6 +60,9 @@ export class PlatosPage {
     this.storage.get("pedido").then((val) => {
       if (val) {
         this.presentAlertConfirm();
+        this.platform.backButton.subscribe(async () => {
+          this.presentAlertConfirm();
+        });
       } else {
         this.router.navigateByUrl("/inicio");
       }

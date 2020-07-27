@@ -6,16 +6,7 @@
     <ion-button fill="clear" (click)="back()" *ngIf="pedido">
       <ion-icon slot="start" name="arrow-back-outline" color="dark"></ion-icon>
     </ion-button>
-    <ion-buttons slot="primary" routerLink="/carrito">
-      <ion-button>
-        <ion-icon
-          slot="icon-only"
-          ios="cart-outline"
-          md="cart-outline"
-        ></ion-icon>
-        <ion-badge color="danger">1 </ion-badge>
-      </ion-button>
-    </ion-buttons>
+
     <ion-buttons slot="end">
       <ion-button>
         <ion-icon
@@ -66,8 +57,9 @@
           >time
         </ion-button>
         <ion-button fill="clear">
-          <ion-icon mode="ios" slot="icon-only" name="cash"> > </ion-icon>Minimo
-          {{precioMinimo}}
+          <ion-icon mode="ios" slot="icon-only" name="cash-outline">
+            > </ion-icon
+          >Minimo {{precioMinimo}}
         </ion-button>
       </ion-label>
     </ion-item>
