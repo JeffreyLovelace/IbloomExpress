@@ -25,10 +25,11 @@ export class DetalleproductoPage {
   currentNumber = 1;
   id = null;
   combos: Combo[];
-  pedido1;
+  pedido1 = { estadoEliminado: "1", id_comercio: null };
   precio;
   total;
   descripcion;
+  id_comercio;
   orden1 = {
     id_combo: null,
     id_pedido: null,
@@ -64,7 +65,7 @@ export class DetalleproductoPage {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.comboService.detail(res, this.id).subscribe((data: Combo[]) => {
         this.combos = data;
-
+        this.id_comercio = this.combos[0].id_comercio;
         this.precio = this.combos[0].precio;
         this.total = this.currentNumber * this.precio;
         console.log(this.combos);
@@ -72,6 +73,7 @@ export class DetalleproductoPage {
     });
   }
   pedido() {
+    this.pedido1 = { estadoEliminado: "1", id_comercio: this.id_comercio };
     this.storage.get(TOKEN_KEY).then((res) => {
       this.pedidoService.save(res, this.pedido1).subscribe((res) => {
         this.orden(res.id);

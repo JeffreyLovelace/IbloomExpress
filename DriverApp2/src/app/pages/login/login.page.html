@@ -1,0 +1,52 @@
+<ion-content>
+  <hr />
+  <hr />
+  <hr />
+  <hr />
+  <hr />
+  <hr />
+  <hr />
+  <hr />
+  <div class="center">
+    <img class="header-img" src="/assets/banner.png" />
+  </div>
+  <hr />
+  <hr />
+  <form>
+    <ion-item lines="none">
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input
+        type="email"
+        placeholder="Email"
+        name="email"
+        [(ngModel)]="credentials.email"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label position="stacked">Password</ion-label>
+      <ion-input
+        type="password"
+        placeholder="Password"
+        name="password"
+        [(ngModel)]="credentials.password"
+      >
+      </ion-input>
+    </ion-item>
+    <hr />
+    <hr />
+    <ion-button
+      mode="ios"
+      expand="block"
+      type="submit"
+      shape="round"
+      (click)="login()"
+      >Iniciar sesión</ion-button
+    >
+    <p slot="end" color="primary">Olvidó su contraseña?</p>
+    <hr />
+    <hr />
+    <hr />
+    <hr />
+  </form>
+</ion-content>

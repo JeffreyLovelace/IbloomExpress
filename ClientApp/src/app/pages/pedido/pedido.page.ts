@@ -33,6 +33,7 @@ export class PedidoPage {
     nit: null,
     razonSocial: null,
     total: null,
+    estadoEliminado: 1,
   };
   precio;
   total;
