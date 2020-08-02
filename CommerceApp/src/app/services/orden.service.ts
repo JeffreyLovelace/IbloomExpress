@@ -14,7 +14,7 @@ const TOKEN_KEY = "access_token";
 @Injectable({
   providedIn: "root",
 })
-export class PedidoService {
+export class OrdenService {
   token = null;
   servidor = environment.url;
   constructor(
@@ -27,30 +27,21 @@ export class PedidoService {
 
   get(token): Observable<any> {
     let headers = new HttpHeaders().set("Authorization", token);
-    return this.http.get(`${this.servidor}/api/vistas/pedido`, {
+    return this.http.get(`${this.servidor}/api/orden`, {
       headers: headers,
     });
   }
-  detalle(token, id_pedido): Observable<any> {
-    let headers = new HttpHeaders().set("Authorization", token);
-    return this.http.get(
-      `${this.servidor}/api/vistas/pedidoDetalle/` + id_pedido,
-      {
-        headers: headers,
-      }
-    );
-  }
-  save(token, data): Observable<any> {
+  save(data, token): Observable<any> {
     let headers = new HttpHeaders().set("Authorization", token);
 
-    return this.http.post(`${this.servidor}/api/pedido`, data, {
+    return this.http.post(`${this.servidor}/api/orden`, data, {
       headers: headers,
     });
   }
 
   edit(data, token, id_combo) {
     let headers = new HttpHeaders().set("Authorization", token);
-    return this.http.put(`${this.servidor}/api/pedido/` + id_combo, data, {
+    return this.http.put(`${this.servidor}/api/orden/` + id_combo, data, {
       headers: headers,
     });
   }

@@ -19,9 +19,9 @@
     </ion-toolbar>
   </ion-header>
   <div *ngFor="let pedido of pedidos">
-    <div *ngIf="pedido.id_conductor==id_client">
+    <div>
       <div
-        *ngIf="pedido.id_estado==2 || pedido.id_estado==3 ||pedido.id_estado==4"
+        *ngIf="pedido.id_conductor==id_client && pedido.id_estado==2 || pedido.id_estado==3 ||pedido.id_estado==4||pedido.id_estado==5"
       >
         <ion-list>
           <ion-item routerLink="/detallepedido/{{pedido.id}}">
@@ -34,13 +34,16 @@
               <p>{{pedido.pNombre}}</p>
             </ion-label>
             <ion-badge *ngIf="pedido.id_estado==2" color="primary" slot="end"
-              >Entregado</ion-badge
+              >En preparación</ion-badge
             >
             <ion-badge *ngIf="pedido.id_estado==3" color="success" slot="end"
               >En camino</ion-badge
             >
-            <ion-badge *ngIf="pedido.id_estado==4" color="danger" slot="end"
-              >Trancadera</ion-badge
+            <ion-badge *ngIf="pedido.id_estado==4" color="warning" slot="end"
+              >En camino</ion-badge
+            >
+            <ion-badge *ngIf="pedido.id_estado==5" color="tertiary" slot="end"
+              >En el destino</ion-badge
             >
           </ion-item>
         </ion-list>

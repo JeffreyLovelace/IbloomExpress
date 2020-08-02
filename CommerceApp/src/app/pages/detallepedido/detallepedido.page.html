@@ -4,40 +4,46 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>
-      Peiddo 123
+      Pedido: {{id_pedido}}
     </ion-title>
+    <ion-button slot="end" size="small" routerLink="/orden/{{id_pedido}}"
+      >Ver orden</ion-button
+    >
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header mode="ios" collapse="condense">
     <ion-toolbar>
-      <ion-title size="large"> Peiddo 123</ion-title>
+      <ion-title size="large">Pedido: {{id_pedido}}</ion-title>
     </ion-toolbar>
     <ion-toolbar>
-      <ion-title mode="md">Para, Juan carlos</ion-title>
-      <ion-button fill="clear" slot="end">
-        <ion-icon slot="icon-only" name="logo-whatsapp">
-          >
-        </ion-icon>
+      <ion-title mode="md">Cliente: {{pNombre}}</ion-title>
+      <ion-button
+        fill="clear"
+        slot="end"
+        href="https://api.whatsapp.com/send?phone=59177114037"
+      >
+        <ion-icon slot="icon-only" name="logo-whatsapp"> </ion-icon>
       </ion-button>
     </ion-toolbar>
   </ion-header>
-  <div id="map"></div>
+  <div id="map1"></div>
   <ion-list>
-    <ion-list-header>
-      <h2>Repartidor</h2>
-    </ion-list-header>
-    <ion-item>
-      <ion-button fill="clear" slot="start">
-        <ion-icon slot="icon-only" name="logo-whatsapp">
-          >
-        </ion-icon>
-      </ion-button>
-      <ion-label> Juan Carlos </ion-label>
-      <p slot="end" color="success">
-        <ion-text color="success">En camino</ion-text>
-      </p>
+    <ion-item slot="start" lines="none">
+      <ion-avatar slot="start">
+        <img src="/assets/card-top-img.png" />
+      </ion-avatar>
+      <ion-label>
+        <h2>Conductor</h2>
+        <p></p>
+
+        <ion-button fill="clear">
+          <ion-icon mode="ios" slot="icon-only" name="bicycle-outline">
+          </ion-icon
+          >10-45
+        </ion-button>
+      </ion-label>
     </ion-item>
   </ion-list>
   <ion-list>
@@ -45,14 +51,15 @@
       <h2>Pedido</h2>
     </ion-list-header>
     <ion-item>
-      <ion-label>
-        <h2>
-          2
-        </h2>
-      </ion-label>
-      <ion-label> Pokémon Yellow </ion-label>
+      <ion-label> Precio pedido </ion-label>
       <p slot="end" color="success">
-        <ion-text>Bs. 40</ion-text>
+        <ion-text>Bs. {{total}}</ion-text>
+      </p>
+    </ion-item>
+    <ion-item>
+      <ion-label> Precio delivery </ion-label>
+      <p slot="end" color="success">
+        <ion-text>Bs. {{delivery}}</ion-text>
       </p>
     </ion-item>
   </ion-list>
@@ -60,22 +67,11 @@
     <ion-item>
       <ion-label> <h1>Total</h1> </ion-label>
       <p slot="end" color="success">
-        <ion-text color="success">Bs. 40</ion-text>
+        <ion-text color="success">Bs. 58</ion-text>
       </p>
     </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-list-header>
-      <h3>Razón Social</h3>
-    </ion-list-header>
     <ion-item>
-      <ion-label>
-        <p>Nombre</p>
-        <p>Nombre</p>
-      </ion-label>
+      <ion-label> Detalle para el conductor </ion-label>
     </ion-item>
   </ion-list>
-  <ion-button mode="ios" expand="block" type="submit" shape="round"
-    >Entregar</ion-button
-  >
 </ion-content>

@@ -32,7 +32,7 @@
     </ion-list-header>
     <ion-item slot="start" lines="none">
       <ion-avatar slot="start">
-        <img src="/assets/card-top-img.png" />
+        <img src="{{servidor}}/imagenes/{{ fotoLogo }}" />
       </ion-avatar>
 
       <ion-label>
@@ -42,7 +42,7 @@
             slot="icon-only"
             name="stopwatch-outline"
           ></ion-icon
-          >time</ion-button
+          >{{tiempo}} min.</ion-button
         >
         <ion-button fill="clear">
           <ion-icon mode="ios" slot="icon-only" name="bicycle-outline">

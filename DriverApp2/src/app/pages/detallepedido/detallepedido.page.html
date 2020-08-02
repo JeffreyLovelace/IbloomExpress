@@ -78,12 +78,40 @@
 <ion-footer>
   <ion-toolbar>
     <ion-button
+      *ngIf="id_estado==2"
       mode="ios"
       expand="block"
       type="submit"
       shape="round"
       (click)="presentActionSheet()"
-      >Espera</ion-button
+      >En preparación</ion-button
+    >
+    <ion-button
+      *ngIf="id_estado==3"
+      mode="ios"
+      expand="block"
+      type="submit"
+      shape="round"
+      (click)="presentActionSheet()"
+      >En camino</ion-button
+    >
+    <ion-button
+      *ngIf="id_estado==4"
+      mode="ios"
+      expand="block"
+      type="submit"
+      shape="round"
+      (click)="presentActionSheet()"
+      >Inconveniente</ion-button
+    >
+    <ion-button
+      *ngIf="id_estado==5"
+      mode="ios"
+      expand="block"
+      type="submit"
+      shape="round"
+      (click)="presentActionSheet()"
+      >En el destino</ion-button
     >
   </ion-toolbar>
 </ion-footer>

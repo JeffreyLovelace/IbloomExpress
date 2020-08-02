@@ -67,6 +67,7 @@ export class UbicacionPage implements OnInit {
         url: "https://image.flaticon.com/icons/svg/1476/1476763.svg", // url
         scaledSize: new google.maps.Size(50, 50), // size
       },
+      draggable: true,
     });
   }
   private async getLocation() {

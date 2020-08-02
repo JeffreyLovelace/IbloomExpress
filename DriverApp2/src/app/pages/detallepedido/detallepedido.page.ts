@@ -10,6 +10,8 @@ import {
   LaunchNavigatorOptions,
 } from "@ionic-native/launch-navigator/ngx";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
+import { AlertController } from "@ionic/angular";
+import { ToastController } from "@ionic/angular";
 
 const TOKEN_KEY = "access_token";
 declare var google;
@@ -19,6 +21,9 @@ declare var google;
   styleUrls: ["./detallepedido.page.scss"],
 })
 export class DetallepedidoPage implements OnInit {
+  pedido1 = {
+    id_estado: null,
+  };
   mapRef = null;
   id;
   id_pedido;
@@ -52,7 +57,9 @@ export class DetallepedidoPage implements OnInit {
     public pedidoService: PedidoService,
     public storage: Storage,
     public geolocation: Geolocation,
-    private launchNavigator: LaunchNavigator
+    private launchNavigator: LaunchNavigator,
+    private alertController: AlertController,
+    public toastController: ToastController
   ) {
     this.getDetalle();
   }
@@ -174,28 +181,28 @@ export class DetallepedidoPage implements OnInit {
           //  role: "destructive",
           icon: "car-sport",
           handler: () => {
-            console.log("Delete clicked");
+            this.tomarPedido(3);
           },
         },
         {
           text: "En el destino",
           icon: "locate",
           handler: () => {
-            console.log("Share clicked");
+            this.tomarPedido(5);
           },
         },
         {
           text: "Inconveniente",
           icon: "build",
           handler: () => {
-            console.log("Play clicked");
+            this.tomarPedido(4);
           },
         },
         {
           text: "Pedido entregado",
           icon: "trophy",
           handler: () => {
-            console.log("Favorite clicked");
+            this.tomarPedido(6);
           },
         },
         {
@@ -232,5 +239,34 @@ export class DetallepedidoPage implements OnInit {
         console.log(error);
       }
     );
+  }
+  tomarPedido(id_estado) {
+    this.pedido1 = {
+      id_estado: id_estado,
+    };
+    this.storage.get(TOKEN_KEY).then((res) => {
+      this.pedidoService.edit(this.pedido1, res, this.id).subscribe(
+        (data) => console.log(data),
+        (error) => this.presentAlertError()
+      );
+    });
+  }
+  async presentAlertError() {
+    const alert = await this.alertController.create({
+      mode: "ios",
+      cssClass: "my-custom-class",
+      header: "Algo salió mal :(",
+      message: "Intente de nuevo",
+      buttons: ["OK"],
+    });
+    await alert.present();
+  }
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: "Cambios de estado exitoso.",
+      duration: 2000,
+    });
+    this.getDetalle();
+    toast.present();
   }
 }

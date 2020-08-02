@@ -12,7 +12,7 @@ export class Comercio {
     public direccion: string,
     public referencia: string,
     public precioMinimo: string,
-    public longitud: number,
-    public latitud: number
+    public longitud: string,
+    public latitud: string
   ) {}
 }

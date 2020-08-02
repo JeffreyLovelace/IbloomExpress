@@ -158,7 +158,7 @@ export class Tab1Page {
 
     this.pedido1 = {
       id_conductor: this.id_client,
-      id_estado: 3,
+      id_estado: 2,
     };
     this.storage.get(TOKEN_KEY).then((res) => {
       this.pedidoService.edit(this.pedido1, res, pedido_id).subscribe(

@@ -15,14 +15,31 @@
       <ion-title size="large"> Pedidos</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <ion-list>
-    <ion-item routerLink="/detallepedido">
-      <ion-label>
-        <h2>Nro de pedido</h2>
-        <h3>Nombre del comprador</h3>
-      </ion-label>
-      <ion-badge color="warning" slot="end">espera</ion-badge>
-    </ion-item>
-  </ion-list>
+  <div *ngFor="let pedido of pedidos">
+    <div>
+      <ion-list>
+        <ion-item routerLink="/detallepedido/{{pedido.id}}">
+          <ion-label>
+            <h2>Pedido Nr. {{pedido.id}}</h2>
+            <h3>Cliente: {{pedido.pNombre}}</h3>
+          </ion-label>
+          <ion-badge *ngIf="pedido.id_estado==1" color="warning" slot="end"
+            >Espera</ion-badge
+          >
+          <ion-badge *ngIf="pedido.id_estado==2" color="primary" slot="end"
+            >En preparación</ion-badge
+          >
+          <ion-badge *ngIf="pedido.id_estado==3" color="success" slot="end"
+            >En camino</ion-badge
+          >
+          <ion-badge *ngIf="pedido.id_estado==4" color="danger" slot="end"
+            >En camino</ion-badge
+          >
+          <ion-badge *ngIf="pedido.id_estado==5" color="tertiary" slot="end"
+            >En el destino</ion-badge
+          >
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
 </ion-content>
