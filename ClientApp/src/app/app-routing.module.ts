@@ -100,6 +100,20 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuard],
   },
+  {
+    path: "detallepedido/:id",
+    loadChildren: () =>
+      import("./pages/detallepedido/detallepedido.module").then(
+        (m) => m.DetallepedidoPageModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "orden/:id",
+    loadChildren: () =>
+      import("./pages/orden/orden.module").then((m) => m.OrdenPageModule),
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

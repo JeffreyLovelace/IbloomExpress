@@ -21,6 +21,7 @@ export class InicioPage {
   pedidos: Pedido[];
   c = 0;
   topStories: any;
+  direccion;
   tipocomercios: Tipocomercio[];
   id = null;
   nombre = null;
@@ -34,7 +35,9 @@ export class InicioPage {
     private pedidoService: PedidoService
   ) {
     this.getNegocios();
-
+    storage.get("address").then((val) => {
+      this.direccion = val;
+    });
     this.topStories = [
       {
         title: "Exploring San Francisco",
@@ -75,15 +78,11 @@ export class InicioPage {
     });
   }
   slideChanged() {
-    this.slides.nativeElement.getActiveIndex().then((index) => {
-      console.log(index);
-    });
+    this.slides.nativeElement.getActiveIndex().then((index) => {});
   }
   getUser() {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.authService.getUser(res).subscribe((data) => {
-        console.log(data);
-
         this.getCliente(data.email);
       });
     });
@@ -99,7 +98,6 @@ export class InicioPage {
             this.getCantidad();
           }
         }
-        console.log(data);
       });
     });
   }
@@ -108,14 +106,12 @@ export class InicioPage {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.pedidoService.get(res).subscribe((data: Pedido[]) => {
         this.pedidos = data;
-        console.log(this.id_client);
 
         for (let pedido of this.pedidos) {
           if (pedido.id_cliente == this.id_client && pedido.id_estado == "1") {
             this.c = this.c + 1;
           }
         }
-        console.log("cantidad" + this.c);
       });
     });
   }

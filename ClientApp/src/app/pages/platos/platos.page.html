@@ -104,7 +104,9 @@
 <ion-footer (click)="presentModal()" class="myColor" line="none" *ngIf="pedido">
   <ion-toolbar>
     <ion-button mode="ios" expand="full" type="submit">
-      Pedido Bs. 300
+      <ion-icon name="cart" slot="start"></ion-icon>
+
+      MI PEDIDO
     </ion-button>
   </ion-toolbar>
 </ion-footer>

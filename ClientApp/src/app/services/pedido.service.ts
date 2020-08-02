@@ -27,9 +27,18 @@ export class PedidoService {
 
   get(token): Observable<any> {
     let headers = new HttpHeaders().set("Authorization", token);
-    return this.http.get(`${this.servidor}/api/pedido`, {
+    return this.http.get(`${this.servidor}/api/vistas/pedido`, {
       headers: headers,
     });
+  }
+  detalle(token, id_pedido): Observable<any> {
+    let headers = new HttpHeaders().set("Authorization", token);
+    return this.http.get(
+      `${this.servidor}/api/vistas/pedidoDetalle/` + id_pedido,
+      {
+        headers: headers,
+      }
+    );
   }
   save(token, data): Observable<any> {
     let headers = new HttpHeaders().set("Authorization", token);

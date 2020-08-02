@@ -28,6 +28,12 @@ const routes: Routes = [
       import("./pages/perfil/perfil.module").then((m) => m.PerfilPageModule),
     canActivate: [AuthGuard],
   },
+  {
+    path: "orden/:id",
+    loadChildren: () =>
+      import("./pages/orden/orden.module").then((m) => m.OrdenPageModule),
+    canActivate: [AuthGuard],
+  },
 ];
 @NgModule({
   imports: [
