@@ -15,7 +15,7 @@ const routes: Routes = [
       import("./pages/login/login.module").then((m) => m.LoginPageModule),
   },
   {
-    path: "detallepedido",
+    path: "detallepedido/:id",
     loadChildren: () =>
       import("./pages/detallepedido/detallepedido.module").then(
         (m) => m.DetallepedidoPageModule

@@ -11,6 +11,8 @@ import { AppComponent } from "./app.component";
 import { HttpClientModule } from "@angular/common/http";
 import { Storage, IonicStorageModule } from "@ionic/storage";
 import { JwtModule, JWT_OPTIONS } from "@auth0/angular-jwt";
+import { Geolocation } from "@ionic-native/geolocation/ngx";
+import { LaunchNavigator } from "@ionic-native/launch-navigator/ngx";
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +30,8 @@ import { JwtModule, JWT_OPTIONS } from "@auth0/angular-jwt";
   providers: [
     StatusBar,
     BackgroundGeolocation,
+    Geolocation,
+    LaunchNavigator,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],

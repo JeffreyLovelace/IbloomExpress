@@ -15,6 +15,8 @@ export class Pedido {
     public telefono: string,
     public nombreCompercio: string,
     public telefonoComercio: string,
-    public delivery: string
+    public delivery: string,
+    public comerciolatitud: number,
+    public comerciolonitud: number
   ) {}
 }
