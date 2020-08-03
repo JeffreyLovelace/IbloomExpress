@@ -11,6 +11,8 @@ import { ModalController } from "@ionic/angular";
 import { PedidoPage } from "../../pages/pedido/pedido.page";
 import { Platform } from "@ionic/angular";
 const TOKEN_KEY = "access_token";
+declare var google: any;
+
 @Component({
   selector: "app-platos",
   templateUrl: "./platos.page.html",
@@ -28,7 +30,15 @@ export class PlatosPage {
   pedido;
   nombre = null;
   combos: Combo[];
+  latitud;
+  longitud;
+  velocidad = 8;
+  tiempo;
+  km;
   segmentModel = "productos";
+  lattitude;
+  longitude;
+  extra;
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -39,12 +49,21 @@ export class PlatosPage {
     private modalController: ModalController,
     private platform: Platform
   ) {
+    this.storage.get("lattitude").then((val) => {
+      this.lattitude = val;
+    });
+    this.storage.get("longitude").then((val) => {
+      this.longitude = val;
+    });
+
     this.id = this.activatedRoute.snapshot.params["id"];
     this.nombre = this.activatedRoute.snapshot.params["nombre"];
     this.fotoLogo = this.activatedRoute.snapshot.params["fotoLogo"];
     this.fotoBaner = this.activatedRoute.snapshot.params["fotoBaner"];
     this.envio = this.activatedRoute.snapshot.params["envio"];
     this.precioMinimo = this.activatedRoute.snapshot.params["precioMinimo"];
+    this.latitud = this.activatedRoute.snapshot.params["latitud"];
+    this.longitud = this.activatedRoute.snapshot.params["longitud"];
 
     console.log(this.router.url);
     this.getCombos();
@@ -74,6 +93,12 @@ export class PlatosPage {
       this.comboService.get(res).subscribe((data: Combo[]) => {
         this.combos = data;
         console.log(data);
+        this.calculateDistance(
+          this.lattitude,
+          this.longitude,
+          this.latitud,
+          this.longitud
+        );
       });
     });
   }
@@ -130,5 +155,21 @@ export class PlatosPage {
       },
     });
     return await modal.present();
+  }
+  calculateDistance(lat1, ln1, lat2, lng2) {
+    console.log(lat1, ln1);
+    console.log(lat2, lng2);
+
+    var gps1 = new google.maps.LatLng(Number(lat1), Number(ln1));
+    var gps2 = new google.maps.LatLng(Number(lat2), Number(lng2));
+
+    var distance = google.maps.geometry.spherical.computeDistanceBetween(
+      gps1,
+      gps2
+    );
+
+    this.km = distance / 1000;
+    this.tiempo = Math.round((this.km / this.velocidad) * 60);
+    this.extra = this.tiempo + 10;
   }
 }

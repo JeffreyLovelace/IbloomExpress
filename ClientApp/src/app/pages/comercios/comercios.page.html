@@ -28,31 +28,28 @@
       <ion-searchbar mode="ios"></ion-searchbar>
     </ion-toolbar>
   </ion-header>
-  <div *ngFor="let comercio of comercios">
+  <div *ngFor="let comercio of mostrar">
     <div *ngIf="comercio.id_tipoComercio == id">
       <ion-card
-        routerLink="/platos/{{comercio.id}}/{{comercio.nombre}}/{{comercio.fotoLogo}}/{{comercio.fotoBaner}}/{{comercio.envio}}/{{comercio.precioMinimo}}"
+        routerLink="/platos/{{comercio.id}}/{{comercio.nombre}}/{{comercio.fotoLogo}}/{{comercio.fotoBaner}}/{{comercio.envio}}/{{comercio.precioMinimo}}/{{comercio.latitud}}/{{comercio.longitud}}"
       >
         <img class="header-img" src="/assets/card-top-img.png" />
-        <div>
-          <ion-button fill="clear">
-            <ion-icon mode="ios" slot="icon-only" name="bicycle"></ion-icon
-            >Envío Bs. {{comercio.envio}}
-          </ion-button>
-          <ion-button fill="clear">
-            <ion-icon mode="ios" slot="icon-only" name="stopwatch"> > </ion-icon
-            >10-45 min
-          </ion-button>
-        </div>
-        <ion-item>
+
+        <ion-item lines="none">
           <ion-thumbnail slot="start">
             <img src="/assets/card-top-img.png" />
           </ion-thumbnail>
 
           <ion-label>
             <h2><strong>{{comercio.nombre}}</strong></h2>
+            <div>
+              <ion-button fill="clear">
+                <ion-icon mode="ios" name="bicycle"></ion-icon>
+                Envío Bs. {{comercio.envio}}
+              </ion-button>
+              <ion-button slot="end" size="small">Abierto</ion-button>
+            </div>
           </ion-label>
-          <ion-button slot="end" size="small">Abierto</ion-button>
         </ion-item>
 
         <ion-card-content> </ion-card-content>

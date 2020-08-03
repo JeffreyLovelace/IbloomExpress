@@ -23,7 +23,7 @@ export class DetallecomercioPage implements OnInit {
 
   telefono;
   nombre;
-  velocidad = 30;
+  velocidad = 8;
   tiempo;
   fotoLogo;
   fotoBaner;
@@ -34,6 +34,8 @@ export class DetallecomercioPage implements OnInit {
   km;
   longitud;
   latitud;
+  lattitude;
+  longitude;
   constructor(
     private geolocation: Geolocation,
     private loadingCtrl: LoadingController,
@@ -42,6 +44,12 @@ export class DetallecomercioPage implements OnInit {
     private storage: Storage,
     private comercioService: ComercioService
   ) {
+    this.storage.get("lattitude").then((val) => {
+      this.lattitude = val;
+    });
+    this.storage.get("longitude").then((val) => {
+      this.longitude = val;
+    });
     this.getComercio();
     this.id = this.activatedRoute.snapshot.params["id"];
   }
@@ -84,7 +92,7 @@ export class DetallecomercioPage implements OnInit {
       map: this.mapRef,
       title: "Ubicación",
       icon: {
-        url: "https://image.flaticon.com/icons/svg/1476/1476763.svg", // url
+        url: "https://image.flaticon.com/icons/svg/1673/1673221.svg", // url
         scaledSize: new google.maps.Size(50, 50), // size
       },
     });
@@ -99,7 +107,7 @@ export class DetallecomercioPage implements OnInit {
       map: this.mapRef,
       title: "Ubicación",
       icon: {
-        url: "https://image.flaticon.com/icons/svg/1476/1476763.svg", // url
+        url: "https://image.flaticon.com/icons/svg/1673/1673241.svg", // url
         scaledSize: new google.maps.Size(50, 50), // size
       },
     });
