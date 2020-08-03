@@ -61,4 +61,8 @@ export class AppComponent {
 
     await alert.present();
   }
+  logout() {
+    this.authService.logout();
+    console.log("salir");
+  }
 }

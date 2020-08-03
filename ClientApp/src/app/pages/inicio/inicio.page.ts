@@ -108,7 +108,13 @@ export class InicioPage {
         this.pedidos = data;
 
         for (let pedido of this.pedidos) {
-          if (pedido.id_cliente == this.id_client && pedido.id_estado == "1") {
+          if (
+            (pedido.id_cliente == this.id_client && pedido.id_estado == "1") ||
+            pedido.id_estado == "2" ||
+            pedido.id_estado == "3" ||
+            pedido.id_estado == "4" ||
+            pedido.id_estado == "5"
+          ) {
             this.c = this.c + 1;
           }
         }

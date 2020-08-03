@@ -6,9 +6,9 @@
         <img src="/assets/logo-amtrak.png" alt="" />
         <ion-label>
           <h2>
-            Jeffsito
+            {{ name }}
           </h2>
-          <p>+591 75824901</p>
+          <p>{{ correo }}</p>
         </ion-label>
       </div>
 
@@ -38,6 +38,10 @@
 
     <ion-toolbar>
       <img class="header-img" src="/assets/banner.png" />
+      <ion-item (click)="logout()">
+        <ion-icon name="exit" slot="start"></ion-icon>
+        <ion-label>Salir</ion-label>
+      </ion-item>
     </ion-toolbar>
   </ion-menu>
   <ion-router-outlet id="main"></ion-router-outlet>

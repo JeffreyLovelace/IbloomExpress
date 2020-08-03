@@ -14,6 +14,8 @@ const TOKEN_KEY = "access_token";
   styleUrls: ["app.component.scss"],
 })
 export class AppComponent {
+  correo;
+  name;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -42,6 +44,8 @@ export class AppComponent {
         this.authService.getUser(res).subscribe((response) => {
           if (response.id_rol == "1") {
             this.router.navigate(["ubicacion"]);
+            this.correo = response.email;
+            this.name = response.name;
           } else {
             this.authService.logout();
             this.presentAlert();
@@ -64,5 +68,9 @@ export class AppComponent {
     });
 
     await alert.present();
+  }
+  logout() {
+    this.authService.logout();
+    console.log("salir");
   }
 }
