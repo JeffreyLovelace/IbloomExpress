@@ -41,4 +41,22 @@
       </ion-list>
     </div>
   </div>
+  <ion-button
+    class="primario"
+    expand="block"
+    (click)="startBackgroundGeolocation()"
+    *ngIf="!tracking"
+  >
+    Comenzar a trabajar <ion-icon name="locate" slot="start"></ion-icon
+  ></ion-button>
+
+  <ion-button
+    class="primario"
+    (click)="stopBackgroundGeolocation()"
+    expand="block"
+    *ngIf="tracking"
+  >
+    Terminar de trabajar
+    <ion-icon name="hand-right-outline" slot="start"></ion-icon
+  ></ion-button>
 </ion-content>

@@ -31,6 +31,8 @@ export class Tab1Page {
   pedidos: Pedido[];
   id_client;
   estado;
+  public tracking: boolean;
+
   pedido1 = {
     id_conductor: null,
     id_estado: null,
@@ -75,6 +77,8 @@ export class Tab1Page {
   }
 
   start() {
+    this.tracking = true;
+
     const config: BackgroundGeolocationConfig = {
       desiredAccuracy: 10,
       stationaryRadius: 1,
@@ -104,6 +108,7 @@ export class Tab1Page {
   }
 
   stopBackgroundGeolocation() {
+    this.tracking = false;
     this.backgroundGeolocation.stop();
   }
   gePedido() {
@@ -130,6 +135,11 @@ export class Tab1Page {
         for (let cliente of data) {
           if (cliente.correo == correo) {
             this.id_client = cliente.id;
+            if (cliente.estadoTrabajo == 1) {
+              this.tracking = true;
+            } else {
+              this.tracking = false;
+            }
             this.estado = cliente.estadoTrabajo;
             console.log(this.id_client);
             this.gePedido();
@@ -143,6 +153,20 @@ export class Tab1Page {
     console.log(this.estado);
     this.driverStatus = {
       estadoTrabajo: 1,
+    };
+
+    this.storage.get(TOKEN_KEY).then((res) => {
+      this.driverService
+        .update(res, this.driverStatus, this.id_client)
+        .subscribe((data) => {
+          console.log(data);
+        });
+    });
+  }
+  updateStatusInactive() {
+    console.log(this.estado);
+    this.driverStatus = {
+      estadoTrabajo: 0,
     };
 
     this.storage.get(TOKEN_KEY).then((res) => {
