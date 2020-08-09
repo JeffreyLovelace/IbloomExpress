@@ -13,7 +13,7 @@ import { Storage, IonicStorageModule } from "@ionic/storage";
 import { JwtModule, JWT_OPTIONS } from "@auth0/angular-jwt";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { LaunchNavigator } from "@ionic-native/launch-navigator/ngx";
-
+import { FCM } from "@ionic-native/fcm/ngx";
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -34,6 +34,8 @@ import { LaunchNavigator } from "@ionic-native/launch-navigator/ngx";
     LaunchNavigator,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    ,
+    FCM,
   ],
   bootstrap: [AppComponent],
 })

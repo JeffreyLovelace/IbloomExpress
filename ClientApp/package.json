@@ -23,6 +23,7 @@
     "@auth0/angular-jwt": "^5.0.1",
     "@capacitor/core": "2.2.1",
     "@ionic-native/core": "^5.0.7",
+    "@ionic-native/fcm": "^5.27.0",
     "@ionic-native/geolocation": "^5.27.0",
     "@ionic-native/google-plus": "^5.27.0",
     "@ionic-native/location-accuracy": "^5.27.0",
@@ -34,6 +35,7 @@
     "cordova-android": "^8.1.0",
     "cordova-plugin-add-swift-support": "^2.0.2",
     "cordova-plugin-compat": "^1.2.0",
+    "cordova-plugin-fcm-with-dependecy-updated": "^7.0.9",
     "cordova-plugin-geolocation": "^4.0.2",
     "cordova-plugin-googleplus": "^8.5.0",
     "cordova-plugin-hotspot": "1.2.10",
@@ -96,7 +98,8 @@
       "cordova-plugin-nativegeocoder": {},
       "cordova-plugin-request-location-accuracy": {
         "PLAY_SERVICES_LOCATION_VERSION": "16.+"
-      }
+      },
+      "cordova-plugin-fcm-with-dependecy-updated": {}
     },
     "platforms": [
       "android"

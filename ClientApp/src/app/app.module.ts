@@ -21,6 +21,7 @@ import { JwtModule, JWT_OPTIONS } from "@auth0/angular-jwt";
 
 import { GooglePlus } from "@ionic-native/google-plus/ngx";
 import { HttpClientModule } from "@angular/common/http";
+import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic/ngx";
 
 @NgModule({
   declarations: [AppComponent],
@@ -45,7 +46,7 @@ import { HttpClientModule } from "@angular/common/http";
     Geolocation,
     NativeGeocoder,
     LocationAccuracy,
-
+    FCM,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent],

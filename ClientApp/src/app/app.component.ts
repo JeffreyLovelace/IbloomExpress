@@ -7,6 +7,8 @@ import { StatusBar } from "@ionic-native/status-bar/ngx";
 import { AuthService } from "./services/auth.service";
 import { Storage } from "@ionic/storage";
 import { Router } from "@angular/router";
+import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic/ngx";
+
 const TOKEN_KEY = "access_token";
 @Component({
   selector: "app-root",
@@ -23,7 +25,8 @@ export class AppComponent {
     private authService: AuthService,
     private router: Router,
     private storage: Storage,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private fcm: FCM
   ) {
     this.initializeApp();
     this.verificar();
@@ -36,6 +39,8 @@ export class AppComponent {
       this.statusBar.styleLightContent();
 
       this.splashScreen.hide();
+      this.fcm.subscribeToTopic("users");
+      console.log("driver suscribe");
     });
   }
   verificar() {

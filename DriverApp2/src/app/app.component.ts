@@ -7,6 +7,7 @@ import { StatusBar } from "@ionic-native/status-bar/ngx";
 import { AuthService } from "./services/auth.service";
 import { Storage } from "@ionic/storage";
 import { Router } from "@angular/router";
+import { FCM } from "@ionic-native/fcm/ngx";
 const TOKEN_KEY = "access_token";
 
 @Component({
@@ -22,7 +23,8 @@ export class AppComponent {
     private authService: AuthService,
     private router: Router,
     private storage: Storage,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private fcm: FCM
   ) {
     this.initializeApp();
     this.verificar();
@@ -45,6 +47,18 @@ export class AppComponent {
   }
   initializeApp() {
     this.platform.ready().then(() => {
+      this.fcm.getToken().then((token) => {
+        console.log(token);
+        // send token to the server
+      });
+      this.fcm.onNotification().subscribe((data) => {
+        console.log(data);
+        if (data.wasTapped) {
+          console.log("Received in background");
+        } else {
+          console.log("Received in foreground");
+        }
+      });
       this.statusBar.styleLightContent();
       this.splashScreen.hide();
     });

@@ -10,6 +10,7 @@ import { PedidoService } from "../../services/pedido.service";
 import { Location } from "@angular/common";
 import { AuthService } from "../../services/auth.service";
 import { ClienteService } from "../../services/cliente.service";
+import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic/ngx";
 
 import { OrdenService } from "../../services/orden.service";
 import { AlertController } from "@ionic/angular";
@@ -31,6 +32,7 @@ export class ConfirmarpedidoPage {
   nit = null;
   razonSocial = null;
   nota = null;
+  tokenpedido = null;
   pedido1 = {
     id_cliente: null,
     id_estado: null,
@@ -52,13 +54,18 @@ export class ConfirmarpedidoPage {
     private location: Location,
     private authService: AuthService,
     private clienteService: ClienteService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private fcm: FCM
   ) {
     this.storage.get("lattitude").then((val) => {
       this.lattitude = val;
     });
     this.storage.get("longitude").then((val) => {
       this.longitude = val;
+    });
+    this.fcm.getToken().then((token) => {
+      console.log(token);
+      this.tokenpedido = token;
     });
   }
 
@@ -131,6 +138,10 @@ export class ConfirmarpedidoPage {
   }
 
   async presentAlert() {
+    this.pedidoService.notification().subscribe((res) => {
+      console.log(res);
+    });
+
     this.storage.remove("pedido").then(() => {
       this.router.navigateByUrl("/inicio");
       console.log("pedido confirmado");
@@ -143,7 +154,7 @@ export class ConfirmarpedidoPage {
         "Su pedido se registro correctamente. Nos pondremos en contacto cuando el pedido este en su puerta. También, puede observar el estado del pedido en el carrito de compras. ",
       buttons: ["OK"],
     });
-
+    this.pedidoService.notification();
     await alert.present();
   }
   async presentAlertError() {

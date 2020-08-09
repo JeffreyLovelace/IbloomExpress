@@ -13,6 +13,7 @@ import { OrdenService } from "../../services/orden.service";
 
 import { Pedido } from "../../interfaces/pedido";
 import { Orden } from "../../interfaces/orden";
+import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic/ngx";
 
 const TOKEN_KEY = "access_token";
 
@@ -25,8 +26,10 @@ export class DetalleproductoPage {
   currentNumber = 1;
   id = null;
   combos: Combo[];
-  pedido1 = { estadoEliminado: "1", id_comercio: null };
+  pedido1 = { estadoEliminado: "1", id_comercio: null, token: null };
   precio;
+  tokenpedido = null;
+
   total;
   descripcion;
   id_comercio;
@@ -44,10 +47,14 @@ export class DetalleproductoPage {
     private comboService: ComboService,
     private pedidoService: PedidoService,
     private ordenService: OrdenService,
-    private location: Location
+    private location: Location,
+    private fcm: FCM
   ) {
     this.getCombo();
-
+    this.fcm.getToken().then((token) => {
+      console.log(token);
+      this.tokenpedido = token;
+    });
     this.id = this.activatedRoute.snapshot.params["id"];
   }
   verificar() {
@@ -73,7 +80,11 @@ export class DetalleproductoPage {
     });
   }
   pedido() {
-    this.pedido1 = { estadoEliminado: "1", id_comercio: this.id_comercio };
+    this.pedido1 = {
+      estadoEliminado: "1",
+      id_comercio: this.id_comercio,
+      token: this.tokenpedido,
+    };
     this.storage.get(TOKEN_KEY).then((res) => {
       this.pedidoService.save(res, this.pedido1).subscribe((res) => {
         this.orden(res.id);
