@@ -45,7 +45,7 @@
   <div *ngFor="let pedido of pedidos">
     <div *ngIf="pedido.id_estado==1">
       <ion-list>
-        <ion-item (click)="presentAlertConfirm(pedido.id)">
+        <ion-item (click)="presentAlertConfirm(pedido.id,pedido.token)">
           <ion-avatar slot="start">
             <img src="./avatar-finn.png" />
           </ion-avatar>

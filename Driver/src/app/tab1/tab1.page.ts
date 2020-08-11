@@ -188,7 +188,7 @@ export class Tab1Page {
       );
     });
   }
-  async presentAlertConfirm(pedido_id) {
+  async presentAlertConfirm(pedido_id, tokenpedido) {
     const alert = await this.alertController.create({
       mode: "ios",
       cssClass: "my-custom-class",
@@ -207,6 +207,9 @@ export class Tab1Page {
           text: "Si",
           handler: () => {
             this.tomarPedido(pedido_id);
+            this.pedidoService.enPreparacion(tokenpedido).subscribe((res) => {
+              console.log(res);
+            });
           },
         },
       ],

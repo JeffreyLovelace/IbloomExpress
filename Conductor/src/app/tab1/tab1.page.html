@@ -1,0 +1,57 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Solicitudes
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header mode="ios" collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Solicitudes</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-button
+    mode="ios"
+    class="primario"
+    expand="block"
+    (click)="startBackgroundGeolocation()"
+    *ngIf="!tracking"
+  >
+    Comenzar a trabajar <ion-icon name="locate" slot="start"></ion-icon
+  ></ion-button>
+
+  <ion-button
+    mode="ios"
+    class="primario"
+    (click)="stopBackgroundGeolocation()"
+    expand="block"
+    *ngIf="tracking"
+  >
+    Terminar de trabajar
+    <ion-icon name="hand-right-outline" slot="start"></ion-icon
+  ></ion-button>
+  <div *ngFor="let pedido of pedidos">
+    <div *ngIf="pedido.id_estado==1">
+      <ion-list>
+        <ion-item (click)="presentAlertConfirm(pedido.id,pedido.token)">
+          <ion-avatar slot="start">
+            <img src="./avatar-finn.png" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Pedido Nr. {{pedido.id}}</h2>
+            <h3>{{pedido.nombreCompercio}}</h3>
+            <p>{{pedido.pNombre}}</p>
+          </ion-label>
+          <ion-badge *ngIf="pedido.id_estado==1" color="warning" slot="end"
+            >Espera</ion-badge
+          >
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>
