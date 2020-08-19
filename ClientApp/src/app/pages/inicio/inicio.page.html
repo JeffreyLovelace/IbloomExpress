@@ -30,49 +30,52 @@
 </ion-header>
 
 <ion-content>
-  <ion-slides
-    class="slide-padding"
-    pager="true"
-    (ionSlideDidChange)="slideChanged()"
-  >
-    <ion-slide *ngFor="let story of topStories">
-      <div class="container">
-        <ion-img src="{{story.picture}}"></ion-img>
-      </div>
-    </ion-slide>
-  </ion-slides>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>{{nombre}}, qué desea pedir?</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col size="4" *ngFor="let tipocomercio of tipocomercios">
-            <ion-img
-              src="/assets/logo-amtrak.png"
-              routerLink="/comercios/{{tipocomercio.id}}/{{tipocomercio.nombre}}"
-            ></ion-img>
-            <p>{{tipocomercio.nombre}}</p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Promociones</ion-card-title>
-    </ion-card-header>
-    <ion-slides class="slide-padding" pager="true">
+  <div *ngIf="tipocomercios">
+    <ion-slides
+      class="slide-padding"
+      pager="true"
+      (ionSlideDidChange)="slideChanged()"
+    >
       <ion-slide *ngFor="let story of topStories">
         <div class="container">
           <ion-img src="{{story.picture}}"></ion-img>
         </div>
       </ion-slide>
     </ion-slides>
-  </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{nombre}}, qué quiere pedir?</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="4" *ngFor="let tipocomercio of tipocomercios">
+              <ion-img
+                src="{{servidor}}/imagenes/{{ tipocomercio.foto }}"
+                routerLink="/comercios/{{tipocomercio.id}}/{{tipocomercio.nombre}}"
+              ></ion-img>
+
+              <p>{{tipocomercio.nombre}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Promociones</ion-card-title>
+      </ion-card-header>
+      <ion-slides class="slide-padding" pager="true">
+        <ion-slide *ngFor="let story of topStories">
+          <div class="container">
+            <ion-img src="{{story.picture}}"></ion-img>
+          </div>
+        </ion-slide>
+      </ion-slides>
+    </ion-card>
+  </div>
   <div *ngIf="!tipocomercios">
     <ion-list>
       <ion-list-header>

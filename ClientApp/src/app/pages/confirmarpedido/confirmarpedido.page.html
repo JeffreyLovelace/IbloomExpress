@@ -16,48 +16,50 @@
       <ion-title size="large">Confirmar pedido</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-list mode="ios">
-    <ion-item slot="start" lines="none">
-      <ion-thumbnail slot="start">
-        <img src="/assets/card-top-img.png" />
-      </ion-thumbnail>
-      <ion-label>
-        <h1><strong>Nombre comercio -as</strong></h1>
-        <p></p>
-      </ion-label>
-    </ion-item>
-    <ion-item slot="start" lines="none">
-      <ion-button fill="clear">
-        <ion-icon mode="ios" slot="icon-only" name="bicycle"></ion-icon>Envío
-        Bs. 10
-      </ion-button>
-      <ion-button fill="clear">
-        <ion-icon mode="ios" slot="icon-only" name="stopwatch"> > </ion-icon
-        >10-45 min
-      </ion-button>
-      <ion-button fill="clear">
-        <ion-icon mode="ios" slot="icon-only" name="cash"> > </ion-icon>Bs. 20
-        mínimo
-      </ion-button>
-    </ion-item>
-  </ion-list>
+  <div *ngFor="let comercio of comercios">
+    <ion-list>
+      <ion-item slot="start" lines="none">
+        <ion-thumbnail slot="start">
+          <img src="{{servidor}}/imagenes/{{ comercio.fotoLogo }}" />
+        </ion-thumbnail>
+        <ion-label>
+          <h1><strong>{{comercio.nombre}}</strong></h1>
+          <p></p>
+        </ion-label>
+      </ion-item>
+      <ion-item slot="start" lines="none">
+        <ion-button fill="clear">
+          <ion-icon mode="ios" slot="icon-only" name="bicycle"></ion-icon>Envío
+          Bs. {{comercio.envio}}
+        </ion-button>
+        <ion-button fill="clear">
+          <ion-icon mode="ios" slot="icon-only" name="stopwatch"> > </ion-icon
+          >{{tiempo}}-{{extra}} min
+        </ion-button>
+        <ion-button fill="clear">
+          <ion-icon mode="ios" slot="icon-only" name="cash"> > </ion-icon>Min
+          Bs. {{comercio.precioMinimo}}
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
   <ion-list mode="ios">
     <ion-item>
       <ion-label> <h2>Sub total</h2> </ion-label>
       <p slot="end" color="success">
-        <ion-text color="success">Bs. 40</ion-text>
+        <ion-text color="success">Bs. {{total}}</ion-text>
       </p>
     </ion-item>
     <ion-item>
       <ion-label> <p>Delivery</p> </ion-label>
       <p slot="end" color="success">
-        <ion-text color="success">Bs. 10</ion-text>
+        <ion-text color="success">Bs. {{envio}}</ion-text>
       </p>
     </ion-item>
     <ion-item>
       <ion-label> <h2>Total</h2> </ion-label>
       <p slot="end" color="success">
-        <ion-text color="success">Bs. 50</ion-text>
+        <ion-text color="success">Bs. {{totalDelivery}}</ion-text>
       </p>
     </ion-item>
   </ion-list>
@@ -67,20 +69,16 @@
     </ion-list-header>
     <ion-item>
       <ion-label position="floating">Nombre</ion-label>
-      <ion-input [(ngModel)]="razonSocial"></ion-input>
+      <ion-input [(ngModel)]="razonSocial" placeholder="Nombre"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Ci/NIT</ion-label>
-      <ion-input [(ngModel)]="nit"></ion-input>
+      <ion-input [(ngModel)]="nit" placeholder="Ci/NIT"></ion-input>
     </ion-item>
-  </ion-list>
-  <ion-list mode="ios">
-    <ion-list-header>
-      ¿Quieres aclarar algo?
-    </ion-list-header>
     <ion-item>
+      <ion-label position="floating">¿Quieres aclarar algo?</ion-label>
       <ion-input
-        [(ngModel)]="nota"
+        [(ngModel)]="desc"
         placeholder="Nota para el pedido"
       ></ion-input>
     </ion-item>

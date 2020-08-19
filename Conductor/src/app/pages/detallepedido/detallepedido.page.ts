@@ -9,6 +9,7 @@ import {
   LaunchNavigator,
   LaunchNavigatorOptions,
 } from "@ionic-native/launch-navigator/ngx";
+import { environment } from "../../../environments/environment";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { AlertController } from "@ionic/angular";
 import { ToastController } from "@ionic/angular";
@@ -24,6 +25,7 @@ export class DetallepedidoPage implements OnInit {
   pedido1 = {
     id_estado: null,
   };
+  servidor = environment.url;
   mapRef = null;
   id;
   id_pedido;
@@ -36,15 +38,16 @@ export class DetallepedidoPage implements OnInit {
   razon_social;
   total;
   pedidos: Pedido[];
-
+  nota;
   delivery;
   token;
   nombreCompercio;
   pNombre;
-
+  fotoComercio;
   telefono;
   telefonoComercio;
   latitude;
+  tiempoDelivery;
   longitude;
   UpdatePedido = {
     id_estado: null,
@@ -65,6 +68,12 @@ export class DetallepedidoPage implements OnInit {
   }
 
   ngOnInit() {}
+  doRefresh(event) {
+    this.getDetalle();
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
+  }
   getDetalle() {
     this.id = this.activatedRoute.snapshot.params["id"];
     this.storage.get(TOKEN_KEY).then((res) => {
@@ -75,13 +84,15 @@ export class DetallepedidoPage implements OnInit {
         this.longitud_comercio = Number(this.pedidos[0].comerciolonitud);
         this.latitud_comercio = Number(this.pedidos[0].comerciolatitud);
         this.id_pedido = this.pedidos[0].id;
-
+        this.fotoComercio = this.pedidos[0].fotoComercio;
         this.id_estado = this.pedidos[0].id_estado;
         this.nit = this.pedidos[0].nit;
         this.razon_social = this.pedidos[0].razonSocial;
         this.total = this.pedidos[0].total;
-
+        this.tiempoDelivery = this.pedidos[0].tiempoDelivery;
         this.delivery = this.pedidos[0].delivery;
+        this.nota = this.pedidos[0].nota;
+        console.log(this.fotoComercio);
 
         this.nombreCompercio = this.pedidos[0].nombreCompercio;
         this.pNombre = this.pedidos[0].pNombre;
@@ -117,6 +128,10 @@ export class DetallepedidoPage implements OnInit {
       loading.dismiss();
       this.addMyMarker(myLatLng.lat, myLatLng.lng);
       this.addMarker(Number(this.latitud_pedido), Number(this.longitud_pedido));
+      this.addMarkerComercio(
+        Number(this.latitud_comercio),
+        Number(this.longitud_comercio)
+      );
     });
   }
   private addMarker(lat: number, lng: number) {
@@ -141,6 +156,29 @@ export class DetallepedidoPage implements OnInit {
     // https://www.google.com/maps/dir//-16.4360577,-68.050949/@-16.4764219,-68.0902384,12
     this.addInfoWindow(marker, content);
   }
+
+  private addMarkerComercio(lat: number, lng: number) {
+    console.log(lat, lng);
+
+    const marker = new google.maps.Marker({
+      position: {
+        lat,
+        lng,
+      },
+      zoom: 8,
+      map: this.mapRef,
+      title: "Ubicación",
+      icon: {
+        url: this.servidor + "/imagenes/" + this.fotoComercio, // url
+        scaledSize: new google.maps.Size(50, 50), // size
+      },
+    });
+    let content = this.nombreCompercio;
+    marker.setMap(this.mapRef);
+
+    // https://www.google.com/maps/dir//-16.4360577,-68.050949/@-16.4764219,-68.0902384,12
+    this.addInfoWindow(marker, content);
+  }
   private addMyMarker(lat: number, lng: number) {
     console.log(lat, lng);
 
@@ -153,7 +191,7 @@ export class DetallepedidoPage implements OnInit {
       map: this.mapRef,
       title: "Ubicación",
       icon: {
-        url: "https://image.flaticon.com/icons/svg/787/787535.svg", // url
+        url: "https://image.flaticon.com/icons/svg/2833/2833394.svg", // url
         scaledSize: new google.maps.Size(50, 50), // size
       },
     });

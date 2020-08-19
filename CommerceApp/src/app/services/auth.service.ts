@@ -8,6 +8,9 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { AlertController } from "@ionic/angular";
 import { environment } from "../../environments/environment";
+import { LoadingController } from "@ionic/angular";
+import { ComercioService } from "../services/comercio.service";
+import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic/ngx";
 
 const helper = new JwtHelperService();
 const TOKEN_KEY = "access_token";
@@ -19,15 +22,22 @@ export class AuthService {
   public user: Observable<any>;
   servidor = environment.url;
   public rol = null;
+  correo;
+  tokenUpdate = {};
   private userData = new BehaviorSubject(null);
   authenticationState = new BehaviorSubject(false);
   token = null;
+  idComercio;
+  token1;
   constructor(
     private storage: Storage,
     private http: HttpClient,
     private plt: Platform,
     private router: Router,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private loadingController: LoadingController,
+    private comercioService: ComercioService,
+    private fcm: FCM
   ) {
     this.plt.ready().then(() => {
       this.checkToken();
@@ -75,6 +85,8 @@ export class AuthService {
           if (res) {
             this.verificarRol();
             this.token = res[TOKEN_KEY];
+            console.log(res);
+
             return this.storage
               .set(TOKEN_KEY, `Bearer ${res[TOKEN_KEY]}`)
               .then((res) => {
@@ -103,7 +115,9 @@ export class AuthService {
     this.storage.get(TOKEN_KEY).then((res) => {
       if (res) {
         this.getUser(res).subscribe((response) => {
-          if (response.name == "comercio") {
+          if (response.id_rol == "3") {
+            this.correo = response.email;
+            this.getComercio();
             this.router.navigateByUrl("/tabs");
           } else {
             this.logout();
@@ -113,10 +127,43 @@ export class AuthService {
       }
     });
   }
+  //data, token, id
+  getComercio() {
+    this.storage.get(TOKEN_KEY).then((res) => {
+      this.comercioService.get(res).subscribe((data) => {
+        for (let datos of data) {
+          if (datos.correo == this.correo) {
+            this.idComercio = datos.id;
+          } else {
+            console.log("no existe");
+          }
+        }
+        this.updateToken();
+      });
+    });
+  }
+  updateToken() {
+    this.fcm.getToken().then((token) => {
+      console.log(token);
+      this.token1 = token;
+      this.tokenUpdate = {
+        token: this.token1,
+      };
+    });
+
+    this.storage.get(TOKEN_KEY).then((res) => {
+      this.comercioService
+        .edit(this.tokenUpdate, res, this.idComercio)
+        .subscribe((res) => {
+          console.log(res);
+        });
+    });
+  }
   logout() {
     this.storage.remove(TOKEN_KEY).then(() => {
       this.router.navigateByUrl("/login");
       this.userData.next(null);
+      navigator["app"].exitApp();
     });
   }
   async presentAlert(Mensaje) {

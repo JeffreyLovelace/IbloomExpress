@@ -6,9 +6,6 @@
     <ion-title>
       Historial
     </ion-title>
-    <ion-buttons slot="primary">
-      <ion-toggle [(ngModel)]="entrega" slot="end"></ion-toggle>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -18,16 +15,25 @@
       <ion-title size="large">Historial</ion-title>
     </ion-toolbar>
   </ion-header>
-
+  <ion-refresher
+    mode="ios"
+    slot="fixed"
+    pullFactor="0.5"
+    pullMin="100"
+    pullMax="200"
+    (ionRefresh)="doRefresh($event)"
+  >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div *ngFor="let pedido of pedidos">
     <div>
       <div
-        *ngIf="pedido.id_conductor==id_client && pedido.id_estado==2 || pedido.id_estado==3 ||pedido.id_estado==4||pedido.id_estado==5"
+        *ngIf="pedido.id_conductor==id_client && pedido.id_estado==2 || pedido.id_estado==3 ||pedido.id_estado==4||pedido.id_estado==5||pedido.id_estado==6"
       >
         <ion-list>
           <ion-item>
             <ion-avatar slot="start">
-              <img src="./avatar-finn.png" />
+              <img src="{{servidor}}/imagenes/{{ pedido.fotoComercio }}" />
             </ion-avatar>
             <ion-label>
               <h2>Pedido Nr. {{pedido.id}}</h2>
@@ -50,5 +56,89 @@
         </ion-list>
       </div>
     </div>
+  </div>
+  <div *ngIf="!pedidos">
+    <ion-list>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
   </div>
 </ion-content>

@@ -12,10 +12,10 @@ import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { NativeGeocoder } from "@ionic-native/native-geocoder/ngx";
 
 import { firebaseConfig } from "../environments/environment";
-import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { LocationAccuracy } from "@ionic-native/location-accuracy/ngx";
-
+import { AngularFireModule } from "@angular/fire";
+import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { Storage, IonicStorageModule } from "@ionic/storage";
 import { JwtModule, JWT_OPTIONS } from "@auth0/angular-jwt";
 
@@ -30,7 +30,17 @@ import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic/ngx";
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireModule.initializeApp({
+      apiKey: "AIzaSyDo2NMNimUHRIBT6AIOWPSjl0LITLr-6kk",
+      authDomain: "ibloomexpress-2a20a.firebaseapp.com",
+      databaseURL: "https://ibloomexpress-2a20a.firebaseio.com",
+      projectId: "ibloomexpress-2a20a",
+      storageBucket: "ibloomexpress-2a20a.appspot.com",
+      messagingSenderId: "238573758608",
+      appId: "1:238573758608:web:cca05f7d5c54022b291015",
+      measurementId: "G-NSE47FPJYG",
+    }),
     IonicStorageModule.forRoot({
       name: "__mydb",
       driverOrder: ["indexeddb", "sqlite", "websql"],

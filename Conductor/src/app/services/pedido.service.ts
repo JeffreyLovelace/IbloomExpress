@@ -166,4 +166,26 @@ export class PedidoService {
       headers: headers,
     });
   }
+  notificarcomercio(token) {
+    this.dato = {
+      notification: {
+        title: "Nuevo pedido",
+        body: "Nuevo pedido registrado",
+        sound: "custom_sound.mp3",
+        click_action: "FCM_PLUGIN_ACTIVITY",
+        icon: "fcm_push_icon",
+      },
+      to: token,
+      priority: "high",
+    };
+    let headers = new HttpHeaders().set(
+      "Authorization",
+      "key=AAAAN4waqJA:APA91bGyHIgTqk9zdVYH7ZdssvG_rrQCPznyx5oq7xN5kW2u-jNE36nN3Vhh-iydzF-YVPTO1n8bScAQYylWlctANayXjZVEkKa8FfWiAb-S5yA8ijLOB4puX-QcFYpScbzGq144f-NC"
+    );
+    headers = headers.append("Content-Type", "application/json");
+
+    return this.http.post("https://fcm.googleapis.com/fcm/send", this.dato, {
+      headers: headers,
+    });
+  }
 }

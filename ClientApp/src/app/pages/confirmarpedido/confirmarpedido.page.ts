@@ -11,12 +11,12 @@ import { Location } from "@angular/common";
 import { AuthService } from "../../services/auth.service";
 import { ClienteService } from "../../services/cliente.service";
 import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic/ngx";
-
 import { OrdenService } from "../../services/orden.service";
 import { AlertController } from "@ionic/angular";
 
-import { Pedido } from "../../interfaces/pedido";
+import { Comercio } from "../../interfaces/comercio";
 import { Orden } from "../../interfaces/orden";
+declare var google: any;
 
 const TOKEN_KEY = "access_token";
 
@@ -26,6 +26,7 @@ const TOKEN_KEY = "access_token";
   styleUrls: ["./confirmarpedido.page.scss"],
 })
 export class ConfirmarpedidoPage {
+  servidor = environment.url;
   lattitude;
   longitude;
   id;
@@ -41,8 +42,30 @@ export class ConfirmarpedidoPage {
     nit: null,
     razonSocial: null,
     total: null,
+    nota: null,
+    tiempoDelivery: null,
   };
   id_pedido;
+  logo;
+  telefono;
+  nombre;
+  velocidad = 8;
+  km;
+  extra;
+  tiempo;
+  fotoLogo;
+  fotoBaner;
+  envio;
+  lattitudec;
+  longitudec;
+  direccion;
+  referencia;
+  precioMinimo;
+  total;
+  desc;
+  idcomercio;
+  comercios: Comercio[];
+  totalDelivery;
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -57,6 +80,7 @@ export class ConfirmarpedidoPage {
     private alertController: AlertController,
     private fcm: FCM
   ) {
+    this.getDetalleNegocio();
     this.storage.get("lattitude").then((val) => {
       this.lattitude = val;
     });
@@ -67,8 +91,40 @@ export class ConfirmarpedidoPage {
       console.log(token);
       this.tokenpedido = token;
     });
+    this.total = this.activatedRoute.snapshot.params["total"];
+    this.idcomercio = this.activatedRoute.snapshot.params["id"];
   }
 
+  getDetalleNegocio() {
+    this.storage.get(TOKEN_KEY).then((res) => {
+      this.comercioService
+        .detalle(res, this.idcomercio)
+        .subscribe((data: Comercio[]) => {
+          this.comercios = data;
+          this.telefono = this.comercios[0].telefono;
+          this.nombre = this.comercios[0].nombre;
+          this.fotoLogo = this.comercios[0].fotoLogo;
+          this.fotoBaner = this.comercios[0].fotoBaner;
+          this.envio = this.comercios[0].envio;
+          this.direccion = this.comercios[0].direccion;
+          this.referencia = this.comercios[0].referencia;
+          this.precioMinimo = this.comercios[0].precioMinimo;
+
+          this.lattitudec = this.comercios[0].latitud;
+          this.longitudec = this.comercios[0].longitud;
+          this.calculateDistance(
+            this.lattitude,
+            this.longitude,
+            this.lattitudec,
+            this.longitudec
+          );
+        });
+      console.log(this.nombre);
+      console.log(this.comercios);
+      this.totalDelivery = this.total + this.envio;
+    });
+  }
+  verificarCantidad() {}
   pedido(id) {
     this.pedido1 = {
       id_cliente: id,
@@ -77,7 +133,9 @@ export class ConfirmarpedidoPage {
       longitud: this.longitude,
       nit: this.nit,
       razonSocial: this.razonSocial,
-      total: null,
+      total: this.total,
+      nota: this.desc,
+      tiempoDelivery: this.tiempo,
     };
 
     this.storage.get("pedido").then((val) => {
@@ -135,6 +193,22 @@ export class ConfirmarpedidoPage {
     });
 
     await alert.present();
+  }
+  calculateDistance(lat1, ln1, lat2, lng2) {
+    console.log(lat1, ln1);
+    console.log(lat2, lng2);
+
+    var gps1 = new google.maps.LatLng(Number(lat1), Number(ln1));
+    var gps2 = new google.maps.LatLng(Number(lat2), Number(lng2));
+
+    var distance = google.maps.geometry.spherical.computeDistanceBetween(
+      gps1,
+      gps2
+    );
+
+    this.km = distance / 1000;
+    this.tiempo = Math.round((this.km / this.velocidad) * 60);
+    this.extra = this.tiempo + 10;
   }
 
   async presentAlert() {

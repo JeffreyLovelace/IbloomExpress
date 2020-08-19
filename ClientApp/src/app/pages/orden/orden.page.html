@@ -20,10 +20,14 @@
       <ion-list>
         <ion-item>
           <ion-label>
+            <ion-item>
+              <ion-label>
+              
+
             <h2>{{orden.nombre}}</h2>
-            <p>Descrip´cion de la orden wapo</p>
+             <p>Detalle: {{orden.detalle}}</p>
           </ion-label>
-          <p slot="end">x {{orden.precio}}</p>
+          <p slot="end">x {{orden.cantidad}}</p>
         </ion-item>
       </ion-list>
     </div>

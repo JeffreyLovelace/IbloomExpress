@@ -94,7 +94,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "confirmarpedido",
+    path: "confirmarpedido/:total/:id",
     loadChildren: () =>
       import("./pages/confirmarpedido/confirmarpedido.module").then(
         (m) => m.ConfirmarpedidoPageModule

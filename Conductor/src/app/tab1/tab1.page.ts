@@ -20,6 +20,8 @@ import { FirebaseService } from "../services/firebase.service";
 import { DriverService } from "../services/driver.service";
 import { AlertController } from "@ionic/angular";
 import { Pedido } from "../interfaces/pedido";
+import { Geolocation } from "@ionic-native/geolocation/ngx";
+
 const TOKEN_KEY = "access_token";
 
 @Component({
@@ -30,7 +32,7 @@ const TOKEN_KEY = "access_token";
 export class Tab1Page {
   pedidos: Pedido[];
   pedidos2: Pedido[];
-
+  servidor = environment.url;
   id_client;
   estado;
   public tracking: boolean;
@@ -48,6 +50,8 @@ export class Tab1Page {
   myValue = false;
   nombre;
   c_pedido = 0;
+  foto;
+
   constructor(
     private backgroundGeolocation: BackgroundGeolocation,
     private router: Router,
@@ -56,11 +60,20 @@ export class Tab1Page {
     private pedidoService: PedidoService,
     private authService: AuthService,
     private alertController: AlertController,
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+
+    private geolocation: Geolocation
   ) {}
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad HomePage");
+  }
+  doRefresh(event) {
+    this.gePedido();
+    this.getUser();
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
   }
   ionViewWillEnter() {
     this.gePedido();
@@ -78,21 +91,34 @@ export class Tab1Page {
   }
 
   start() {
+    let escucahador = this.geolocation.watchPosition();
+
+    escucahador.subscribe((resultado) => {
+      this.logs.push(
+        "Lat:" +
+          resultado.coords.latitude +
+          ", Long" +
+          resultado.coords.longitude
+      );
+
+      this.localization(resultado.coords.latitude, resultado.coords.longitude);
+    });
     this.updateStatusActive();
     const config: BackgroundGeolocationConfig = {
       desiredAccuracy: 10,
       stationaryRadius: 20,
       distanceFilter: 30,
-      debug: true,
-      stopOnTerminate: false,
-      // Android only section
-      locationProvider: 1,
+      debug: true, //  enable this hear sounds for background-geolocation life-cycle.
+      stopOnTerminate: false, // enable this to clear background location settings when the app terminates
+
+      interval: 300000,
+      fastestInterval: 300000,
+      activitiesInterval: 300000,
       startForeground: true,
-      interval: 10000,
-      fastestInterval: 5000,
-      activitiesInterval: 10000,
+      stopOnStillActivity: true,
+      activityType: "AutomotiveNavigation",
       notificationTitle: "Ibloom Express",
-      notificationText: this.nombre + " esta activo",
+      notificationText: this.nombre + " esta activo ",
     };
 
     console.log("start");
@@ -100,12 +126,11 @@ export class Tab1Page {
       this.backgroundGeolocation
         .on(BackgroundGeolocationEvents.location)
         .subscribe((location: BackgroundGeolocationResponse) => {
-          console.log(location);
           this.localization(location.latitude, location.longitude);
+
           // IMPORTANT:  You must execute the finish method here to inform the native plugin that you're finished,
           // and the background-task may be completed.  You must do this regardless if your HTTP request is successful or not.
           // IF YOU DON'T, ios will CRASH YOUR APP for spending too much time in the background.
-          this.backgroundGeolocation.finish(); // FOR IOS ONLY
         });
     });
 
@@ -141,6 +166,7 @@ export class Tab1Page {
         for (let cliente of data) {
           if (cliente.correo == correo) {
             this.id_client = cliente.id;
+            this.foto = cliente.foto;
             if (cliente.estadoTrabajo == 1) {
               this.tracking = true;
             } else {
@@ -188,7 +214,7 @@ export class Tab1Page {
     });
   }
   valor;
-  tomarPedido(pedido_id) {
+  tomarPedido(pedido_id, tokenpedido, tokencomercio) {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.pedidoService.get(res).subscribe((data: Pedido[]) => {
         this.pedidos2 = data;
@@ -211,6 +237,16 @@ export class Tab1Page {
             this.pedidoService
               .detalle(res, pedido_id)
               .subscribe((data: Pedido[]) => {
+                this.pedidoService
+                  .enPreparacion(tokenpedido)
+                  .subscribe((res) => {
+                    console.log(res);
+                  });
+                this.pedidoService
+                  .notificarcomercio(tokencomercio)
+                  .subscribe((res) => {
+                    console.log(res);
+                  });
                 console.log("estado" + data[0].id_estado);
                 if (data[0].id_estado != "1") {
                   console.log("estado otro");
@@ -247,8 +283,7 @@ export class Tab1Page {
     console.log("mis pedidos" + this.c_pedido);
   }
 
-  comprobarPedidos() {}
-  async presentAlertConfirm(pedido_id, tokenpedido) {
+  async presentAlertConfirm(pedido_id, tokenpedido, tokencomercio) {
     const alert = await this.alertController.create({
       mode: "ios",
       cssClass: "my-custom-class",
@@ -266,10 +301,7 @@ export class Tab1Page {
         {
           text: "Si",
           handler: () => {
-            this.tomarPedido(pedido_id);
-            this.pedidoService.enPreparacion(tokenpedido).subscribe((res) => {
-              console.log(res);
-            });
+            this.tomarPedido(pedido_id, tokenpedido, tokencomercio);
           },
         },
       ],
@@ -325,11 +357,12 @@ export class Tab1Page {
   }
   localization(latitude, longitude) {
     console.log("create");
-    alert(longitude + "," + latitude);
     this.firebaseService
-      .crete(String(this.id_client), latitude, longitude)
+      .crete(String(this.id_client), latitude, longitude, this.foto)
       .then((resp) => {
-        console.log(resp);
+        this.backgroundGeolocation.finish(); // FOR IOS ONLY
+
+        console.log(this.foto);
       });
   }
 }

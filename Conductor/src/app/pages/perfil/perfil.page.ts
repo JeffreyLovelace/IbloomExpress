@@ -32,7 +32,7 @@ export class PerfilPage implements OnInit {
   ano;
   fechaNacimiento;
   estadoTrabajo;
-
+  created_at;
   foto;
   constructor(
     private storage: Storage,
@@ -41,7 +41,12 @@ export class PerfilPage implements OnInit {
   ) {
     this.getUser();
   }
-
+  doRefresh(event) {
+    this.getUser();
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
+  }
   ngOnInit() {}
   getUser() {
     this.storage.get(TOKEN_KEY).then((res) => {
@@ -71,6 +76,7 @@ export class PerfilPage implements OnInit {
             this.fechaNacimiento = cliente.fechaNacimiento;
             this.estadoTrabajo = cliente.estadoTrabajo;
             this.foto = cliente.foto;
+            this.created_at = cliente.created_at;
           }
         }
         console.log(data);

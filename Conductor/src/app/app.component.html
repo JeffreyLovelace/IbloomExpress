@@ -3,12 +3,11 @@
     <ion-content>
       <div class="menu-header-bg"></div>
       <div class="header-content">
-        <img src="/assets/logo-amtrak.png" alt="" />
+        <img src="/assets/icon.png" alt="" />
         <ion-label>
           <h2>
-            Jeffsito
+            Ibloom Express
           </h2>
-          <p>+591 75824901</p>
         </ion-label>
       </div>
 
@@ -38,7 +37,7 @@
 
     <ion-toolbar>
       <img class="header-img" src="/assets/banner.png" />
-      <ion-item>
+      <ion-item (click)="logout()">
         <ion-icon name="exit" slot="start"></ion-icon>
         <ion-label>Cerrar sesión</ion-label>
       </ion-item>

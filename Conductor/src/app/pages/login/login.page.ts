@@ -3,7 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { AlertController } from "@ionic/angular";
 import { Router } from "@angular/router";
 import { Storage } from "@ionic/storage";
-
+import { LoadingController } from "@ionic/angular";
 import { AuthService } from "../../services/auth.service";
 @Component({
   selector: "app-login",
@@ -20,14 +20,18 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private storage: Storage
+    private storage: Storage,
+    private loadingController: LoadingController
   ) {}
 
   ngOnInit() {}
   onSubmit() {
     this.router.navigateByUrl("/tabs");
   }
-  login() {
+  async login() {
+    const loading = await this.loadingController.create();
+    loading.present();
     this.authService.login1(this.credentials);
+    loading.dismiss();
   }
 }

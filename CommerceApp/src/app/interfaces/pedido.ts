@@ -17,6 +17,9 @@ export class Pedido {
     public telefonoComercio: string,
     public delivery: string,
     public comerciolatitud: number,
-    public comerciolonitud: number
+    public comerciolonitud: number,
+    public created_at: string,
+    public nota: string,
+    public conductorTelefono: string
   ) {}
 }

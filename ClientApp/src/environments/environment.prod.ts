@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  url: "http://177.222.52.26:8000",
+  url: "http://134.122.18.6",
 };
 export const firebaseConfig = {
   apiKey: "AIzaSyDNrYWwErmjVL8pMJ8j0C7S6jaUaQTlsKA",

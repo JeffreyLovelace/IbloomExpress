@@ -27,6 +27,7 @@ const TOKEN_KEY = "access_token";
 export class Tab2Page {
   pedidos: Pedido[];
   id_client;
+  servidor = environment.url;
   c = 0;
   constructor(
     private router: Router,
@@ -44,7 +45,12 @@ export class Tab2Page {
   ionViewWillEnter() {
     this.getUser();
   }
-
+  doRefresh(event) {
+    this.getUser();
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
+  }
   gePedido() {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.pedidoService.get(res).subscribe((data: Pedido[]) => {

@@ -27,6 +27,9 @@ export class Tab3Page {
   pedidos: Pedido[];
   id_client;
   c = 0;
+
+  servidor = environment.url;
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -43,7 +46,12 @@ export class Tab3Page {
   ionViewWillEnter() {
     this.getUser();
   }
-
+  doRefresh(event) {
+    this.getUser();
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
+  }
   gePedido() {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.pedidoService.get(res).subscribe((data: Pedido[]) => {

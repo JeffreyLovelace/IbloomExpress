@@ -37,11 +37,11 @@
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-  <img class="position" src="/assets/card-top-img.png" />
+  <img class="position" src="{{servidor}}/imagenes/{{ fotoBaner }}" />
   <ion-list>
     <ion-item slot="start" lines="none">
       <ion-thumbnail slot="start">
-        <img src="/assets/card-top-img.png" />
+        <img src="{{servidor}}/imagenes/{{ fotoLogo}}" />
       </ion-thumbnail>
       <ion-label>
         <div>
@@ -68,23 +68,17 @@
       </ion-label>
     </ion-item>
   </ion-list>
-  <ion-segment
-    value="productos"
-    color="primary"
-    scrollable="true"
-    mode="md"
-    [(ngModel)]="segmentModel"
-    (ionChange)="segmentChanged($event)"
-  >
-    <ion-segment-button value="productos">
-      <ion-label>Combos</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="promociones">
-      <ion-label>Promociones</ion-label>
-    </ion-segment-button>
-  </ion-segment>
-  <div *ngIf="segmentModel === 'productos'">
-    <ion-searchbar mode="ios"></ion-searchbar>
+
+  <div>
+    <ion-searchbar
+      showCancelButton="focus"
+      cancelButtonText="Cancelar"
+      mode="ios"
+      placeholder="Buscar..."
+      type="text"
+      debounce="500"
+      (ionChange)="getItems($event)"
+    ></ion-searchbar>
 
     <div *ngFor="let combo of combos">
       <div *ngIf="combo.id_comercio == id">
@@ -103,7 +97,7 @@
       </div>
     </div>
   </div>
-  <ion-list *ngIf="segmentModel === 'promociones'"></ion-list>
+
   <div *ngIf="!combos">
     <ion-list>
       <ion-list-header>

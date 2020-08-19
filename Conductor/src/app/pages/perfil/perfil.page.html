@@ -6,9 +6,6 @@
     <ion-title>
       Perfil
     </ion-title>
-    <ion-buttons slot="primary">
-      <ion-toggle [(ngModel)]="entrega" slot="end"></ion-toggle>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -21,86 +18,178 @@
       <ion-title mode="md">{{pNombre}} {{pApellido}}</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-refresher
+    mode="ios"
+    slot="fixed"
+    pullFactor="0.5"
+    pullMin="100"
+    pullMax="200"
+    (ionRefresh)="doRefresh($event)"
+  >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  <ion-list>
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="./avatar-finn.png" />
-      </ion-avatar>
-      <ion-label>
-        <h2>{{pNombre}} {{sNombre}} {{pApellido}} {{sApellido}}</h2>
-        <h3>{{correo}}</h3>
-        <p>{{telefono}}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <div *ngIf="correo">
+    <ion-list>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="{{servidor}}/imagenes/{{foto}}" />
+        </ion-avatar>
+        <ion-label>
+          <h2>{{pNombre}} {{sNombre}} {{pApellido}} {{sApellido}}</h2>
+          <h3>{{correo}}</h3>
+          <p>{{telefono}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
 
-  <ion-list>
-    <ion-list-header mode="ios">
-      Vehículo
-    </ion-list-header>
+    <ion-list>
+      <ion-list-header mode="ios">
+        Vehículo
+      </ion-list-header>
 
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="./avatar-finn.png" />
-      </ion-avatar>
-      <ion-label>
-        <h2>Tipo de vehículo: {{tipoVehiculo}}</h2>
-        <h3>Modelo: {{modelo}}</h3>
-        <p>Color: {{color}}</p>
-        <p>Año: {{ano}}</p>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <h2>Fechas inicio - hoy</h2>
-      </ion-label>
-      <ion-button fill="clear" slot="start">
-        <ion-icon slot="icon-only" name="calendar-outline"> </ion-icon>
-      </ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <h2>Cantidad de pedidos</h2>
-        <h2>12</h2>
-      </ion-label>
-      <ion-button fill="clear" slot="start">
-        <ion-icon slot="icon-only" name="bicycle-outline">
-          >
-        </ion-icon>
-      </ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <h2>Total Generado</h2>
-        <h2>500</h2>
-      </ion-label>
-      <ion-button fill="clear" slot="start">
-        <ion-icon slot="icon-only" name="cash-outline">
-          >
-        </ion-icon>
-      </ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <h2>Billetera</h2>
-        <h2>12</h2>
-      </ion-label>
-      <ion-button fill="clear" slot="start">
-        <ion-icon slot="icon-only" name="wallet-outline">
-          >
-        </ion-icon>
-      </ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <h2>Ver extracto</h2>
-      </ion-label>
-      <ion-button fill="clear" slot="start">
-        <ion-icon slot="icon-only" name="receipt-outline">
-          >
-        </ion-icon>
-      </ion-button>
-    </ion-item>
-  </ion-list>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="{{servidor}}/imagenes/{{ fotoVehiculo}}" />
+        </ion-avatar>
+        <ion-label>
+          <h2>Tipo de vehículo: {{tipoVehiculo}}</h2>
+          <h3>Modelo: {{modelo}}</h3>
+          <p>Color: {{color}}</p>
+          <p>Año: {{ano}}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h2>{{created_at}} - hoy</h2>
+        </ion-label>
+        <ion-button fill="clear" slot="start">
+          <ion-icon slot="icon-only" name="calendar-outline"> </ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h2>Cantidad de pedidos</h2>
+          <h2>12</h2>
+        </ion-label>
+        <ion-button fill="clear" slot="start">
+          <ion-icon slot="icon-only" name="bicycle-outline"> </ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h2>Total Generado</h2>
+          <h2>500</h2>
+        </ion-label>
+        <ion-button fill="clear" slot="start">
+          <ion-icon slot="icon-only" name="cash-outline"> </ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h2>Billetera</h2>
+          <h2>12</h2>
+        </ion-label>
+        <ion-button fill="clear" slot="start">
+          <ion-icon slot="icon-only" name="wallet-outline">
+            >
+          </ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h2>Ver extracto</h2>
+        </ion-label>
+        <ion-button fill="clear" slot="start">
+          <ion-icon slot="icon-only" name="receipt-outline">
+            >
+          </ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="!correo">
+    <ion-list>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

@@ -22,7 +22,12 @@ export class OrdenPage {
   ) {
     this.getOrden();
   }
-
+  doRefresh(event) {
+    this.getOrden();
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
+  }
   getOrden() {
     this.id = this.activatedRoute.snapshot.params["id"];
 

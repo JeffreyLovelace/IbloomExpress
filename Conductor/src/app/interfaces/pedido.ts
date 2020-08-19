@@ -11,6 +11,9 @@ export class Pedido {
     public nit: string,
     public razonSocial: string,
     public id_comercio: string,
+    public nota: string,
+    public created_at: string,
+    public token: string,
     public pNombre: string,
     public telefono: string,
     public nombreCompercio: string,
@@ -18,6 +21,14 @@ export class Pedido {
     public delivery: string,
     public comerciolatitud: number,
     public comerciolonitud: number,
-    public token: string
+    public tiempoDelivery: string,
+    public estado: string,
+    public conductor: string,
+    public conductorTelefono: string,
+    public conductorFoto: string,
+    public conductorTipoVehiculo: string,
+    public cliente: string,
+    public fotoComercio: string,
+    public tokenComercio: string
   ) {}
 }

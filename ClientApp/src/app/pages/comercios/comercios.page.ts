@@ -5,7 +5,7 @@ import { ComercioService } from "../../services/comercio.service";
 import { Storage } from "@ionic/storage";
 import { Router, ActivatedRoute } from "@angular/router";
 declare var google: any;
-
+import { environment } from "../../../environments/environment";
 const TOKEN_KEY = "access_token";
 @Component({
   selector: "app-comercios",
@@ -13,6 +13,7 @@ const TOKEN_KEY = "access_token";
   styleUrls: ["./comercios.page.scss"],
 })
 export class ComerciosPage {
+  servidor = environment.url;
   id = null;
   lattitude;
   longitude;
@@ -76,5 +77,41 @@ export class ComerciosPage {
       }
     }
     console.log(this.mostrar);
+  }
+  FilterJSONData(ev: any) {
+    this.getComercio();
+    const val = ev.target.value;
+    if (val && val.trim() != "") {
+      this.comercios = this.comercios.filter((item) => {
+        return item.nombre.toLowerCase().indexOf(val.toLowerCase()) > -1;
+      });
+    }
+  }
+  /*getItems(ev) {
+    // Reset items back to all of the items
+    this.getComercio();
+
+    // set val to the value of the ev target
+    var val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != "") {
+      this.comercios = this.comercios.filter((item) => {
+        return item.nombre.toLowerCase().indexOf(val.toLowerCase()) > -1;
+      });
+    }
+  }*/
+  getItems(ev: any) {
+    // Reset items back to all of the items
+
+    // set val to the value of the searchbar
+    const val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() !== "") {
+      this.mostrar = this.mostrar.filter((item) => {
+        return item.nombre.toLowerCase().indexOf(val.toLowerCase()) > -1;
+      });
+    }
   }
 }

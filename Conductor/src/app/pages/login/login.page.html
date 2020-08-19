@@ -14,20 +14,20 @@
   <hr />
   <form>
     <ion-item lines="none">
-      <ion-label position="stacked">Email</ion-label>
+      <ion-label position="stacked">Correo</ion-label>
       <ion-input
         type="email"
-        placeholder="Email"
+        placeholder="Correo"
         name="email"
         [(ngModel)]="credentials.email"
       ></ion-input>
     </ion-item>
 
     <ion-item lines="none">
-      <ion-label position="stacked">Password</ion-label>
+      <ion-label position="stacked">Contraseña</ion-label>
       <ion-input
         type="password"
-        placeholder="Password"
+        placeholder="Contraseña"
         name="password"
         [(ngModel)]="credentials.password"
       >
@@ -43,7 +43,6 @@
       (click)="login()"
       >Iniciar sesión</ion-button
     >
-    <p slot="end" color="primary">Olvidó su contraseña?</p>
     <hr />
     <hr />
     <hr />

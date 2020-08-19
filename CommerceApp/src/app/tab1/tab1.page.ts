@@ -28,7 +28,8 @@ export class Tab1Page {
     private authService: AuthService,
     private storage: Storage,
     private pedidoService: PedidoService
-  ) {
+  ) {}
+  ionViewWillEnter() {
     this.getUser();
   }
   getUser() {
@@ -44,7 +45,7 @@ export class Tab1Page {
       this.comercioService.get(res).subscribe((data) => {
         for (let datos of data) {
           if (datos.correo == this.correo) {
-            this.idcomercio = datos.idcomercio;
+            this.idcomercio = datos.id;
 
             this.getPedido();
           }
@@ -52,11 +53,16 @@ export class Tab1Page {
       });
     });
   }
+  doRefresh(event) {
+    this.getUser();
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
+  }
   getPedido() {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.pedidoService.get(res).subscribe((data: Pedido[]) => {
         this.pedidos = data;
-        console.log(this.pedidos);
       });
     });
   }

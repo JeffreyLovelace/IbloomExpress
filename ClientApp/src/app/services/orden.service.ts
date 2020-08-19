@@ -27,7 +27,7 @@ export class OrdenService {
 
   get(token): Observable<any> {
     let headers = new HttpHeaders().set("Authorization", token);
-    return this.http.get(`${this.servidor}/api/orden`, {
+    return this.http.get(`${this.servidor}/api/vistas/orden`, {
       headers: headers,
     });
   }

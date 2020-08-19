@@ -13,6 +13,9 @@ export class Comercio {
     public referencia: string,
     public precioMinimo: string,
     public longitud: string,
-    public latitud: string
+    public latitud: string,
+    public estadoTrabajo: string,
+    public horarioEnt: string,
+    public horarioSal: string
   ) {}
 }

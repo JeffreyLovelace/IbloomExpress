@@ -7,8 +7,12 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
 import { ClienteService } from "../../services/cliente.service";
 import { PedidoService } from "../../services/pedido.service";
-import { Pedido } from "../../interfaces/pedido";
+import { PublicacionesService } from "../../services/publicaciones.service";
+import { Promocion } from "../../interfaces/promocion";
+import { Publicacion } from "../../interfaces/publicacion";
 
+import { Pedido } from "../../interfaces/pedido";
+import { environment } from "../../../environments/environment";
 const TOKEN_KEY = "access_token";
 
 @Component({
@@ -19,6 +23,11 @@ const TOKEN_KEY = "access_token";
 export class InicioPage {
   @ViewChild("slides") slides;
   pedidos: Pedido[];
+  promociones: Promocion[];
+
+  publicaciones: Publicacion[];
+
+  servidor = environment.url;
   c = 0;
   topStories: any;
   direccion;
@@ -32,9 +41,12 @@ export class InicioPage {
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
     private clienteService: ClienteService,
-    private pedidoService: PedidoService
+    private pedidoService: PedidoService,
+    private publicacionesService: PublicacionesService
   ) {
     this.getNegocios();
+    this.getPromociones();
+    this.getPublicaciones();
     storage.get("address").then((val) => {
       this.direccion = val;
     });
@@ -64,6 +76,26 @@ export class InicioPage {
         picture: "https://picsum.photos/500/400?image=903",
       },
     ];
+  }
+  getPromociones() {
+    this.storage.get(TOKEN_KEY).then((res) => {
+      this.publicacionesService
+        .getPromocion(res)
+        .subscribe((data: Promocion[]) => {
+          this.promociones = data;
+          console.log(data);
+        });
+    });
+  }
+  getPublicaciones() {
+    this.storage.get(TOKEN_KEY).then((res) => {
+      this.publicacionesService
+        .getPublicacion(res)
+        .subscribe((data: Publicacion[]) => {
+          this.publicaciones = data;
+          console.log(data);
+        });
+    });
   }
   ionViewWillEnter() {
     this.c = 0;

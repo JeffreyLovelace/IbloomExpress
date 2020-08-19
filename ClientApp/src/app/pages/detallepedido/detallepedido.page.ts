@@ -9,9 +9,16 @@ import { Orden } from "../../interfaces/orden";
 
 import { Storage } from "@ionic/storage";
 import { AlertController } from "@ionic/angular";
-
+import { environment } from "../../../environments/environment";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
-
+import { FirebaseService } from "../../services/firebase.service";
+interface Marker {
+  position: {
+    lat: number;
+    lng: number;
+  };
+  dirrecion: string;
+}
 const TOKEN_KEY = "access_token";
 declare var google;
 @Component({
@@ -22,6 +29,7 @@ declare var google;
 export class DetallepedidoPage implements OnInit {
   mapRef = null;
   id;
+  servidor = environment.url;
   id_pedido;
   longitud_comercio;
   latitud_comercio;
@@ -32,13 +40,14 @@ export class DetallepedidoPage implements OnInit {
   razon_social;
   total;
   pedidos: Pedido[];
-
+  lat2: any;
+  lng2: any;
   ordenes: Orden[];
   delivery;
 
   nombreCompercio;
   pNombre;
-
+  nota;
   telefono;
   telefonoComercio;
   latitude;
@@ -46,6 +55,23 @@ export class DetallepedidoPage implements OnInit {
   UpdatePedido = {
     id_estado: null,
   };
+  fotoLogo;
+  id_conductor;
+  tiempoDelivery;
+  fotoComercio;
+  conductor;
+  conductorTelefono;
+  conductorFoto;
+  markers: Marker[] = [
+    {
+      position: {
+        lat: this.lat2,
+        lng: this.lng2,
+      },
+      dirrecion: "Parque Simón Bolivar2",
+    },
+  ];
+  conductorTipoVehiculo;
   constructor(
     private loadingCtrl: LoadingController,
     private router: Router,
@@ -55,7 +81,8 @@ export class DetallepedidoPage implements OnInit {
     public storage: Storage,
     public geolocation: Geolocation,
     private alertController: AlertController,
-    private ordenService: OrdenService
+    private ordenService: OrdenService,
+    private firebaseService: FirebaseService
   ) {
     this.getDetalle();
   }
@@ -71,7 +98,9 @@ export class DetallepedidoPage implements OnInit {
         this.longitud_comercio = Number(this.pedidos[0].comerciolonitud);
         this.latitud_comercio = Number(this.pedidos[0].comerciolatitud);
         this.id_pedido = this.pedidos[0].id;
+        this.nota = this.pedidos[0].nota;
         console.log(this.pedidos[0].id_cliente);
+        this.id_conductor = this.pedidos[0].id_conductor;
 
         this.id_estado = this.pedidos[0].id_estado;
         this.nit = this.pedidos[0].nit;
@@ -85,14 +114,48 @@ export class DetallepedidoPage implements OnInit {
 
         this.telefono = this.pedidos[0].telefono;
         this.telefonoComercio = this.pedidos[0].telefonoComercio;
+        this.tiempoDelivery = this.pedidos[0].tiempoDelivery;
+        this.fotoComercio = this.pedidos[0].fotoComercio;
+        this.conductor = this.pedidos[0].conductor;
+        this.conductorTelefono = this.pedidos[0].conductorTelefono;
+        this.conductorFoto = this.pedidos[0].conductorFoto;
+        this.conductorTipoVehiculo = this.pedidos[0].conductorTipoVehiculo;
         // this.addMarker(this.latitud_pedido, this.longitud_pedido);
         this.loadMap();
+        this.getFirebase(Number(this.id_conductor));
 
         console.log(data);
       });
     });
   }
+  getFirebase(camion) {
+    this.firebaseService.read_students(String(camion)).subscribe((data) => {
+      this.lat2 = Number(data.payload.data()["latitud"]);
+      this.lng2 = Number(data.payload.data()["longitud"]);
+      this.renderMarkers1();
+    });
+  }
+  renderMarkers1() {
+    this.markers.forEach((marker) => {
+      this.addMarker1(marker);
+      this.addInfoWindow(this.addMarker1(marker), "<h3>Repartidor!</h3>");
+    });
+  }
+  addMarker1(marker: Marker) {
+    return new google.maps.Marker({
+      position: {
+        lat: this.lat2,
+        lng: this.lng2,
+      },
+      map: this.mapRef,
+      title: marker.dirrecion,
 
+      icon: {
+        url: "https://image.flaticon.com/icons/svg/2833/2833394.svg", // url
+        scaledSize: new google.maps.Size(50, 50), // size
+      },
+    });
+  }
   async loadMap() {
     const loading = await this.loadingCtrl.create();
     loading.present();

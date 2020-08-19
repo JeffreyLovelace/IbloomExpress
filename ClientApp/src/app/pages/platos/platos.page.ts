@@ -172,4 +172,23 @@ export class PlatosPage {
     this.tiempo = Math.round((this.km / this.velocidad) * 60);
     this.extra = this.tiempo + 10;
   }
+  isItemAvailable = false;
+
+  getItems(ev: any) {
+    // Reset items back to all of the items
+
+    // set val to the value of the searchbar
+    const val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() !== "") {
+      this.isItemAvailable = true;
+      this.combos = this.combos.filter((item) => {
+        return item.nombre.toLowerCase().indexOf(val.toLowerCase()) > -1;
+      });
+    } else {
+      this.isItemAvailable = false;
+      this.getCombos();
+    }
+  }
 }

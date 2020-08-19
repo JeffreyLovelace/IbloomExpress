@@ -50,6 +50,13 @@ const routes: Routes = [
       import("./pages/orden/orden.module").then((m) => m.OrdenPageModule),
     canActivate: [AuthGuard],
   },
+  {
+    path: "update-combo/:id/:nombre/:descripcion/:precio/:promocion/:stock",
+    loadChildren: () =>
+      import("./pages/update-combo/update-combo.module").then(
+        (m) => m.UpdateComboPageModule
+      ),
+  },
 ];
 @NgModule({
   imports: [

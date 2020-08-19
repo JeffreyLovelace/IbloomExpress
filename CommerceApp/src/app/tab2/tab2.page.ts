@@ -6,6 +6,8 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import { Storage } from "@ionic/storage";
 import { ComercioService } from "../services/comercio.service";
 import { AlertController } from "@ionic/angular";
+import { environment } from "../../environments/environment";
+
 const TOKEN_KEY = "access_token";
 
 @Component({
@@ -14,6 +16,7 @@ const TOKEN_KEY = "access_token";
   styleUrls: ["tab2.page.scss"],
 })
 export class Tab2Page {
+  servidor = environment.url;
   combos: Combo[];
   combos1: Combo[];
   public promocion: boolean = false;
@@ -35,7 +38,8 @@ export class Tab2Page {
     private storage: Storage,
     private comercioService: ComercioService,
     public alertController: AlertController
-  ) {
+  ) {}
+  ionViewWillEnter() {
     this.getCorreo();
   }
   get() {
@@ -80,17 +84,39 @@ export class Tab2Page {
     this.storage.get(TOKEN_KEY).then((res) => {
       if (res) {
         this.comboService.edit(this.dataDelete, res, id_producto).subscribe(
-          (data) => console.log("Se elimino correctamente."),
+          (data) => this.getCorreo(),
           (error) => console.log("Algo salió mal")
         );
       }
     });
   }
   doRefresh(event) {
-    this.get();
+    this.getCorreo();
     setTimeout(() => {
       event.target.complete();
     }, 2000);
+  }
+  async presentConfirm(id_producto) {
+    const alert = await this.alertController.create({
+      mode: "ios",
+      message: "¿Quiere eliminar el producto?",
+      buttons: [
+        {
+          text: "Cancelar",
+          role: "cancel",
+          handler: () => {
+            console.log("Cancel clicked");
+          },
+        },
+        {
+          text: "Confirmar",
+          handler: () => {
+            this.delete(id_producto);
+          },
+        },
+      ],
+    });
+    await alert.present();
   }
 
   async presentAlertPrompt(id, nombre, descripcion, precio) {
@@ -101,14 +127,16 @@ export class Tab2Page {
       header: "Editar " + nombre,
 
       inputs: [
-        { name: "name2", type: "text", value: nombre, placeholder: "Nombre" },
+        { name: "nombre", type: "text", value: nombre, placeholder: "Nombre" },
         {
+          name: "descripcion",
           type: "text",
 
           value: descripcion,
           placeholder: "Descripción",
         },
         {
+          name: "precio",
           type: "text",
           value: precio,
           placeholder: "Precio",
@@ -126,12 +154,7 @@ export class Tab2Page {
         {
           text: "Confirmar",
           handler: () => {
-            this.combo = {
-              nombre: nombre,
-              descripcion: descripcion,
-              precio: precio,
-            };
-            this.edit(id);
+            this.edit(id, nombre, descripcion, precio);
             console.log("Confirm Ok");
           },
         },
@@ -140,11 +163,16 @@ export class Tab2Page {
 
     await alert.present();
   }
-  edit(id_producto) {
+  edit(id_producto, nombre, descripcion, precio) {
+    this.combo = {
+      nombre: nombre,
+      descripcion: descripcion,
+      precio: precio,
+    };
     this.storage.get(TOKEN_KEY).then((res) => {
       if (res) {
         this.comboService.edit(this.combo, res, id_producto).subscribe(
-          (data) => console.log("Se actualizo correctamente."),
+          (data) => this.getCorreo(),
           (error) => console.log("Algo salió mal")
         );
       }

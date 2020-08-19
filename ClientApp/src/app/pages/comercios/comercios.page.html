@@ -25,7 +25,11 @@
       <ion-title size="large"> {{nombre}} </ion-title>
     </ion-toolbar>
     <ion-toolbar>
-      <ion-searchbar mode="ios"></ion-searchbar>
+      <ion-searchbar
+        type="text"
+        debounce="500"
+        (ionChange)="getItems($event)"
+      ></ion-searchbar>
     </ion-toolbar>
   </ion-header>
   <div *ngFor="let comercio of mostrar">
@@ -33,11 +37,14 @@
       <ion-card
         routerLink="/platos/{{comercio.id}}/{{comercio.nombre}}/{{comercio.fotoLogo}}/{{comercio.fotoBaner}}/{{comercio.envio}}/{{comercio.precioMinimo}}/{{comercio.latitud}}/{{comercio.longitud}}"
       >
-        <img class="header-img" src="/assets/card-top-img.png" />
+        <img
+          class="header-img"
+          src="{{servidor}}/imagenes/{{ comercio.fotoBaner}}"
+        />
 
         <ion-item lines="none">
           <ion-thumbnail slot="start">
-            <img src="/assets/card-top-img.png" />
+            <img src="{{servidor}}/imagenes/{{ comercio.fotoLogo}}" />
           </ion-thumbnail>
 
           <ion-label>
