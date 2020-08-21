@@ -1,0 +1,74 @@
+<app-menu></app-menu>
+
+<!-- product list-->
+<div class="row">
+    <div class="col-md-6">
+        <div class="card-body">
+            <h3>Publicacion</h3>
+            <form [formGroup]="formGroup" (ngSubmit)="save()">
+
+
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" name="nombre" class="form-control" placeholder="Nombre"
+                                formControlName="nombre" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="foto">Foto</label>
+                            <input type="file" (change)="onFileChange($event)" name="foto" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <div class="row">
+                    <div class="col align-self-center">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            Registrar
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <br>
+        <h3>Publicaciones</h3>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" class="text-center">Nombre</th>
+                    <th scope="col" class="text-center">Foto</th>
+                    <th scope="col" class="text-center">Editar</th>
+                    <th scope="col" class="text-center">Eliminar</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let publicacion of publicaciones | paginate: { itemsPerPage: 5, currentPage: p }">
+                    <th class="text-center">{{publicacion.nombre}}</th>
+                    <th class="text-center">{{publicacion.foto}}</th>
+                    <td class="text-center"><a class="btn btn-info btn-sm"
+                            routerLink="/nuevasala/{{publicacion.id}}">Ver-Editar</a></td>
+                    <td class="text-center"><a class="btn btn-danger btn-sm"
+                            routerLink="/nuevasala/{{publicacion.id}}">Eliminar</a></td>
+                </tr>
+
+            </tbody>
+
+        </table>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+    </div>
+</div>

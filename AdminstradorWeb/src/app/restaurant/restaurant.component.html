@@ -1,0 +1,186 @@
+<app-menu></app-menu>
+
+<!-- product list-->
+<div class="row">
+    <div class="col-md-6">
+        <div class="card-body">
+            <h3>Agregar Comercio</h3>
+            <form [formGroup]="formGroup" (ngSubmit)="save()">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="correo">Correo</label>
+                            <input type="text" name="correo" class="form-control" placeholder="Correo"
+                                formControlName="correo" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="password">Contraseña</label>
+                            <input type="text" name="password" class="form-control" placeholder="Contraseña"
+                                formControlName="password" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="telefono">Telefono</label>
+                            <input type="text" name="telefono" class="form-control" placeholder="Telefono"
+                                formControlName="telefono" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" name="nombre" class="form-control" placeholder="Nombre"
+                                formControlName="nombre" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="id_tipoComercio">Tipo Comercio</label>
+
+
+                            <select class="form-control" id="inlineFormCustomSelect" formControlName="id_tipoComercio">
+                                <option *ngFor="let tipoNegocio of tipoNegocios" value={{tipoNegocio.id}}>
+                                    {{tipoNegocio.nombre}}</option>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="fotoLogo">Foto Logo</label>
+                            <input type="file" (change)="onFileChange($event)" name="fotoLogo" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="fotoBaner">Foto Baner</label>
+                            <input type="file" (change)="onFileChanges($event)" name="fotoBaner" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="envio">Envio</label>
+                            <input type="text" name="envio" class="form-control" placeholder="Envio"
+                                formControlName="envio" required />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="precioMinimo">Precio Minimo</label>
+                            <input type="text" name="precioMinimo" class="form-control" placeholder="PePreciodido Minimo"
+                                formControlName="precioMinimo" required />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="horarioSal">Horario Entrada</label>
+                            <input type="text" name="horarioSal" class="form-control" placeholder="Horario Entrada"
+                                formControlName="horarioSal" required />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="horarioEnt">Horario Salida</label>
+                            <input type="text" name="horarioEnt" class="form-control" placeholder="Horario Salida"
+                                formControlName="horarioEnt" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="direccion">Direccion</label>
+                            <input type="text" name="direccion" class="form-control" placeholder="Direccion"
+                                formControlName="direccion" required />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="referencia">Referencia</label>
+                            <input type="text" name="referencia" class="form-control" placeholder="referencia"
+                                formControlName="referencia" required />
+                        </div>
+                    </div>
+                </div>
+
+
+                <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="13">
+                    <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+                        (dragEnd)="markerDragEnd($event)"></agm-marker>
+                </agm-map>
+
+                <br>
+                <div class="row">
+                    <div class="col align-self-center">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            Registrar
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <br>
+        <h3>Conductores</h3>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" class="text-center">Correo</th>
+                    <th scope="col" class="text-center">logo</th>
+                    <th scope="col" class="text-center">Editar</th>
+                    <th scope="col" class="text-center">Eliminar</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let restaurant of restaurantes | paginate: { itemsPerPage: 5, currentPage: p }">
+                    <th class="text-center">{{restaurant.correo}}</th>
+                    <th class="text-center">
+                        <img width="80px" src="http://134.122.18.6/imagenes/{{restaurant.fotoLogo}}" alt="">
+                    </th>
+                    <td class="text-center"><a class="btn btn-info btn-sm"
+                            routerLink="/modificarrestaurant/{{restaurant.id}}">Ver-Editar</a></td>
+                    <td class="text-center"><a class="btn btn-danger btn-sm"
+                            (click)="eliminar(restaurant.id)">Eliminar</a></td>
+                </tr>
+
+            </tbody>
+
+        </table>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+    </div>
+
+</div>

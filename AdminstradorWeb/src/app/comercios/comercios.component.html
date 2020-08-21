@@ -1,0 +1,13 @@
+<app-menu></app-menu>
+<h3>Restaurantes</h3>
+<agm-map [latitude]="-16.5022646" [longitude]="-68.16925379999999" [zoom]="12">
+  <agm-marker [iconUrl]="punto.foto" *ngFor="let punto of puntos" [latitude]="punto.latitud" [longitude]="punto.longitud">
+    <agm-info-window [disableAutoPan]="false" #infoWindow>
+      <div>Restaurant: {{ punto.nombre }}</div>
+      <div>
+        <a class="btn btn-attention pull-right" routerLink="/verinfoentrega/{{ punto.id }}">Ver Restaurant<i
+            class="fa fa-angle-double-right"></i></a>
+      </div>
+    </agm-info-window>  
+  </agm-marker>
+</agm-map>

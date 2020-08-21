@@ -1,0 +1,81 @@
+<app-menu></app-menu>
+
+<!-- product list-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card-body">
+            <h3>Modificar Pedido</h3>
+            <form (ngSubmit)="modificar()">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="nit">Nit</label>
+                            <input [(ngModel)]="pedidos.nit" type="text" name="nit" class="form-control" placeholder="Nit"
+                                required />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="razonSocial">Razon Social</label>
+                            <input [(ngModel)]="pedidos.razonSocial" type="text" name="razonSocial" class="form-control" placeholder="Razon Social"
+                                required />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="nota">Nota</label>
+                            <input [(ngModel)]="pedidos.nota" type="text" name="nota" class="form-control" placeholder="Nota"
+                                required />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="tiempoDelivery">Tiempo Delivery</label>
+                            <input [(ngModel)]="pedidos.tiempoDelivery" type="tiempoDelivery" name="nit" class="form-control" placeholder="Tiempo Delivery"
+                                required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="id_estado">Estado</label>
+                            <input [(ngModel)]="pedidos.id_estado" type="text" name="id_estado" class="form-control" placeholder="Estado"
+                                required />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="id_conductor">Condutor</label>
+                            <input [(ngModel)]="pedidos.id_conductor" type="text" name="id_conductor" class="form-control" placeholder="Conductor"
+                                required />
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <br>
+                <div class="row">
+                    <div class="col align-self-center">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            Registrar
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    
+</div>

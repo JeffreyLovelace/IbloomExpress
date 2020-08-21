@@ -1,0 +1,86 @@
+<app-menu></app-menu>
+<!-- product list-->
+<div class="row">
+    <div class="col">
+        <div class="card-body">
+            <h3>Modificar Cliente</h3>
+            <form (ngSubmit)="modificar()">
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="pNombre">Primer Nombre</label>
+                            <input [(ngModel)]="cliente.pNombre" type="text" name="pNombre" class="form-control" placeholder="Primer Nombre"
+                                required />
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="sNombre">Segundo Nombre</label>
+                            <input [(ngModel)]="cliente.sNombre" type="text" name="sNombre" class="form-control" placeholder="Segundo Nombre"
+                                required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="pApellido">Primer Apellido</label>
+                            <input [(ngModel)]="cliente.pApellido" type="text" name="pApellido" class="form-control" placeholder="Primer Apellido"
+                                 required />
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="sApellido">Segundo Apellido</label>
+                            <input [(ngModel)]="cliente.sApellido" type="text" name="sApellido" class="form-control" placeholder="Segundo Apellido"
+                                 required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="fechaNacimiento">Fecha Nacimiento</label>
+                            <input [(ngModel)]="cliente.fechaNacimiento" type="date" name="fechaNacimiento" class="form-control" placeholder="Fecha Nacimiento"
+                                 required />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="telefono">Telefono</label>
+                            <input [(ngModel)]="cliente.telefono" type="text" name="telefono" class="form-control" placeholder="Telefono"
+                                required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="correo">Correo</label>
+                            <input [(ngModel)]="cliente.correo" type="text" name="correo" class="form-control" placeholder="Correo"
+                                required />
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <div class="row">
+                    <div class="col align-self-center">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            Modificar
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    
+</div>

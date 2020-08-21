@@ -1,0 +1,69 @@
+<app-menu></app-menu>
+<!-- product list-->
+<div class="row">
+    <div class="col-md-12">
+        <br>
+        <h3>Pedidos</h3>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group ">
+
+                <label for="selected"> Buscar por: 
+                </label>
+                <select class="form-control" id="selected" [(ngModel)]="selected">
+                    <option value='comercio'>Comercio</option>
+                    <option value='nit'>Nit</option>
+                    <option value='razonSocial'>Razon Social</option>
+                    <option value='cliente'>Cliente</option>
+                    <option value='conductor'>Conductor</option>
+                </select>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group ">
+                    <input [(ngModel)]="filtertext" class="form-control" type="text" name=""
+                        placeholder="Nombre, apellido, teléfono, cargo...">
+
+                </div>
+            </div>
+        </div><br>
+
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" class="text-center">Comercio</th>
+                    <th scope="col" class="text-center">Nit</th>
+                    <th scope="col" class="text-center">Razon Social</th>
+                    <th scope="col" class="text-center">Cliente</th>
+                    <th scope="col" class="text-center">Conductor</th>
+                    <th scope="col" class="text-center">Estado</th>
+                    <th scope="col" class="text-center">Ver</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr
+                    *ngFor=" let pedido of pedidos | paginate: { itemsPerPage: 5, currentPage: p } | pedido: filtertext: selected">
+                    <th class="text-center">{{pedido.comercio}}</th>
+                    <th class="text-center">{{pedido.nit}}</th>
+                    <th class="text-center">{{pedido.razonSocial}}</th>
+                    <th class="text-center">{{pedido.cliente}}</th>
+                    <th class="text-center">{{pedido.conductor}}</th>
+                    <th class="text-center">{{pedido.estado}}</th>
+                    <td class="text-center"><a class="btn btn-info btn-sm"
+                        routerLink="/modificarPedido/{{pedido.id}}">Ver-Editar</a></td>
+                </tr>
+
+            </tbody>
+
+        </table>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+    </div>
+</div>
+

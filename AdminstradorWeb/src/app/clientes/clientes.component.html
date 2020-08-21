@@ -1,0 +1,128 @@
+<app-menu></app-menu>
+
+<!-- product list-->
+<div class="row">
+    <div class="col-md-6">
+        <div class="card-body">
+            <h3>Agregar Cliente</h3>
+            <form [formGroup]="formGroup" (ngSubmit)="save()">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="pNombre">Primer Nombre</label>
+                            <input type="text" name="pNombre" class="form-control" placeholder="Primer Nombre"
+                                formControlName="pNombre" required />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="sNombre">Segundo Nombre</label>
+                            <input type="text" name="sNombre" class="form-control" placeholder="Segundo Nombre"
+                                formControlName="sNombre" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="pApellido">Primer Apellido</label>
+                            <input type="text" name="pApellido" class="form-control" placeholder="Primer Apellido"
+                                formControlName="pApellido" required />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="sApellido">Segundo Apellido</label>
+                            <input type="text" name="sApellido" class="form-control" placeholder="Segundo Apellido"
+                                formControlName="sApellido" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="fechaNacimiento">Fecha Nacimiento</label>
+                            <input type="date" name="fechaNacimiento" class="form-control" placeholder="Nombre"
+                                formControlName="fechaNacimiento" required />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="telefono">Telefono</label>
+                            <input type="text" name="telefono" class="form-control" placeholder="Telefono"
+                                formControlName="telefono" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="correo">Correo</label>
+                            <input type="text" name="correo" class="form-control" placeholder="Correo"
+                                formControlName="correo" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="password">Contraseña</label>
+                            <input type="text" name="password" class="form-control" placeholder="Contraseña"
+                                formControlName="password" required />
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <div class="row">
+                    <div class="col align-self-center">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            Registrar
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+            
+        </div>
+    </div>
+    <div class="col-md-6">
+        <br>
+        <h3>Clientes</h3>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" class="text-center">Correo</th>
+                    <th scope="col" class="text-center">Nombre</th>
+                    <th scope="col" class="text-center">Editar</th>
+                    <th scope="col" class="text-center">Eliminar</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let cliente of clientes | paginate: { itemsPerPage: 5, currentPage: p }">
+                    <th class="text-center">{{cliente.correo}}</th>
+                    <th class="text-center">{{cliente.pNombre}}</th>
+                    <td class="text-center"><a class="btn btn-info btn-sm"
+                            routerLink="/modificarClientes/{{cliente.id}}">Ver-Editar</a></td>
+                    <td class="text-center"><a class="btn btn-danger btn-sm"
+                            (click)="eliminar(cliente.id)">Eliminar</a></td>
+                </tr>
+
+            </tbody>
+
+        </table>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+    </div>
+</div>

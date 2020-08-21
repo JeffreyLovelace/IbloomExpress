@@ -1,2 +1,0 @@
-# IbloomExpress
-Delivery
