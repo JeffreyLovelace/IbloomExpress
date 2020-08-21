@@ -10,7 +10,7 @@
           ios="cart-outline"
           md="cart-outline"
         ></ion-icon>
-        <ion-badge color="danger">1 </ion-badge>
+        <ion-badge *ngIf="c>0" color="danger">{{c}} </ion-badge>
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
@@ -24,57 +24,115 @@
     </ion-buttons>
 
     <ion-title>
-      <ion-select interface="popover">
-        <ion-select-option value="nes">NES12321</ion-select-option>
-        <ion-select-option value="n64">Nintendo64</ion-select-option>
-        <ion-select-option value="ps">PlayStation</ion-select-option>
-      </ion-select>
+      <p>{{direccion}}</p>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-slides
-    class="slide-padding"
-    pager="true"
-    (ionSlideDidChange)="slideChanged()"
-  >
-    <ion-slide *ngFor="let story of topStories">
-      <div class="container">
-        <ion-img src="{{story.picture}}"></ion-img>
-      </div>
-    </ion-slide>
-  </ion-slides>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Qué desea llevar?</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col size="4" *ngFor="let tipocomercio of tipocomercios">
-            <ion-img
-              src="/assets/logo-amtrak.png"
-              routerLink="/comercios/{{tipocomercio.id}}/{{tipocomercio.nombre}}"
-            ></ion-img>
-            <p>{{tipocomercio.nombre}}</p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Promociones</ion-card-title>
-    </ion-card-header>
-    <ion-slides class="slide-padding" pager="true">
+  <div *ngIf="tipocomercios">
+    <ion-slides
+      class="slide-padding"
+      pager="true"
+      (ionSlideDidChange)="slideChanged()"
+    >
       <ion-slide *ngFor="let story of topStories">
         <div class="container">
           <ion-img src="{{story.picture}}"></ion-img>
         </div>
       </ion-slide>
     </ion-slides>
-  </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{nombre}}, qué quiere pedir?</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="4" *ngFor="let tipocomercio of tipocomercios">
+              <ion-img
+                src="{{servidor}}/imagenes/{{ tipocomercio.foto }}"
+                routerLink="/comercios/{{tipocomercio.id}}/{{tipocomercio.nombre}}"
+              ></ion-img>
+
+              <p>{{tipocomercio.nombre}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Promociones</ion-card-title>
+      </ion-card-header>
+      <ion-slides class="slide-padding" pager="true">
+        <ion-slide *ngFor="let story of topStories">
+          <div class="container">
+            <ion-img src="{{story.picture}}"></ion-img>
+          </div>
+        </ion-slide>
+      </ion-slides>
+    </ion-card>
+  </div>
+  <div *ngIf="!tipocomercios">
+    <ion-list>
+      <ion-list-header>
+        <ion-label>
+          <ion-skeleton-text animated style="width: 20%;"></ion-skeleton-text>
+        </ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-avatar slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-avatar>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-skeleton-text
+          animated
+          style="width: 27px; height: 27px;"
+          slot="start"
+        ></ion-skeleton-text>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

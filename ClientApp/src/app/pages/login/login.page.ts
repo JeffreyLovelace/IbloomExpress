@@ -44,5 +44,6 @@ export class LoginPage implements OnInit {
   }
   login() {
     this.authService.login1(this.credentials);
+    this.router.navigateByUrl("/ubicacion");
   }
 }

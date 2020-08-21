@@ -3,16 +3,7 @@
     <ion-buttons slot="start" mode="md">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-buttons slot="primary" routerLink="/carrito">
-      <ion-button>
-        <ion-icon
-          slot="icon-only"
-          ios="cart-outline"
-          md="cart-outline"
-        ></ion-icon>
-        <ion-badge color="danger">1 </ion-badge>
-      </ion-button>
-    </ion-buttons>
+
     <ion-buttons slot="end">
       <ion-button>
         <ion-icon
@@ -32,8 +23,8 @@
       <ion-title size="large"> Detalles </ion-title>
     </ion-toolbar>
   </ion-header>
+  <img class="header-img" src="{{servidor}}/imagenes/{{ foto}}" />
 
-  <img class="header-img" src="/assets/card-top-img.png" />
   <ion-list *ngFor="let combo of combos">
     <ion-item slot="start" lines="none">
       <ion-label>
@@ -45,7 +36,7 @@
   <ion-item>
     <ion-textarea
       [(ngModel)]="descripcion"
-      placeholder="Enter a description"
+      placeholder="Detalles para la orden"
     ></ion-textarea>
   </ion-item>
   <hr />

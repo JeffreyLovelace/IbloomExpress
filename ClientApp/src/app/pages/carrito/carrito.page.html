@@ -3,16 +3,7 @@
     <ion-buttons slot="start" mode="md">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-buttons slot="primary" routerLink="/carrito">
-      <ion-button>
-        <ion-icon
-          slot="icon-only"
-          ios="cart-outline"
-          md="cart-outline"
-        ></ion-icon>
-        <ion-badge color="danger">1 </ion-badge>
-      </ion-button>
-    </ion-buttons>
+
     <ion-buttons slot="end">
       <ion-button>
         <ion-icon
@@ -34,14 +25,95 @@
       <ion-title size="large"> Pedidos </ion-title>
     </ion-toolbar>
   </ion-header>
-  <div *ngFor="let pedido of pedidos">
-    <div>
-      <ion-list>
-        <ion-item>
-          <ion-label>Pedido número: <strong>{{pedido.id}}</strong></ion-label>
-          <ion-badge color="warning" slot="end">Espera</ion-badge>
-        </ion-item>
-      </ion-list>
+  <div *ngIf="pedidos">
+    <div *ngFor="let pedido of pedidos">
+      <div>
+        <div
+          *ngIf="pedido.id_estado==1 || pedido.id_estado==2 || pedido.id_estado==3 ||pedido.id_estado==4 ||pedido.id_estado==5 && pedido.id_cliente == id_client"
+        >
+          <ion-list>
+            <ion-item routerLink="/detallepedido/{{pedido.id}}">
+              <ion-label
+                >Pedido número: <strong>{{pedido.id}}</strong></ion-label
+              >
+              <ion-badge *ngIf="pedido.id_estado==1" color="primary" slot="end"
+                >Espera</ion-badge
+              >
+              <ion-badge *ngIf="pedido.id_estado==2" color="primary" slot="end"
+                >En preparación</ion-badge
+              >
+              <ion-badge *ngIf="pedido.id_estado==3" color="success" slot="end"
+                >En camino</ion-badge
+              >
+              <ion-badge *ngIf="pedido.id_estado==4" color="success" slot="end"
+                >En camino</ion-badge
+              >
+              <ion-badge *ngIf="pedido.id_estado==5" color="tertiary" slot="end"
+                >En el destino</ion-badge
+              >
+            </ion-item>
+          </ion-list>
+        </div>
+      </div>
     </div>
+  </div>
+  <div *ngIf="!pedidos">
+    <ion-list>
+      <ion-list-header>
+        <ion-label>
+          <ion-skeleton-text animated style="width: 20%;"></ion-skeleton-text>
+        </ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-avatar slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-avatar>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-skeleton-text
+          animated
+          style="width: 27px; height: 27px;"
+          slot="start"
+        ></ion-skeleton-text>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
   </div>
 </ion-content>

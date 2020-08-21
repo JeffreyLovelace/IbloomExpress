@@ -53,7 +53,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "platos/:id/:nombre/:fotoLogo/:fotoBaner/:envio/:precioMinimo",
+    path:
+      "platos/:id/:nombre/:fotoLogo/:fotoBaner/:envio/:precioMinimo/:latitud/:longitud",
     loadChildren: () =>
       import("./pages/platos/platos.module").then((m) => m.PlatosPageModule),
     canActivate: [AuthGuard],
@@ -93,12 +94,33 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "confirmarpedido",
+    path: "confirmarpedido/:total/:id",
     loadChildren: () =>
       import("./pages/confirmarpedido/confirmarpedido.module").then(
         (m) => m.ConfirmarpedidoPageModule
       ),
     canActivate: [AuthGuard],
+  },
+  {
+    path: "detallepedido/:id",
+    loadChildren: () =>
+      import("./pages/detallepedido/detallepedido.module").then(
+        (m) => m.DetallepedidoPageModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "orden/:id",
+    loadChildren: () =>
+      import("./pages/orden/orden.module").then((m) => m.OrdenPageModule),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "dirrecciones",
+    loadChildren: () =>
+      import("./pages/dirrecciones/dirrecciones.module").then(
+        (m) => m.DirreccionesPageModule
+      ),
   },
 ];
 

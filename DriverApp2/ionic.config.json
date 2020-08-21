@@ -1,0 +1,7 @@
+{
+  "name": "DriverApp2",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

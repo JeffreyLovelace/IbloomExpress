@@ -7,6 +7,8 @@ import { StatusBar } from "@ionic-native/status-bar/ngx";
 import { AuthService } from "./services/auth.service";
 import { Storage } from "@ionic/storage";
 import { Router } from "@angular/router";
+import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic/ngx";
+
 const TOKEN_KEY = "access_token";
 @Component({
   selector: "app-root",
@@ -14,6 +16,8 @@ const TOKEN_KEY = "access_token";
   styleUrls: ["app.component.scss"],
 })
 export class AppComponent {
+  correo;
+  name;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -21,7 +25,8 @@ export class AppComponent {
     private authService: AuthService,
     private router: Router,
     private storage: Storage,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private fcm: FCM
   ) {
     this.initializeApp();
     this.verificar();
@@ -34,6 +39,8 @@ export class AppComponent {
       this.statusBar.styleLightContent();
 
       this.splashScreen.hide();
+      this.fcm.subscribeToTopic("users");
+      console.log("driver suscribe");
     });
   }
   verificar() {
@@ -42,6 +49,8 @@ export class AppComponent {
         this.authService.getUser(res).subscribe((response) => {
           if (response.id_rol == "1") {
             this.router.navigate(["ubicacion"]);
+            this.correo = response.email;
+            this.name = response.name;
           } else {
             this.authService.logout();
             this.presentAlert();
@@ -64,5 +73,9 @@ export class AppComponent {
     });
 
     await alert.present();
+  }
+  logout() {
+    this.authService.logout();
+    console.log("salir");
   }
 }

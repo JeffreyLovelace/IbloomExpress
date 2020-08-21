@@ -37,12 +37,25 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "detallepedido",
+    path: "detallepedido/:id",
     loadChildren: () =>
       import("./pages/detallepedido/detallepedido.module").then(
         (m) => m.DetallepedidoPageModule
       ),
     canActivate: [AuthGuard],
+  },
+  {
+    path: "orden/:id",
+    loadChildren: () =>
+      import("./pages/orden/orden.module").then((m) => m.OrdenPageModule),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "update-combo/:id/:nombre/:descripcion/:precio/:promocion/:stock",
+    loadChildren: () =>
+      import("./pages/update-combo/update-combo.module").then(
+        (m) => m.UpdateComboPageModule
+      ),
   },
 ];
 @NgModule({

@@ -4,7 +4,7 @@
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Mi Datos
+      Mis Datos
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,56 +12,95 @@
 <ion-content [fullscreen]="true">
   <ion-header mode="ios" collapse="condense">
     <ion-toolbar>
-      <ion-title size="large"> Mi Datos</ion-title>
+      <ion-title size="large"> Mis Datos</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <img class="header-img" src="/assets/card-top-img.png" />
-  <ion-item>
-    <ion-label position="stacked">Correo</ion-label>
-    <ion-input
-      type="email"
-      placeholder="Email"
-      [(ngModel)]="corrreo"
-    ></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="stacked">Celular</ion-label>
-    <ion-input placeholder="telefono" [(ngModel)]="telefono"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="stacked">Nombre</ion-label>
-    <ion-input placeholder="nombre" [(ngModel)]="nombre"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="stacked">Envío</ion-label>
-    <ion-input placeholder="envio" [(ngModel)]="envio"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="stacked">Dirección</ion-label>
-    <ion-input placeholder="direccion" [(ngModel)]="direccion"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="stacked">Referencia</ion-label>
-    <ion-input [(ngModel)]="referencia"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="stacked">Mínimo de compra (BS.)</ion-label>
-    <ion-input
-      placeholder="precioMinimo"
-      [(ngModel)]="precioMinimo"
-    ></ion-input>
-  </ion-item>
-  <ion-button
+  <ion-refresher
     mode="ios"
-    expand="block"
-    type="submit"
-    shape="round"
-    fill="outline"
+    slot="fixed"
+    pullFactor="0.5"
+    pullMin="100"
+    pullMax="200"
+    (ionRefresh)="doRefresh($event)"
   >
-    Actualizar información</ion-button
-  >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="nombre">
+    <img
+      class="header-img"
+      src="http://134.122.18.6/imagenes/{{ fotoBaner }}"
+    />
+    <ion-list>
+      <ion-item>
+        <ion-avatar>
+          <img src="http://134.122.18.6/imagenes/{{ fotoLogo }}" />
+        </ion-avatar>
+        <ion-label><h2>{{nombre}}</h2></ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label
+          ><h2>Correo</h2>
+          <h2>{{corrreo}}</h2></ion-label
+        >
+      </ion-item>
 
+      <ion-item>
+        <ion-label
+          ><h2>Celular</h2>
+          <h2>{{telefono}}</h2></ion-label
+        >
+      </ion-item>
+
+      <ion-item>
+        <ion-label
+          ><h2>Envío (Bs.)</h2>
+          <h2>{{envio}}</h2></ion-label
+        >
+      </ion-item>
+      <ion-item>
+        <ion-label
+          ><h2>Dirección</h2>
+          <h2>{{direccion}}</h2></ion-label
+        >
+      </ion-item>
+      <ion-item>
+        <ion-label
+          ><h2>Referencia</h2>
+          <h2>{{referencia}}</h2></ion-label
+        >
+      </ion-item>
+      <ion-item>
+        <ion-label
+          ><h2>Mínimo de compra (Bs.)</h2>
+          <h2>{{precioMinimo}}</h2></ion-label
+        >
+      </ion-item>
+      <ion-item>
+        <ion-label
+          ><h2>Horario semanal</h2>
+          <h2>{{horarioEnt}} - {{horarioSal}}</h2></ion-label
+        >
+      </ion-item>
+    </ion-list>
+    <ion-button
+      mode="ios"
+      class="primario"
+      expand="block"
+      (click)="abrir()"
+      *ngIf="estadoTrabajo==0"
+    >
+      Abrir<ion-icon name="locate" slot="start"></ion-icon
+    ></ion-button>
+    <ion-button
+      mode="ios"
+      class="primario"
+      expand="block"
+      (click)="cerrar()"
+      *ngIf="estadoTrabajo==1 || estadoTrabajo==null"
+    >
+      Cerrar<ion-icon name="locate" slot="start"></ion-icon
+    ></ion-button>
+  </div>
   <div *ngIf="!nombre">
     <div class="ion-padding custom-skeleton">
       <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>

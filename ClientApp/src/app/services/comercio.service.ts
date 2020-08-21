@@ -31,4 +31,10 @@ export class ComercioService {
       headers: headers,
     });
   }
+  detalle(token, id): Observable<any> {
+    let headers = new HttpHeaders().set("Authorization", token);
+    return this.http.get(`${this.servidor}/api/comercio/` + id, {
+      headers: headers,
+    });
+  }
 }

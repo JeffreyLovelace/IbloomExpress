@@ -12,6 +12,31 @@
   </div>
   <hr />
   <hr />
+  <ion-button
+    class="facebook"
+    mode="ios"
+    expand="block"
+    type="submit"
+    shape="round"
+    (click)="loginGoogle()"
+  >
+    <ion-icon name="logo-facebook" slot="start"></ion-icon>
+    Facebook</ion-button
+  >
+
+  <ion-button
+    mode="ios"
+    color="danger"
+    expand="block"
+    type="submit"
+    shape="round"
+    (click)="loginGoogle()"
+  >
+    <ion-icon name="logo-google" slot="start"></ion-icon>
+    GOOGLE{{correo}}</ion-button
+  >
+  <hr />
+  <hr />
   <form>
     <ion-item lines="none">
       <ion-label position="stacked">Email</ion-label>
@@ -49,26 +74,4 @@
     <hr />
     <hr />
   </form>
-  <ion-button
-    class="facebook"
-    mode="ios"
-    expand="block"
-    type="submit"
-    shape="round"
-    (click)="loginGoogle()"
-  >
-    <ion-icon name="logo-facebook" slot="start"></ion-icon>
-    Facebook</ion-button
-  >
-  <ion-button
-    mode="ios"
-    color="danger"
-    expand="block"
-    type="submit"
-    shape="round"
-    (click)="loginGoogle()"
-  >
-    <ion-icon name="logo-google" slot="start"></ion-icon>
-    GOOGLE{{correo}}</ion-button
-  >
 </ion-content>

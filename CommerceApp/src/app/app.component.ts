@@ -6,6 +6,8 @@ import { StatusBar } from "@ionic-native/status-bar/ngx";
 import { AuthService } from "./services/auth.service";
 import { Storage } from "@ionic/storage";
 import { Router } from "@angular/router";
+import { LoadingController } from "@ionic/angular";
+
 const TOKEN_KEY = "access_token";
 @Component({
   selector: "app-root",
@@ -13,6 +15,7 @@ const TOKEN_KEY = "access_token";
   styleUrls: ["app.component.scss"],
 })
 export class AppComponent {
+  existe;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -20,37 +23,40 @@ export class AppComponent {
     private authService: AuthService,
     private router: Router,
     private storage: Storage,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private loadingController: LoadingController
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
+    this.verificar();
     this.platform.ready().then(() => {
       this.statusBar.styleBlackTranslucent();
+
       this.splashScreen.hide();
-      this.verificar();
     });
   }
-  verificar() {
-    this.authService.authenticationState.subscribe((state) => {
-      if (state) {
-        this.storage.get(TOKEN_KEY).then((res) => {
-          if (res) {
-            this.authService.getUser(res).subscribe((response) => {
-              if (response.name == "comercio") {
-                this.router.navigate(["tabs"]);
-              } else {
-                this.authService.logout();
-                this.presentAlert();
-              }
-            });
+
+  async verificar() {
+    const loading = await this.loadingController.create();
+    loading.present();
+    this.storage.get(TOKEN_KEY).then((res) => {
+      if (res) {
+        this.existe = true;
+        this.authService.getUser(res).subscribe((response) => {
+          if (response.id_rol == "3") {
+            this.router.navigate(["tabs"]);
+          } else {
+            this.authService.logout();
+            this.presentAlert();
           }
         });
       } else {
         this.router.navigate(["/login"]);
       }
     });
+    loading.dismiss();
   }
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -63,5 +69,10 @@ export class AppComponent {
     });
 
     await alert.present();
+  }
+  logout() {
+    this.authService.logout();
+
+    console.log("salir");
   }
 }

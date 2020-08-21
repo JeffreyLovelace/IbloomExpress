@@ -1,0 +1,71 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Actualizar
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header mode="ios" collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large"> Actualizar</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-item>
+    <ion-label>Nombre:</ion-label>
+    <ion-input
+      value="{{nombre}}"
+      [(ngModel)]="nombre"
+      type="text"
+      required
+    ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Descripción:</ion-label>
+    <ion-textarea
+      value="{{descripcion}}"
+      [(ngModel)]="descripcion"
+      type="text"
+      required
+    ></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label>Precio (Bs.):</ion-label>
+    <ion-input
+      value="{{precio}}"
+      [(ngModel)]="precio"
+      type="number"
+      required
+    ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Stock</ion-label>
+    <ion-select placeholder="stock" [(ngModel)]="stock">
+      <ion-select-option value="1">Hay stock</ion-select-option>
+      <ion-select-option value="0">No hay stock</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Promoción</ion-label>
+    <ion-select placeholder="Promoción" [(ngModel)]="promocion">
+      <ion-select-option value="1">Promoción</ion-select-option>
+      <ion-select-option value="0">No promoción</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <hr />
+  <hr />
+  <ion-button
+    mode="ios"
+    expand="block"
+    type="submit"
+    shape="round"
+    (click)="edit()"
+    >Actualizar</ion-button
+  >
+</ion-content>

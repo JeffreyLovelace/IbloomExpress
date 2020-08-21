@@ -3,16 +3,7 @@
     <ion-buttons slot="start" mode="md">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-buttons slot="primary" routerLink="/carrito">
-      <ion-button>
-        <ion-icon
-          slot="icon-only"
-          ios="cart-outline"
-          md="cart-outline"
-        ></ion-icon>
-        <ion-badge color="danger">1 </ion-badge>
-      </ion-button>
-    </ion-buttons>
+
     <ion-buttons slot="end">
       <ion-button>
         <ion-icon
@@ -40,28 +31,30 @@
       {{nombre}}
     </ion-list-header>
     <ion-item slot="start" lines="none">
-      <ion-avatar slot="start">
-        <img src="/assets/card-top-img.png" />
-      </ion-avatar>
-
+      <ion-thumbnail slot="start">
+        <img src="{{servidor}}/imagenes/{{ fotoLogo }}" />
+      </ion-thumbnail>
       <ion-label>
+        <div>
+          <ion-button fill="clear">
+            <ion-icon mode="ios" slot="icon-only" name="cash-outline">
+              > </ion-icon
+            >Minímo: BS. {{precioMinimo}}
+          </ion-button>
+        </div>
+
         <ion-button fill="clear">
           <ion-icon
             mode="ios"
             slot="icon-only"
-            name="stopwatch-outline"
+            name="bicycle-outline"
           ></ion-icon
-          >time</ion-button
+          >Envío: bs. {{envio}}</ion-button
         >
         <ion-button fill="clear">
-          <ion-icon mode="ios" slot="icon-only" name="bicycle-outline">
+          <ion-icon mode="ios" slot="icon-only" name="stopwatch-outline">
             > </ion-icon
-          >Bs. {{envio}}
-        </ion-button>
-        <ion-button fill="clear">
-          <ion-icon mode="ios" slot="icon-only" name="cash-outline">
-            > </ion-icon
-          >Minimo Bs {{precioMinimo}}
+          >{{tiempo}}-{{extra}} min
         </ion-button>
       </ion-label>
     </ion-item>

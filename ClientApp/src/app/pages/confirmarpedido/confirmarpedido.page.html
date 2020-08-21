@@ -1,9 +1,93 @@
-<ion-header>
+<ion-header mode="ios">
   <ion-toolbar>
-    <ion-title>confirmarpedido</ion-title>
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      Confirmar pedido
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content [fullscreen]="true">
+  <ion-header mode="ios" collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Confirmar pedido</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div *ngFor="let comercio of comercios">
+    <ion-list>
+      <ion-item slot="start" lines="none">
+        <ion-thumbnail slot="start">
+          <img src="{{servidor}}/imagenes/{{ comercio.fotoLogo }}" />
+        </ion-thumbnail>
+        <ion-label>
+          <h1><strong>{{comercio.nombre}}</strong></h1>
+          <p></p>
+        </ion-label>
+      </ion-item>
+      <ion-item slot="start" lines="none">
+        <ion-button fill="clear">
+          <ion-icon mode="ios" slot="icon-only" name="bicycle"></ion-icon>Envío
+          Bs. {{comercio.envio}}
+        </ion-button>
+        <ion-button fill="clear">
+          <ion-icon mode="ios" slot="icon-only" name="stopwatch"> > </ion-icon
+          >{{tiempo}}-{{extra}} min
+        </ion-button>
+        <ion-button fill="clear">
+          <ion-icon mode="ios" slot="icon-only" name="cash"> > </ion-icon>Min
+          Bs. {{comercio.precioMinimo}}
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+  <ion-list mode="ios">
+    <ion-item>
+      <ion-label> <h2>Sub total</h2> </ion-label>
+      <p slot="end" color="success">
+        <ion-text color="success">Bs. {{total}}</ion-text>
+      </p>
+    </ion-item>
+    <ion-item>
+      <ion-label> <p>Delivery</p> </ion-label>
+      <p slot="end" color="success">
+        <ion-text color="success">Bs. {{envio}}</ion-text>
+      </p>
+    </ion-item>
+    <ion-item>
+      <ion-label> <h2>Total</h2> </ion-label>
+      <p slot="end" color="success">
+        <ion-text color="success">Bs. {{totalDelivery}}</ion-text>
+      </p>
+    </ion-item>
+  </ion-list>
+  <ion-list mode="ios">
+    <ion-list-header>
+      Detalles de la entrega
+    </ion-list-header>
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input [(ngModel)]="razonSocial" placeholder="Nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Ci/NIT</ion-label>
+      <ion-input [(ngModel)]="nit" placeholder="Ci/NIT"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">¿Quieres aclarar algo?</ion-label>
+      <ion-input
+        [(ngModel)]="desc"
+        placeholder="Nota para el pedido"
+      ></ion-input>
+    </ion-item>
+  </ion-list>
 </ion-content>
+<ion-footer line="none" (click)="presentAlertConfirm()">
+  <ion-toolbar>
+    <ion-button mode="ios" expand="block" shape="round"
+      >Confirmar pedido</ion-button
+    >
+  </ion-toolbar>
+</ion-footer>

@@ -19,17 +19,32 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-list>
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="./avatar-finn.png" />
-      </ion-avatar>
-      <ion-label>
-        <h2>Pedido Nr.</h2>
-        <h3>Nombre Comercio</h3>
-        <p>Cliente</p>
-      </ion-label>
-      <ion-badge color="success" slot="end">terminado</ion-badge>
-    </ion-item>
-  </ion-list>
+  <div *ngFor="let pedido of pedidos">
+    <div>
+      <ion-list>
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="./avatar-finn.png" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Pedido Nr. {{pedido.id}}</h2>
+            <h3>Nombre Comercio</h3>
+            <p>Cliente</p>
+          </ion-label>
+          <ion-badge *ngIf="pedido.id_estado==1" color="warning" slot="end"
+            >Espera</ion-badge
+          >
+          <ion-badge *ngIf="pedido.id_estado==2" color="primary" slot="end"
+            >Entregado</ion-badge
+          >
+          <ion-badge *ngIf="pedido.id_estado==3" color="success" slot="end"
+            >En camino</ion-badge
+          >
+          <ion-badge *ngIf="pedido.id_estado==4" color="danger" slot="end"
+            >Trancadera</ion-badge
+          >
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
 </ion-content>

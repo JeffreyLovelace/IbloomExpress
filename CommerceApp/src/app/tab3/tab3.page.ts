@@ -24,7 +24,16 @@ export class Tab3Page {
   direccion = null;
   referencia = null;
   precioMinimo = null;
-
+  estadoTrabajo: boolean;
+  horarioEnt;
+  horarioSal;
+  public tracking: boolean = false;
+  comercioOpen = {
+    estadoTrabajo: null,
+  };
+  comercioClose = {
+    estadoTrabajo: null,
+  };
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -41,6 +50,12 @@ export class Tab3Page {
         this.get();
       });
     });
+  }
+  doRefresh(event) {
+    this.getUser();
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
   }
   get() {
     this.storage.get(TOKEN_KEY).then((res) => {
@@ -59,11 +74,38 @@ export class Tab3Page {
             this.direccion = datos.direccion;
             this.referencia = datos.referencia;
             this.precioMinimo = datos.precioMinimo;
+            this.estadoTrabajo = datos.estadoTrabajo;
+            this.horarioEnt = datos.horarioEnt;
+            this.horarioSal = datos.horarioSal;
           } else {
             console.log("no existe");
           }
         }
       });
+    });
+  }
+  abrir() {
+    this.comercioOpen = {
+      estadoTrabajo: 1,
+    };
+    this.storage.get(TOKEN_KEY).then((res) => {
+      this.comercioService
+        .edit(this.comercioOpen, res, this.id)
+        .subscribe((data) => {
+          this.getUser();
+        });
+    });
+  }
+  cerrar() {
+    this.comercioClose = {
+      estadoTrabajo: 0,
+    };
+    this.storage.get(TOKEN_KEY).then((res) => {
+      this.comercioService
+        .edit(this.comercioClose, res, this.id)
+        .subscribe((data) => {
+          this.getUser();
+        });
     });
   }
 }

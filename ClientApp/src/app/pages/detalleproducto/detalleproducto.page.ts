@@ -10,10 +10,9 @@ import { PedidoService } from "../../services/pedido.service";
 import { Location } from "@angular/common";
 
 import { OrdenService } from "../../services/orden.service";
-
 import { Pedido } from "../../interfaces/pedido";
 import { Orden } from "../../interfaces/orden";
-
+import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic/ngx";
 const TOKEN_KEY = "access_token";
 
 @Component({
@@ -22,18 +21,23 @@ const TOKEN_KEY = "access_token";
   styleUrls: ["./detalleproducto.page.scss"],
 })
 export class DetalleproductoPage {
+  servidor = environment.url;
   currentNumber = 1;
   id = null;
   combos: Combo[];
-  pedido1;
+  pedido1 = { estadoEliminado: "1", id_comercio: null, token: null };
   precio;
+  tokenpedido = null;
+
   total;
   descripcion;
+  id_comercio;
+  foto;
   orden1 = {
     id_combo: null,
     id_pedido: null,
-    precio: null,
-    nombre: null,
+    detalle: null,
+    cantidad: null,
   };
   constructor(
     private router: Router,
@@ -43,10 +47,14 @@ export class DetalleproductoPage {
     private comboService: ComboService,
     private pedidoService: PedidoService,
     private ordenService: OrdenService,
-    private location: Location
+    private location: Location,
+    private fcm: FCM
   ) {
     this.getCombo();
-
+    this.fcm.getToken().then((token) => {
+      console.log(token);
+      this.tokenpedido = token;
+    });
     this.id = this.activatedRoute.snapshot.params["id"];
   }
   verificar() {
@@ -64,7 +72,8 @@ export class DetalleproductoPage {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.comboService.detail(res, this.id).subscribe((data: Combo[]) => {
         this.combos = data;
-
+        this.foto = this.combos[0].foto;
+        this.id_comercio = this.combos[0].id_comercio;
         this.precio = this.combos[0].precio;
         this.total = this.currentNumber * this.precio;
         console.log(this.combos);
@@ -72,6 +81,11 @@ export class DetalleproductoPage {
     });
   }
   pedido() {
+    this.pedido1 = {
+      estadoEliminado: "1",
+      id_comercio: this.id_comercio,
+      token: this.tokenpedido,
+    };
     this.storage.get(TOKEN_KEY).then((res) => {
       this.pedidoService.save(res, this.pedido1).subscribe((res) => {
         this.orden(res.id);
@@ -83,8 +97,8 @@ export class DetalleproductoPage {
     this.orden1 = {
       id_combo: this.id,
       id_pedido: val,
-      precio: this.currentNumber,
-      nombre: this.descripcion,
+      detalle: this.descripcion,
+      cantidad: this.currentNumber,
     };
     this.storage.get(TOKEN_KEY).then((res) => {
       this.ordenService.save(this.orden1, res).subscribe((res) => {
