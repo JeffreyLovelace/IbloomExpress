@@ -61,7 +61,9 @@
       </ion-item>
       <ion-item>
         <ion-label>
-          <h2>{{created_at}} - hoy</h2>
+          <p displayFormat="MMM DD" pickerFormat="HH:mm">
+            {{created_at}} - {{myDate}}
+          </p>
         </ion-label>
         <ion-button fill="clear" slot="start">
           <ion-icon slot="icon-only" name="calendar-outline"> </ion-icon>
@@ -70,7 +72,7 @@
       <ion-item>
         <ion-label>
           <h2>Cantidad de pedidos</h2>
-          <h2>12</h2>
+          <h2>{{c}}</h2>
         </ion-label>
         <ion-button fill="clear" slot="start">
           <ion-icon slot="icon-only" name="bicycle-outline"> </ion-icon>
@@ -79,7 +81,7 @@
       <ion-item>
         <ion-label>
           <h2>Total Generado</h2>
-          <h2>500</h2>
+          <h2>{{generado}}</h2>
         </ion-label>
         <ion-button fill="clear" slot="start">
           <ion-icon slot="icon-only" name="cash-outline"> </ion-icon>
@@ -88,27 +90,30 @@
       <ion-item>
         <ion-label>
           <h2>Billetera</h2>
-          <h2>12</h2>
+          <h2>{{billetera}}</h2>
         </ion-label>
         <ion-button fill="clear" slot="start">
-          <ion-icon slot="icon-only" name="wallet-outline">
-            >
-          </ion-icon>
+          <ion-icon slot="icon-only" name="wallet-outline"> </ion-icon>
         </ion-button>
       </ion-item>
+
       <ion-item>
-        <ion-label>
-          <h2>Ver extracto</h2>
-        </ion-label>
+        <ion-label>Extracto</ion-label>
         <ion-button fill="clear" slot="start">
-          <ion-icon slot="icon-only" name="receipt-outline">
-            >
-          </ion-icon>
+          <ion-icon slot="icon-only" name="receipt-outline"> </ion-icon>
         </ion-button>
+        <ion-select>
+          <ion-select-option *ngFor="let pedido of pedidos"
+            ><div *ngIf="pedido.id_conductor==id_client">
+              Nro:{{pedido.id}}
+              <p>Bs: {{pedido.delivery}}</p>
+            </div>
+          </ion-select-option>
+        </ion-select>
       </ion-item>
     </ion-list>
   </div>
-  <div *ngIf="!correo">
+  <div *ngIf="!pNombre">
     <ion-list>
       <ion-item>
         <ion-thumbnail slot="start">

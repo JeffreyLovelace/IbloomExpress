@@ -25,6 +25,10 @@ export class DetallepedidoPage implements OnInit {
   pedido1 = {
     id_estado: null,
   };
+  pedido2 = {
+    id_estado: null,
+    tiempoDelivery: null,
+  };
   servidor = environment.url;
   mapRef = null;
   id;
@@ -49,6 +53,7 @@ export class DetallepedidoPage implements OnInit {
   latitude;
   tiempoDelivery;
   longitude;
+  pedidoDelivery;
   UpdatePedido = {
     id_estado: null,
   };
@@ -92,8 +97,7 @@ export class DetallepedidoPage implements OnInit {
         this.tiempoDelivery = this.pedidos[0].tiempoDelivery;
         this.delivery = this.pedidos[0].delivery;
         this.nota = this.pedidos[0].nota;
-        console.log(this.fotoComercio);
-
+        this.pedidoDelivery = this.pedidos[0].pedidoDelivery;
         this.nombreCompercio = this.pedidos[0].nombreCompercio;
         this.pNombre = this.pedidos[0].pNombre;
         this.token = this.pedidos[0].token;
@@ -106,7 +110,8 @@ export class DetallepedidoPage implements OnInit {
       });
     });
   }
-
+  mylgn;
+  myltd;
   async loadMap() {
     const loading = await this.loadingCtrl.create();
     loading.present();
@@ -127,6 +132,8 @@ export class DetallepedidoPage implements OnInit {
       // loaded
       loading.dismiss();
       this.addMyMarker(myLatLng.lat, myLatLng.lng);
+      this.mylgn = myLatLng.lng;
+      this.myltd = myLatLng.lat;
       this.addMarker(Number(this.latitud_pedido), Number(this.longitud_pedido));
       this.addMarkerComercio(
         Number(this.latitud_comercio),
@@ -150,7 +157,18 @@ export class DetallepedidoPage implements OnInit {
         scaledSize: new google.maps.Size(50, 50), // size
       },
     });
-    let content = "<h5>Pedido</h5>";
+    let content =
+      "<h5>Pedido</h5>" +
+      '<a href="https://www.google.com/maps/dir/?api=1&origin=' +
+      this.myltd +
+      "," +
+      this.mylgn +
+      "&destination=" +
+      lat +
+      "," +
+      lng +
+      "" +
+      '"><h5>Ruta</h5></a>';
     marker.setMap(this.mapRef);
 
     // https://www.google.com/maps/dir//-16.4360577,-68.050949/@-16.4764219,-68.0902384,12
@@ -173,7 +191,18 @@ export class DetallepedidoPage implements OnInit {
         scaledSize: new google.maps.Size(50, 50), // size
       },
     });
-    let content = this.nombreCompercio;
+    let content =
+      this.nombreCompercio +
+      '<a href="https://www.google.com/maps/dir/?api=1&origin=' +
+      this.myltd +
+      "," +
+      this.mylgn +
+      "&destination=" +
+      lat +
+      "," +
+      lng +
+      "" +
+      '"><h5>Ruta</h5></a>';
     marker.setMap(this.mapRef);
 
     // https://www.google.com/maps/dir//-16.4360577,-68.050949/@-16.4764219,-68.0902384,12
@@ -239,10 +268,7 @@ export class DetallepedidoPage implements OnInit {
           text: "Inconveniente",
           icon: "build",
           handler: () => {
-            this.tomarPedido(4);
-            this.pedidoService.trancadera(this.token).subscribe((res) => {
-              console.log(res);
-            });
+            this.time();
           },
         },
         {
@@ -318,5 +344,62 @@ export class DetallepedidoPage implements OnInit {
     });
     this.getDetalle();
     toast.present();
+  }
+
+  async time() {
+    const alert = await this.alertController.create({
+      mode: "ios",
+
+      inputs: [
+        {
+          placeholder: "¿Qué pasó?",
+          name: "name1",
+          type: "text",
+        },
+        {
+          placeholder: "Tiempo aproximado",
+          name: "tiempo",
+          type: "number",
+        },
+      ],
+      buttons: [
+        {
+          text: "Cancelar",
+          role: "cancel",
+          cssClass: "secondary",
+          handler: () => {
+            console.log("Confirm Cancel");
+          },
+        },
+        {
+          text: "Ok",
+          handler: (alertData) => {
+            //takes the data
+            console.log(alertData.name1);
+            console.log(alertData.tiempo);
+
+            this.tomarPedido2(4, alertData.tiempo);
+            this.pedidoService
+              .trancadera(this.token, alertData.name1)
+              .subscribe((res) => {
+                console.log(res);
+              });
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+  tomarPedido2(id_estado, tiempo) {
+    this.pedido2 = {
+      id_estado: id_estado,
+      tiempoDelivery: tiempo,
+    };
+    this.storage.get(TOKEN_KEY).then((res) => {
+      this.pedidoService.edit(this.pedido2, res, this.id).subscribe(
+        (data) => this.getDetalle(),
+        (error) => this.presentAlertError()
+      );
+    });
   }
 }

@@ -45,8 +45,8 @@
     Terminar de trabajar
     <ion-icon name="hand-right-outline" slot="start"></ion-icon
   ></ion-button>
-  <div *ngFor="let pedido of pedidos">
-    <div *ngIf="pedido.id_estado==1">
+  <div *ngFor="let pedido of mostrar">
+    <div>
       <ion-list>
         <ion-item
           (click)="presentAlertConfirm(pedido.id,pedido.token,pedido.tokenComercio)"

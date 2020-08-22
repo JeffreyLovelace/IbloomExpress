@@ -119,6 +119,7 @@ export class AuthService {
     this.storage.remove(TOKEN_KEY).then(() => {
       this.router.navigateByUrl("/login");
       this.userData.next(null);
+      navigator["app"].exitApp();
     });
   }
   async presentAlert(Mensaje) {

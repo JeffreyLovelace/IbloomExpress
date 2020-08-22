@@ -47,6 +47,7 @@ export class DetallepedidoPage implements OnInit {
   lat2: any;
   lng2: any;
   nombreCompercio;
+  pedidoDelivery;
   pNombre;
   markers: Marker[] = [
     {
@@ -102,10 +103,10 @@ export class DetallepedidoPage implements OnInit {
 
         this.nombreCompercio = this.pedidos[0].nombreCompercio;
         this.pNombre = this.pedidos[0].pNombre;
-
+        this.pedidoDelivery = this.pedidos[0].pedidoDelivery;
         this.telefono = this.pedidos[0].telefono;
         this.telefonoComercio = this.pedidos[0].telefonoComercio;
-        this.totalfin = this.delivery + this.total;
+        this.totalfin = this.pedidoDelivery + this.total;
         // this.addMarker(this.latitud_pedido, this.longitud_pedido);
         this.loadMap();
         this.getFirebase(Number(this.id_conductor));

@@ -10,9 +10,10 @@ import { ComboService } from "../services/combo.service";
 import { Storage } from "@ionic/storage";
 import { Router, ActivatedRoute } from "@angular/router";
 import { environment } from "../../environments/environment";
-import { ComercioService } from "../services/comercio.service";
+import { InformacionService } from "../services/informacion.service";
 import { PedidoService } from "../services/pedido.service";
 import { Location } from "@angular/common";
+import { NgZone } from "@angular/core";
 
 import { OrdenService } from "../services/orden.service";
 import { AuthService } from "../services/auth.service";
@@ -20,7 +21,11 @@ import { FirebaseService } from "../services/firebase.service";
 import { DriverService } from "../services/driver.service";
 import { AlertController } from "@ionic/angular";
 import { Pedido } from "../interfaces/pedido";
+import { Informacion } from "../interfaces/informacion";
+
 import { Geolocation } from "@ionic-native/geolocation/ngx";
+import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic/ngx";
+declare var google: any;
 
 const TOKEN_KEY = "access_token";
 
@@ -31,6 +36,8 @@ const TOKEN_KEY = "access_token";
 })
 export class Tab1Page {
   pedidos: Pedido[];
+  informaciones: Informacion[];
+
   pedidos2: Pedido[];
   servidor = environment.url;
   id_client;
@@ -51,6 +58,9 @@ export class Tab1Page {
   nombre;
   c_pedido = 0;
   foto;
+  longitud;
+  latitud;
+  mostrar = [];
 
   constructor(
     private backgroundGeolocation: BackgroundGeolocation,
@@ -61,9 +71,30 @@ export class Tab1Page {
     private authService: AuthService,
     private alertController: AlertController,
     private firebaseService: FirebaseService,
+    private fcm: FCM,
+    private geolocation: Geolocation,
+    private zone: NgZone,
+    private informacionService: InformacionService
+  ) {
+    this.informacionService.get().subscribe((data: Informacion[]) => {
+      this.informaciones = data;
+      this.distanciaDriver = this.informaciones[0].distanciaDriver;
+      this.maximoPedidos = this.informaciones[0].maximoPedidos;
+    });
+    let escucahador = this.geolocation.watchPosition();
 
-    private geolocation: Geolocation
-  ) {}
+    escucahador.subscribe((resultado) => {
+      this.logs.push(
+        "Lat:" +
+          resultado.coords.latitude +
+          ", Long" +
+          resultado.coords.longitude
+      );
+      this.longitud = resultado.coords.longitude;
+
+      this.latitud = resultado.coords.latitude;
+    });
+  }
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad HomePage");
@@ -89,8 +120,59 @@ export class Tab1Page {
       }
     });
   }
+  refresh() {
+    this.zone.run(() => {
+      console.log("force update the screen");
+    });
+  }
+  calculateDistance() {
+    console.log(
+      "distancia driver" +
+        this.distanciaDriver +
+        "max pedidos" +
+        this.maximoPedidos
+    );
+    this.mostrar.splice(0);
+    console.log(this.latitud, this.longitud);
 
+    var center = new google.maps.LatLng(
+      Number(this.latitud),
+      Number(this.longitud)
+    );
+    for (let comercio of this.pedidos) {
+      const markerLoc = new google.maps.LatLng(
+        comercio.latitud,
+        comercio.longitud
+      );
+      const distanceInKm =
+        google.maps.geometry.spherical.computeDistanceBetween(
+          markerLoc,
+          center
+        ) / 1000;
+      if (distanceInKm < this.distanciaDriver && comercio.id_estado == "1") {
+        console.log(comercio);
+
+        this.mostrar.push(comercio);
+      }
+    }
+    console.log(this.mostrar);
+  }
   start() {
+    this.fcm.getToken().then((token) => {
+      console.log(token);
+    });
+    this.fcm.subscribeToTopic("drivers");
+    console.log("driver suscribe");
+
+    // ionic push notification example
+    this.fcm.onNotification().subscribe((data) => {
+      console.log(data);
+      if (data.wasTapped) {
+        console.log("Received in background");
+      } else {
+        console.log("Received in foreground");
+      }
+    });
     let escucahador = this.geolocation.watchPosition();
 
     escucahador.subscribe((resultado) => {
@@ -100,7 +182,9 @@ export class Tab1Page {
           ", Long" +
           resultado.coords.longitude
       );
+      this.longitud = resultado.coords.longitude;
 
+      this.latitud = resultado.coords.latitude;
       this.localization(resultado.coords.latitude, resultado.coords.longitude);
     });
     this.updateStatusActive();
@@ -136,6 +220,7 @@ export class Tab1Page {
 
     // start recording location
     this.backgroundGeolocation.start();
+    this.calculateDistance();
   }
 
   stopBackgroundGeolocation() {
@@ -146,11 +231,28 @@ export class Tab1Page {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.pedidoService.get(res).subscribe((data: Pedido[]) => {
         this.pedidos = data;
+        this.calculateDistance();
+
         console.log(this.pedidos);
       });
     });
   }
+  distanciaDriver;
+  maximoPedidos;
+  getInformacion() {
+    this.informacionService.get().subscribe((data: Informacion[]) => {
+      this.informaciones = data;
+      this.distanciaDriver = this.informaciones[0].distanciaDriver;
+      this.maximoPedidos = this.informaciones[0].maximoPedidos;
 
+      console.log(
+        "distancia driver" +
+          this.distanciaDriver +
+          "max pedidos" +
+          this.maximoPedidos
+      );
+    });
+  }
   getUser() {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.authService.getUser(res).subscribe((data) => {
@@ -215,6 +317,12 @@ export class Tab1Page {
   }
   valor;
   tomarPedido(pedido_id, tokenpedido, tokencomercio) {
+    console.log(
+      "distancia driver " +
+        this.distanciaDriver +
+        "max pedidos " +
+        this.maximoPedidos
+    );
     this.storage.get(TOKEN_KEY).then((res) => {
       this.pedidoService.get(res).subscribe((data: Pedido[]) => {
         this.pedidos2 = data;
@@ -224,13 +332,14 @@ export class Tab1Page {
               pedidos2.id_estado == "2") ||
             pedidos2.id_estado == "3" ||
             pedidos2.id_estado == "4" ||
-            pedidos2.id_estado == "5"
+            pedidos2.id_estado == "5" ||
+            pedidos2.id_estado == "6"
           ) {
             this.c_pedido = this.c_pedido + 1;
           }
         }
 
-        if (this.c_pedido >= 2) {
+        if (this.c_pedido >= this.maximoPedidos) {
           this.presentAlertErrorPedido();
         } else {
           this.storage.get(TOKEN_KEY).then((res) => {
@@ -337,7 +446,7 @@ export class Tab1Page {
     const alert = await this.alertController.create({
       mode: "ios",
       cssClass: "my-custom-class",
-      header: "Solo puede tomar 2 pedidos máximo",
+      header: "Solo puede tomar " + this.maximoPedidos + " pedidos máximo",
       message: "Termine los pedidos por favor.",
       buttons: ["OK"],
     });

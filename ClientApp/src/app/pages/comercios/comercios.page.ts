@@ -112,6 +112,10 @@ export class ComerciosPage {
       this.mostrar = this.mostrar.filter((item) => {
         return item.nombre.toLowerCase().indexOf(val.toLowerCase()) > -1;
       });
+    } else {
+      const val = ev.target.value;
+
+      this.getComercio();
     }
   }
 }

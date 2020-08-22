@@ -20,6 +20,7 @@ export class Pedido {
     public comerciolonitud: number,
     public created_at: string,
     public nota: string,
-    public conductorTelefono: string
+    public conductorTelefono: string,
+    public pedidoDelivery: string
   ) {}
 }

@@ -8,7 +8,8 @@ import { AuthService } from "./services/auth.service";
 import { Storage } from "@ionic/storage";
 import { Router } from "@angular/router";
 import { AlertController } from "@ionic/angular";
-
+import { InformacionService } from "./services/informacion.service";
+import { Informacion } from "./interfaces/informacion";
 const TOKEN_KEY = "access_token";
 
 @Component({
@@ -17,6 +18,7 @@ const TOKEN_KEY = "access_token";
   styleUrls: ["app.component.scss"],
 })
 export class AppComponent {
+  informaciones: Informacion[];
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -25,7 +27,8 @@ export class AppComponent {
     private router: Router,
     private storage: Storage,
     public alertController: AlertController,
-    private fcm: FCM
+    private fcm: FCM,
+    private informacionService: InformacionService
   ) {
     this.initializeApp();
     this.verificar();
@@ -55,21 +58,6 @@ export class AppComponent {
       // this.fcm.subscribeToTopic('Deals');
 
       // get FCM token
-      this.fcm.getToken().then((token) => {
-        console.log(token);
-      });
-      this.fcm.subscribeToTopic("drivers");
-      console.log("driver suscribe");
-
-      // ionic push notification example
-      this.fcm.onNotification().subscribe((data) => {
-        console.log(data);
-        if (data.wasTapped) {
-          console.log("Received in background");
-        } else {
-          console.log("Received in foreground");
-        }
-      });
 
       // refresh the FCM token
       /*   this.fcm.onTokenRefresh().subscribe((token) => {
@@ -95,5 +83,13 @@ export class AppComponent {
   logout() {
     this.authService.logout();
     console.log("salir");
+  }
+  telefono;
+  getInformacion() {
+    this.informacionService.get().subscribe((data: Informacion[]) => {
+      this.informaciones = data;
+      this.telefono = this.informaciones[0].telefono;
+      console.log("telefono" + this.telefono);
+    });
   }
 }

@@ -60,7 +60,7 @@ export class PedidoService {
     this.dato = {
       notification: {
         title: "Su pedido esta en preparación",
-        body: "puede revisar el estado en el carrito de compras.",
+        body: "Puede revisar el estado en el carrito de compras.",
         sound: "default",
         click_action: "FCM_PLUGIN_ACTIVITY",
         icon: "fcm_push_icon",
@@ -82,7 +82,7 @@ export class PedidoService {
     this.dato = {
       notification: {
         title: "Su pedido esta en camino",
-        body: "puede revisar el estado en el carrito de compras.",
+        body: "Puede revisar el estado en el carrito de compras.",
         sound: "default",
         click_action: "FCM_PLUGIN_ACTIVITY",
         icon: "fcm_push_icon",
@@ -100,11 +100,11 @@ export class PedidoService {
       headers: headers,
     });
   }
-  trancadera(token) {
+  trancadera(token, texto) {
     this.dato = {
       notification: {
-        title: "Su pedido esta en camino pero el conductor tiene un problema.",
-        body: "puede revisar el estado en el carrito de compras.",
+        title: "El repartidor presento un problema",
+        body: texto,
         sound: "default",
         click_action: "FCM_PLUGIN_ACTIVITY",
         icon: "fcm_push_icon",

@@ -38,7 +38,7 @@
             <ion-label>
               <h2>Pedido Nr. {{pedido.id}}</h2>
               <h3>{{pedido.nombreCompercio}}</h3>
-              <p>{{pedido.pNombre}}</p>
+              <p>Delivery: {{pedido.pedidoDelivery}}</p>
             </ion-label>
             <ion-badge *ngIf="pedido.id_estado==2" color="primary" slot="end"
               >En preparación</ion-badge
@@ -46,9 +46,9 @@
             <ion-badge *ngIf="pedido.id_estado==3" color="success" slot="end"
               >En camino</ion-badge
             >
-            <ion-badge *ngIf="pedido.id_estado==4" color="warning" slot="end"
-              >En camino</ion-badge
-            >
+            <ion-badge *ngIf="pedido.id_estado==4" color="danger" slot="end">
+              inconveniente
+            </ion-badge>
             <ion-badge *ngIf="pedido.id_estado==5" color="tertiary" slot="end"
               >En el destino</ion-badge
             >

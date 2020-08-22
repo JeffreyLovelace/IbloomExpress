@@ -39,6 +39,7 @@ export class PlatosPage {
   lattitude;
   longitude;
   extra;
+  envioTotal;
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -171,6 +172,21 @@ export class PlatosPage {
     this.km = distance / 1000;
     this.tiempo = Math.round((this.km / this.velocidad) * 60);
     this.extra = this.tiempo + 10;
+    if (this.km <= 2) {
+      this.envioTotal = this.envio * 1;
+    }
+    if (this.km > 2 && this.km <= 4) {
+      this.envioTotal = this.envio * 1.5;
+    }
+    if (this.km > 4 && this.km <= 6) {
+      this.envioTotal = this.envio * 2;
+    }
+    if (this.km > 6 && this.km <= 8) {
+      this.envioTotal = this.envio * 3.5;
+    }
+    if (this.km > 8) {
+      this.envioTotal = this.envio * 5;
+    }
   }
   isItemAvailable = false;
 
