@@ -12,66 +12,24 @@
   </div>
   <hr />
   <hr />
-  <ion-button
-    class="facebook"
-    mode="ios"
-    expand="block"
-    type="submit"
-    shape="round"
-    (click)="loginGoogle()"
-  >
-    <ion-icon name="logo-facebook" slot="start"></ion-icon>
-    Facebook</ion-button
-  >
-
-  <ion-button
-    mode="ios"
-    color="danger"
-    expand="block"
-    type="submit"
-    shape="round"
-    (click)="loginGoogle()"
-  >
-    <ion-icon name="logo-google" slot="start"></ion-icon>
-    GOOGLE{{correo}}</ion-button
-  >
-  <hr />
-  <hr />
-  <form>
-    <ion-item lines="none">
-      <ion-label position="stacked">Email</ion-label>
-      <ion-input
-        type="email"
-        placeholder="Email"
-        name="email"
-        [(ngModel)]="credentials.email"
-      ></ion-input>
-    </ion-item>
-
-    <ion-item lines="none">
-      <ion-label position="stacked">Password</ion-label>
-      <ion-input
-        type="password"
-        placeholder="Password"
-        name="password"
-        [(ngModel)]="credentials.password"
-      >
-      </ion-input>
-    </ion-item>
-    <hr />
-    <hr />
-    <ion-button
-      mode="ios"
-      expand="block"
-      type="submit"
-      shape="round"
-      (click)="login()"
-      >Iniciar sesión</ion-button
+  <ion-item lines="none">
+    <ion-label position="stacked">Número de celular</ion-label>
+    <ion-input
+      type="number"
+      placeholder="Ingrese su número"
+      [(ngModel)]="number"
     >
-    <p slot="end" color="primary">Olvidó su contraseña?</p>
-    <hr />
-    <hr />
-    <hr />
-    <hr />
-  </form>
+    </ion-input>
+  </ion-item>
+  <hr />
+  <hr />
+  <hr />
+  <ion-button
+    mode="ios"
+    expand="block"
+    type="submit"
+    shape="round"
+    (click)="enviarMensaje()"
+    >Enviar</ion-button
+  >
 </ion-content>

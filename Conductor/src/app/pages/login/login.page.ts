@@ -15,8 +15,8 @@ import { Informacion } from "../../interfaces/informacion";
 })
 export class LoginPage implements OnInit {
   credentials = {
-    email: "driver@gmail.com",
-    password: "driver",
+    email: "",
+    password: "",
     remember_me: true,
   };
   informaciones: Informacion[];

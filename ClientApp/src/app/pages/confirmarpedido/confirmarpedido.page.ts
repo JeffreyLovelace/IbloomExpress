@@ -121,7 +121,7 @@ export class ConfirmarpedidoPage {
         });
       console.log(this.nombre);
       console.log(this.comercios);
-      this.totalDelivery = this.total + this.envio;
+      this.totalDelivery = this.total + this.envioTotal;
     });
   }
   verificarCantidad() {}
@@ -209,8 +209,23 @@ export class ConfirmarpedidoPage {
     this.km = distance / 1000;
     this.tiempo = Math.round((this.km / this.velocidad) * 60);
     this.extra = this.tiempo + 10;
+    if (this.km <= 2) {
+      this.envioTotal = this.envio * 1;
+    }
+    if (this.km > 2 && this.km <= 4) {
+      this.envioTotal = this.envio * 1.5;
+    }
+    if (this.km > 4 && this.km <= 6) {
+      this.envioTotal = this.envio * 2;
+    }
+    if (this.km > 6 && this.km <= 8) {
+      this.envioTotal = this.envio * 3.5;
+    }
+    if (this.km > 8) {
+      this.envioTotal = this.envio * 5;
+    }
   }
-
+  envioTotal;
   async presentAlert() {
     this.pedidoService.notification().subscribe((res) => {
       console.log(res);

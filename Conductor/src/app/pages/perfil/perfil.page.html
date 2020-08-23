@@ -29,7 +29,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <div *ngIf="correo">
+  <div *ngIf="pNombre">
     <ion-list>
       <ion-item>
         <ion-avatar slot="start">
@@ -50,7 +50,7 @@
 
       <ion-item>
         <ion-avatar slot="start">
-          <img src="{{servidor}}/imagenes/{{ fotoVehiculo}}" />
+          <img src="{{servidor}}/imagenes/{{fotoVehiculo}}" />
         </ion-avatar>
         <ion-label>
           <h2>Tipo de vehículo: {{tipoVehiculo}}</h2>
@@ -103,12 +103,18 @@
           <ion-icon slot="icon-only" name="receipt-outline"> </ion-icon>
         </ion-button>
         <ion-select>
-          <ion-select-option *ngFor="let pedido of pedidos"
-            ><div *ngIf="pedido.id_conductor==id_client">
-              Nro:{{pedido.id}}
-              <p>Bs: {{pedido.delivery}}</p>
+          <div *ngFor="let pedido of pedidos">
+            <div
+              *ngIf="pedido.id_conductor==id_client && pedido.id_estado == 6"
+            >
+              <ion-select-option
+                ><div>
+                  Nro:{{pedido.id}}
+                  <p>Bs: {{pedido.pedidoDelivery}}</p>
+                </div>
+              </ion-select-option>
             </div>
-          </ion-select-option>
+          </div>
         </ion-select>
       </ion-item>
     </ion-list>

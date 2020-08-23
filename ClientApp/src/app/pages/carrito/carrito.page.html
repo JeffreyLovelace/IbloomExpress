@@ -29,7 +29,7 @@
     <div *ngFor="let pedido of pedidos">
       <div>
         <div
-          *ngIf="pedido.id_estado==1 || pedido.id_estado==2 || pedido.id_estado==3 ||pedido.id_estado==4 ||pedido.id_estado==5 && pedido.id_cliente == id_client"
+          *ngIf="  pedido.id_cliente == id_client && pedido.id_estado==1 ||pedido.id_cliente == id_client && pedido.id_estado==2 ||pedido.id_cliente == id_client && pedido.id_estado==3 ||pedido.id_cliente == id_client && pedido.id_estado==4 ||pedido.id_estado==5 && pedido.id_cliente == id_client"
         >
           <ion-list>
             <ion-item routerLink="/detallepedido/{{pedido.id}}">

@@ -21,6 +21,7 @@ const TOKEN_KEY = "access_token";
 export class PerfilPage implements OnInit {
   myDate: String = new Date().toISOString();
   pedidos: Pedido[];
+  servidor = environment.url;
 
   id;
   correo;
@@ -105,7 +106,7 @@ export class PerfilPage implements OnInit {
         this.pedidos = data;
 
         for (let cliente of this.pedidos) {
-          if (id == cliente.id_conductor) {
+          if (id == cliente.id_conductor && cliente.id_estado == "6") {
             this.c++;
             this.generado = this.generado + Number(cliente.pedidoDelivery);
           }

@@ -151,12 +151,12 @@ export class Tab1Page {
         ) / 1000;
       if (distanceInKm < this.distanciaDriver && comercio.id_estado == "1") {
         console.log(comercio);
-
+        this.contador++;
         this.mostrar.push(comercio);
       }
     }
-    console.log(this.mostrar);
   }
+  contador = 0;
   start() {
     this.fcm.getToken().then((token) => {
       console.log(token);
@@ -168,9 +168,7 @@ export class Tab1Page {
     this.fcm.onNotification().subscribe((data) => {
       console.log(data);
       if (data.wasTapped) {
-        console.log("Received in background");
       } else {
-        console.log("Received in foreground");
       }
     });
     let escucahador = this.geolocation.watchPosition();
@@ -192,7 +190,7 @@ export class Tab1Page {
       desiredAccuracy: 10,
       stationaryRadius: 20,
       distanceFilter: 30,
-      debug: true, //  enable this hear sounds for background-geolocation life-cycle.
+      debug: false, //  enable this hear sounds for background-geolocation life-cycle.
       stopOnTerminate: false, // enable this to clear background location settings when the app terminates
 
       interval: 300000,
@@ -205,7 +203,6 @@ export class Tab1Page {
       notificationText: this.nombre + " esta activo ",
     };
 
-    console.log("start");
     this.backgroundGeolocation.configure(config).then(() => {
       this.backgroundGeolocation
         .on(BackgroundGeolocationEvents.location)
@@ -232,8 +229,6 @@ export class Tab1Page {
       this.pedidoService.get(res).subscribe((data: Pedido[]) => {
         this.pedidos = data;
         this.calculateDistance();
-
-        console.log(this.pedidos);
       });
     });
   }
@@ -244,13 +239,6 @@ export class Tab1Page {
       this.informaciones = data;
       this.distanciaDriver = this.informaciones[0].distanciaDriver;
       this.maximoPedidos = this.informaciones[0].maximoPedidos;
-
-      console.log(
-        "distancia driver" +
-          this.distanciaDriver +
-          "max pedidos" +
-          this.maximoPedidos
-      );
     });
   }
   getUser() {
@@ -277,11 +265,9 @@ export class Tab1Page {
             this.estado = cliente.estadoTrabajo;
 
             this.nombre = cliente.pNombre;
-            console.log(this.id_client);
             this.gePedido();
           }
         }
-        console.log(data);
       });
     });
   }
@@ -295,7 +281,6 @@ export class Tab1Page {
       this.driverService
         .update(res, this.driverStatus, this.id_client)
         .subscribe((data) => {
-          console.log(data);
           this.getUser();
         });
     });
@@ -310,19 +295,12 @@ export class Tab1Page {
       this.driverService
         .update(res, this.driverStatus, this.id_client)
         .subscribe((data) => {
-          console.log(data);
           this.getUser();
         });
     });
   }
   valor;
   tomarPedido(pedido_id, tokenpedido, tokencomercio) {
-    console.log(
-      "distancia driver " +
-        this.distanciaDriver +
-        "max pedidos " +
-        this.maximoPedidos
-    );
     this.storage.get(TOKEN_KEY).then((res) => {
       this.pedidoService.get(res).subscribe((data: Pedido[]) => {
         this.pedidos2 = data;
@@ -330,10 +308,12 @@ export class Tab1Page {
           if (
             (pedidos2.id_conductor == this.id_client &&
               pedidos2.id_estado == "2") ||
-            pedidos2.id_estado == "3" ||
-            pedidos2.id_estado == "4" ||
-            pedidos2.id_estado == "5" ||
-            pedidos2.id_estado == "6"
+            (pedidos2.id_conductor == this.id_client &&
+              pedidos2.id_estado == "3") ||
+            (pedidos2.id_conductor == this.id_client &&
+              pedidos2.id_estado == "4") ||
+            (pedidos2.id_conductor == this.id_client &&
+              pedidos2.id_estado == "5")
           ) {
             this.c_pedido = this.c_pedido + 1;
           }
@@ -356,19 +336,9 @@ export class Tab1Page {
                   .subscribe((res) => {
                     console.log(res);
                   });
-                console.log("estado" + data[0].id_estado);
                 if (data[0].id_estado != "1") {
-                  console.log("estado otro");
                   this.presentAlertError();
                 } else {
-                  console.log("estado 1");
-                  console.log(
-                    "id pedido " +
-                      pedido_id +
-                      "this.id_client " +
-                      this.id_client
-                  );
-
                   this.pedido1 = {
                     id_conductor: this.id_client,
                     id_estado: 2,
@@ -382,14 +352,11 @@ export class Tab1Page {
                       );
                   });
                 }
-
-                console.log(data);
               });
           });
         }
       });
     });
-    console.log("mis pedidos" + this.c_pedido);
   }
 
   async presentAlertConfirm(pedido_id, tokenpedido, tokencomercio) {
@@ -458,10 +425,7 @@ export class Tab1Page {
     // instead of '$event.checked'
     if (evt.detail.value !== this.entrega) {
       // do things
-
-      console.log("true creo");
     } else {
-      console.log("false creo");
     }
   }
   localization(latitude, longitude) {
@@ -470,8 +434,6 @@ export class Tab1Page {
       .crete(String(this.id_client), latitude, longitude, this.foto)
       .then((resp) => {
         this.backgroundGeolocation.finish(); // FOR IOS ONLY
-
-        console.log(this.foto);
       });
   }
 }

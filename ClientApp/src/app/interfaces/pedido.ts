@@ -29,6 +29,7 @@ export class Pedido {
     public conductorTipoVehiculo: string,
     public cliente: string,
     public fotoComercio: string,
-    public tokenComercio: string
+    public tokenComercio: string,
+    public pedidoDelivery: string
   ) {}
 }

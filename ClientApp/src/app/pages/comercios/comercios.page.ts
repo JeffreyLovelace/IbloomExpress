@@ -5,8 +5,12 @@ import { ComercioService } from "../../services/comercio.service";
 import { Storage } from "@ionic/storage";
 import { Router, ActivatedRoute } from "@angular/router";
 declare var google: any;
+import { ToastController } from "@ionic/angular";
+
 import { environment } from "../../../environments/environment";
 const TOKEN_KEY = "access_token";
+myDate: new Date().getTime();
+
 @Component({
   selector: "app-comercios",
   templateUrl: "./comercios.page.html",
@@ -14,6 +18,8 @@ const TOKEN_KEY = "access_token";
 })
 export class ComerciosPage {
   servidor = environment.url;
+  myDate: String = new Date().toISOString();
+
   id = null;
   lattitude;
   longitude;
@@ -26,7 +32,8 @@ export class ComerciosPage {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private comercioService: ComercioService,
-    private storage: Storage
+    private storage: Storage,
+    public toastController: ToastController
   ) {
     this.storage.get("lattitude").then((val) => {
       this.lattitude = val;
@@ -38,7 +45,21 @@ export class ComerciosPage {
     this.nombre = this.activatedRoute.snapshot.params["nombre"];
     this.getComercio();
   }
-
+  ionViewWillEnter() {
+    this.storage.get("pedido").then((val) => {
+      if (val) {
+        this.storage.remove("pedido");
+        this.presentToast();
+      }
+    });
+  }
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: "Se elimino su pedido",
+      duration: 2000,
+    });
+    toast.present();
+  }
   back() {
     this.router.navigateByUrl("/inicio");
   }
@@ -70,7 +91,6 @@ export class ComerciosPage {
           center
         ) / 1000;
       if (distanceInKm < 100) {
-        console.log("es menor wapo");
         console.log(comercio);
 
         this.mostrar.push(comercio);

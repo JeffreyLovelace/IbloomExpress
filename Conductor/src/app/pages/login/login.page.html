@@ -12,51 +12,50 @@
   </div>
   <hr />
   <hr />
-  <form>
-    <ion-item lines="none">
-      <ion-label position="stacked">Correo</ion-label>
-      <ion-input
-        type="email"
-        placeholder="Correo"
-        name="email"
-        [(ngModel)]="credentials.email"
-      ></ion-input>
-    </ion-item>
 
-    <ion-item lines="none">
-      <ion-label position="stacked">Contraseña</ion-label>
-      <ion-input
-        type="password"
-        placeholder="Contraseña"
-        name="password"
-        [(ngModel)]="credentials.password"
-      >
-      </ion-input>
-    </ion-item>
-    <hr />
-    <hr />
-    <ion-button
-      mode="ios"
-      expand="block"
-      type="submit"
-      shape="round"
-      (click)="login()"
-      >Iniciar sesión</ion-button
+  <ion-item lines="none">
+    <ion-label position="stacked">Correo</ion-label>
+    <ion-input
+      type="email"
+      placeholder="Correo"
+      name="email"
+      [(ngModel)]="credentials.email"
+    ></ion-input>
+  </ion-item>
+
+  <ion-item lines="none">
+    <ion-label position="stacked">Contraseña</ion-label>
+    <ion-input
+      type="password"
+      placeholder="Contraseña"
+      name="password"
+      [(ngModel)]="credentials.password"
     >
-    <hr />
-    <hr />
-    <hr />
-    <hr />
-    <ion-button
-      href="https://api.whatsapp.com/send?phone=591{{telefono}}"
-      mode="ios"
-      expand="block"
-      type="submit"
-      shape="round"
-      fill="outline"
-    >
-      <ion-icon name="logo-whatsapp" slot="start"></ion-icon
-      >Contactanos</ion-button
-    >
-  </form>
+    </ion-input>
+  </ion-item>
+  <hr />
+  <hr />
+  <ion-button
+    mode="ios"
+    expand="block"
+    type="submit"
+    shape="round"
+    (click)="login()"
+    >Iniciar sesión</ion-button
+  >
+  <hr />
+  <hr />
+  <hr />
+  <hr />
+  <ion-button
+    href="https://api.whatsapp.com/send?phone=59177773415"
+    mode="ios"
+    expand="block"
+    type="submit"
+    shape="round"
+    fill="outline"
+  >
+    <ion-icon name="logo-whatsapp" slot="start"></ion-icon
+    >Contactanos</ion-button
+  >
 </ion-content>

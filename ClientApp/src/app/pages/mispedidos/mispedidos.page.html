@@ -1,73 +1,66 @@
 <ion-header mode="ios">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button menu="main-menu" mode="ios"></ion-menu-button>
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-buttons slot="primary" routerLink="/carrito">
+
+    <ion-buttons slot="end">
       <ion-button>
         <ion-icon
           slot="icon-only"
-          ios="cart-outline"
-          md="cart-outline"
+          ios="search-outline"
+          md="search-sharp"
         ></ion-icon>
-        <ion-badge *ngIf="c>0" color="danger">{{c}} </ion-badge>
       </ion-button>
     </ion-buttons>
-
     <ion-title>
-      <p>{{direccion}}</p>
+      Mis pedidos
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div *ngIf="tipocomercios">
-    <ion-slides
-      class="slide-padding"
-      pager="true"
-      (ionSlideDidChange)="slideChanged()"
-    >
-      <ion-slide *ngFor="let publicacion of publicaciones">
-        <div class="container">
-          <ion-img src="{{servidor}}/imagenes/{{ publicacion.foto }}"></ion-img>
+<ion-content [fullscreen]="true">
+  <ion-header mode="ios" collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large"> Mis pedidos </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div *ngIf="pedidos">
+    <div *ngFor="let pedido of pedidos">
+      <div>
+        <div
+          *ngIf="  pedido.id_cliente == id_client && pedido.id_estado==1 ||pedido.id_cliente == id_client && pedido.id_estado==2 ||pedido.id_cliente == id_client && pedido.id_estado==3 ||pedido.id_cliente == id_client && pedido.id_estado==4 ||pedido.id_estado==5 && pedido.id_cliente == id_client||pedido.id_estado==6 && pedido.id_cliente == id_client"
+        >
+          <ion-list>
+            <ion-item>
+              <ion-label
+                >Pedido número: <strong>{{pedido.id}}</strong></ion-label
+              >
+              <ion-badge *ngIf="pedido.id_estado==1" color="primary" slot="end"
+                >Espera</ion-badge
+              >
+              <ion-badge *ngIf="pedido.id_estado==2" color="primary" slot="end"
+                >En preparación</ion-badge
+              >
+              <ion-badge *ngIf="pedido.id_estado==3" color="success" slot="end"
+                >En camino</ion-badge
+              >
+              <ion-badge *ngIf="pedido.id_estado==4" color="success" slot="end"
+                >En camino</ion-badge
+              >
+              <ion-badge *ngIf="pedido.id_estado==5" color="tertiary" slot="end"
+                >En el destino</ion-badge
+              >
+              <ion-badge *ngIf="pedido.id_estado==5" color="tertiary" slot="end"
+                >Entregado</ion-badge
+              >
+            </ion-item>
+          </ion-list>
         </div>
-      </ion-slide>
-    </ion-slides>
-
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>{{nombre}}, qué quiere pedir?</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-grid>
-          <ion-row>
-            <ion-col size="4" *ngFor="let tipocomercio of tipocomercios">
-              <ion-img
-                src="{{servidor}}/imagenes/{{ tipocomercio.foto }}"
-                routerLink="/comercios/{{tipocomercio.id}}/{{tipocomercio.nombre}}"
-              ></ion-img>
-
-              <p>{{tipocomercio.nombre}}</p>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Promociones</ion-card-title>
-      </ion-card-header>
-      <ion-slides class="slide-padding" pager="true">
-        <ion-slide *ngFor="let promocion of promociones">
-          <div class="container">
-            <ion-img src="{{servidor}}/imagenes/{{ promocion.foto }}"></ion-img>
-          </div>
-        </ion-slide>
-      </ion-slides>
-    </ion-card>
+      </div>
+    </div>
   </div>
-  <div *ngIf="!tipocomercios">
+  <div *ngIf="!pedidos">
     <ion-list>
       <ion-list-header>
         <ion-label>

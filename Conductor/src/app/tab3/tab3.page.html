@@ -27,9 +27,7 @@
   </ion-refresher>
   <div *ngFor="let pedido of pedidos">
     <div>
-      <div
-        *ngIf="pedido.id_conductor==id_client && pedido.id_estado==2 || pedido.id_estado==3 ||pedido.id_estado==4||pedido.id_estado==5||pedido.id_estado==6"
-      >
+      <div *ngIf="pedido.id_conductor==id_client && pedido.id_estado==6">
         <ion-list>
           <ion-item>
             <ion-avatar slot="start">

@@ -6,6 +6,7 @@ export class Combo {
     public descripcion: string,
     public foto: string,
     public precio: string,
-    public promocion: string
+    public promocion: string,
+    public stock: number
   ) {}
 }

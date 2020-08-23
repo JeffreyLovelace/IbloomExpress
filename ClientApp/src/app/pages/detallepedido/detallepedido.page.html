@@ -26,13 +26,15 @@
       </ion-avatar>
       <ion-label>
         <h2>{{nombreCompercio}}</h2>
-        <IonBadge slot="end" color="warning">{{tiempoDelivery}} min.</IonBadge>
+        <IonBadge slot="end" color="warning"
+          >{{tiempoDelivery}}-{{tiempoDelivery+10}}min.</IonBadge
+        >
       </ion-label>
     </ion-item>
 
     <ion-item slot="start" lines="none">
       <ion-avatar slot="start">
-        <img src="{{servidor}}/imagenes/{{ conductorFoto }}" />
+        <img src="{{servidor}}/imagenes/{{conductorFoto }}" />
       </ion-avatar>
       <ion-label>
         <h2>Conductor</h2>
@@ -41,7 +43,7 @@
     </ion-item>
     <ion-item slot="start" lines="none">
       <ion-avatar slot="start">
-        <img src="/assets/card-top-img.png" />
+        <img src="{{servidor}}/imagenes/{{conductorFoto }}" />
       </ion-avatar>
       <ion-label>
         <h2>Vehículo</h2>

@@ -5,6 +5,16 @@
 export const environment = {
   production: false,
   url: "http://134.122.18.6",
+  firebaseConfig: {
+    apiKey: "AIzaSyDo2NMNimUHRIBT6AIOWPSjl0LITLr-6kk",
+    authDomain: "ibloomexpress-2a20a.firebaseapp.com",
+    databaseURL: "https://ibloomexpress-2a20a.firebaseio.com",
+    projectId: "ibloomexpress-2a20a",
+    storageBucket: "ibloomexpress-2a20a.appspot.com",
+    messagingSenderId: "238573758608",
+    appId: "1:238573758608:web:cca05f7d5c54022b291015",
+    measurementId: "G-NSE47FPJYG",
+  },
 };
 
 /*
@@ -16,11 +26,12 @@ export const environment = {
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
 export const firebaseConfig = {
-  apiKey: "AIzaSyDNrYWwErmjVL8pMJ8j0C7S6jaUaQTlsKA",
-  authDomain: "login-f2e0f.firebaseapp.com",
-  databaseURL: "https://login-f2e0f.firebaseio.com",
-  projectId: "login-f2e0f",
-  storageBucket: "login-f2e0f.appspot.com",
-  messagingSenderId: "827377395656",
-  appId: "1:827377395656:web:66c59c6ad826ca8e6e02fd",
+  apiKey: "AIzaSyDo2NMNimUHRIBT6AIOWPSjl0LITLr-6kk",
+  authDomain: "ibloomexpress-2a20a.firebaseapp.com",
+  databaseURL: "https://ibloomexpress-2a20a.firebaseio.com",
+  projectId: "ibloomexpress-2a20a",
+  storageBucket: "ibloomexpress-2a20a.appspot.com",
+  messagingSenderId: "238573758608",
+  appId: "1:238573758608:web:cca05f7d5c54022b291015",
+  measurementId: "G-NSE47FPJYG",
 };

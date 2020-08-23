@@ -3,7 +3,8 @@ import { Component, OnInit } from "@angular/core";
 import { AlertController } from "@ionic/angular";
 import { Router } from "@angular/router";
 import { Storage } from "@ionic/storage";
-
+import { FirebaseAuthentication } from "@ionic-native/firebase-authentication/ngx";
+import { WindowService } from "../../services/window.service";
 import { AuthService } from "../../services/auth.service";
 import { GooglePlus } from "@ionic-native/google-plus/ngx";
 @Component({
@@ -17,18 +18,80 @@ export class LoginPage implements OnInit {
     password: "cliente",
     remember_me: true,
   };
-
+  windowRef: any;
+  prefix: any;
+  line: any;
+  verifCode: any;
   correo = "";
   constructor(
     private router: Router,
     private authService: AuthService,
     private googlePlus: GooglePlus,
-    private storage: Storage
-  ) {}
+    private storage: Storage,
+    public alertController: AlertController,
+    private firebaseAuthentication: FirebaseAuthentication
+  ) {
+    /* this.firebaseAuthentication.onAuthStateChanged().subscribe((user) => {
+      if (user) {
+        alert(JSON.stringify(user));
+        this.alertController.dismiss;
+        alert("estamos aca");
+        this.login();
+      }
+    });*/
+  }
 
+  //Initiate windowRef from WindowService
+  number;
   ngOnInit() {}
   onSubmit() {
     this.router.navigateByUrl("/ubicacion");
+  }
+  enviarMensaje() {
+    this.firebaseAuthentication
+      .verifyPhoneNumber("+591" + this.number.toString(), 30000)
+      .then((verificationid) => {
+        //alert(verificationid);
+        this.verificarCodigo(verificationid);
+      });
+  }
+  async verificarCodigo(verificationid) {
+    const prompt = await this.alertController.create({
+      mode: "ios",
+      cssClass: "my-custom-class",
+      header: "Ingrese el código de verificación",
+      inputs: [
+        {
+          name: "code",
+          type: "number",
+          placeholder: "Ingresa tu código de verificación",
+        },
+      ],
+      buttons: [
+        {
+          text: "Cancel",
+          role: "cancel",
+          cssClass: "secondary",
+          handler: () => {
+            console.log("Confirm Cancel");
+          },
+        },
+        {
+          text: "Confirmar ",
+          handler: (response) => {
+            const smsCode = response.code;
+            this.firebaseAuthentication
+              .signInWithVerificationId(verificationid, smsCode)
+              .then(
+                (data) => this.login(),
+                (error) => alert("Código incorrecto")
+              );
+          },
+        },
+      ],
+    });
+
+    await prompt.present();
   }
 
   loginGoogle() {

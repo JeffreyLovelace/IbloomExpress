@@ -44,17 +44,9 @@
         </div>
 
         <ion-button fill="clear">
-          <ion-icon
-            mode="ios"
-            slot="icon-only"
-            name="bicycle-outline"
-          ></ion-icon
-          >Envío: bs. {{envio}}</ion-button
-        >
-        <ion-button fill="clear">
           <ion-icon mode="ios" slot="icon-only" name="stopwatch-outline">
             > </ion-icon
-          >{{tiempo}}-{{extra}} min
+          >Tiempo: {{tiempo}}-{{tiempo+10}} min
         </ion-button>
       </ion-label>
     </ion-item>
@@ -67,29 +59,44 @@
     <ion-item>
       <ion-label>Lunes</ion-label>
       <p slot="end" color="success">
-        <ion-text color="success">Hora</ion-text>
+        <ion-text color="success">{{horarioEnt}}-{{horarioSal}}</ion-text>
       </p>
     </ion-item>
     <ion-item>
       <ion-label>Martes</ion-label>
       <p slot="end" color="success">
-        <ion-text color="success">Hora</ion-text>
+        <ion-text color="success">{{horarioEnt}}-{{horarioSal}}</ion-text>
       </p>
     </ion-item>
     <ion-item>
       <ion-label>Miercoles</ion-label>
+      <p slot="end" color="success">
+        <ion-text color="success">{{horarioEnt}}-{{horarioSal}}</ion-text>
+      </p>
     </ion-item>
     <ion-item>
       <ion-label>Jueves</ion-label>
+      <p slot="end" color="success">
+        <ion-text color="success">{{horarioEnt}}-{{horarioSal}}</ion-text>
+      </p>
     </ion-item>
     <ion-item>
       <ion-label>Viernes</ion-label>
+      <p slot="end" color="success">
+        <ion-text color="success">{{horarioEnt}}-{{horarioSal}}</ion-text>
+      </p>
     </ion-item>
     <ion-item>
       <ion-label>Sabado</ion-label>
+      <p slot="end" color="success">
+        <ion-text color="success">{{horarioEnt}}-{{horarioSal}}</ion-text>
+      </p>
     </ion-item>
     <ion-item>
       <ion-label>Domingo</ion-label>
+      <p slot="end" color="success">
+        <ion-text color="success">{{horarioEnt}}-{{horarioSal}}</ion-text>
+      </p>
     </ion-item>
   </ion-list>
 </ion-content>

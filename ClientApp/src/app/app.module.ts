@@ -11,17 +11,19 @@ import { AppRoutingModule } from "./app-routing.module";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { NativeGeocoder } from "@ionic-native/native-geocoder/ngx";
 
-import { firebaseConfig } from "../environments/environment";
+import { environment } from "../environments/environment";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { LocationAccuracy } from "@ionic-native/location-accuracy/ngx";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { Storage, IonicStorageModule } from "@ionic/storage";
 import { JwtModule, JWT_OPTIONS } from "@auth0/angular-jwt";
+import { FirebaseAuthentication } from "@ionic-native/firebase-authentication/ngx";
 
 import { GooglePlus } from "@ionic-native/google-plus/ngx";
 import { HttpClientModule } from "@angular/common/http";
 import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic/ngx";
+import * as firebase from "firebase";
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,6 +43,7 @@ import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic/ngx";
       appId: "1:238573758608:web:cca05f7d5c54022b291015",
       measurementId: "G-NSE47FPJYG",
     }),
+
     IonicStorageModule.forRoot({
       name: "__mydb",
       driverOrder: ["indexeddb", "sqlite", "websql"],
@@ -50,6 +53,7 @@ import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic/ngx";
     HttpClientModule,
   ],
   providers: [
+    FirebaseAuthentication,
     GooglePlus,
     StatusBar,
     SplashScreen,

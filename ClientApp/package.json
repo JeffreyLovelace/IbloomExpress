@@ -24,6 +24,7 @@
     "@capacitor/core": "2.2.1",
     "@ionic-native/core": "^5.0.7",
     "@ionic-native/fcm": "^5.27.0",
+    "@ionic-native/firebase-authentication": "^5.28.0",
     "@ionic-native/geolocation": "^5.27.0",
     "@ionic-native/google-plus": "^5.27.0",
     "@ionic-native/location-accuracy": "^5.27.0",
@@ -36,13 +37,16 @@
     "cordova-plugin-add-swift-support": "^2.0.2",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-fcm-with-dependecy-updated": "^7.0.9",
+    "cordova-plugin-firebase-authentication": "^3.3.1",
     "cordova-plugin-geolocation": "^4.0.2",
     "cordova-plugin-googleplus": "^8.5.0",
     "cordova-plugin-hotspot": "1.2.10",
     "cordova-plugin-nativegeocoder": "^3.4.1",
     "cordova-plugin-request-location-accuracy": "^2.3.0",
     "cordova-sqlite-storage": "^5.0.1",
-    "firebase": "^7.16.1",
+    "cordova-support-android-plugin": "^1.0.2",
+    "cordova-support-google-services": "^1.4.1",
+    "firebase": "^7.19.0",
     "rxjs": "~6.5.1",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
@@ -105,7 +109,10 @@
       "cordova-plugin-request-location-accuracy": {
         "PLAY_SERVICES_LOCATION_VERSION": "16.+"
       },
-      "cordova-plugin-fcm-with-dependecy-updated": {}
+      "cordova-plugin-fcm-with-dependecy-updated": {},
+      "cordova-plugin-firebase-authentication": {
+        "FIREBASE_AUTH_VERSION": "19.3.+"
+      }
     },
     "platforms": [
       "android"

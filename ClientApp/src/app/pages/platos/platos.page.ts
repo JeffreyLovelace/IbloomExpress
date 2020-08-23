@@ -80,9 +80,6 @@ export class PlatosPage {
     this.storage.get("pedido").then((val) => {
       if (val) {
         this.presentAlertConfirm();
-        this.platform.backButton.subscribe(async () => {
-          this.presentAlertConfirm();
-        });
       } else {
         this.router.navigateByUrl("/inicio");
       }

@@ -17,6 +17,7 @@
     </ion-toolbar>
     <ion-toolbar>
       <ion-searchbar
+        placeholder="Buscar {{nombre}}..."
         type="text"
         debounce="500"
         (ionChange)="getItems($event)"
@@ -26,6 +27,7 @@
   <div *ngFor="let comercio of mostrar">
     <div *ngIf="comercio.id_tipoComercio == id">
       <ion-card
+        *ngIf="comercio.estadoTrabajo==1 && (myDate | date:'HH:mm') >= comercio.horarioEnt && (myDate | date:'HH:mm') < comercio.horarioSal"
         routerLink="/platos/{{comercio.id}}/{{comercio.nombre}}/{{comercio.fotoLogo}}/{{comercio.fotoBaner}}/{{comercio.envio}}/{{comercio.precioMinimo}}/{{comercio.latitud}}/{{comercio.longitud}}"
       >
         <img
@@ -42,10 +44,52 @@
             <h2><strong>{{comercio.nombre}}</strong></h2>
             <div>
               <ion-button fill="clear">
-                <ion-icon mode="ios" name="bicycle"></ion-icon>
-                Envío Bs. {{comercio.envio}}
+                <ion-icon mode="ios" slot="icon-only" name="cash-outline">
+                  > </ion-icon
+                >Minímo: BS. {{comercio.precioMinimo}}
               </ion-button>
-              <ion-button slot="end" size="small">Abierto</ion-button>
+              <ion-button
+                slot="end"
+                size="small"
+                color="danger"
+                *ngIf="comercio.estadoTrabajo==0 || (myDate | date:'HH:mm') < comercio.horarioEnt || (myDate | date:'HH:mm') >= comercio.horarioSal"
+                >Cerrado</ion-button
+              >
+            </div>
+          </ion-label>
+        </ion-item>
+
+        <ion-card-content> </ion-card-content>
+      </ion-card>
+
+      <ion-card
+        *ngIf="comercio.estadoTrabajo==0 || (myDate | date:'HH:mm') < comercio.horarioEnt || (myDate | date:'HH:mm') >= comercio.horarioSal"
+      >
+        <img
+          class="header-img"
+          src="{{servidor}}/imagenes/{{ comercio.fotoBaner}}"
+        />
+
+        <ion-item lines="none">
+          <ion-thumbnail slot="start">
+            <img src="{{servidor}}/imagenes/{{ comercio.fotoLogo}}" />
+          </ion-thumbnail>
+
+          <ion-label>
+            <h2><strong>{{comercio.nombre}}</strong></h2>
+            <div>
+              <ion-button fill="clear">
+                <ion-icon mode="ios" slot="icon-only" name="cash-outline">
+                  > </ion-icon
+                >Minímo: BS. {{comercio.precioMinimo}}
+              </ion-button>
+              <ion-button
+                slot="end"
+                size="small"
+                color="danger"
+                *ngIf="comercio.estadoTrabajo==0 || (myDate | date:'HH:mm') < comercio.horarioEnt || (myDate | date:'HH:mm') >= comercio.horarioSal"
+                >Cerrado</ion-button
+              >
             </div>
           </ion-label>
         </ion-item>

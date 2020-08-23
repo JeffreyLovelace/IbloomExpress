@@ -61,6 +61,7 @@ export class DetallepedidoPage implements OnInit {
   fotoComercio;
   conductor;
   conductorTelefono;
+
   conductorFoto;
   markers: Marker[] = [
     {
@@ -107,7 +108,7 @@ export class DetallepedidoPage implements OnInit {
         this.razon_social = this.pedidos[0].razonSocial;
         this.total = this.pedidos[0].total;
 
-        this.delivery = this.pedidos[0].delivery;
+        this.delivery = this.pedidos[0].pedidoDelivery;
 
         this.nombreCompercio = this.pedidos[0].nombreCompercio;
         this.pNombre = this.pedidos[0].pNombre;

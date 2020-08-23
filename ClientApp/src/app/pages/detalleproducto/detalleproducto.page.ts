@@ -25,10 +25,15 @@ export class DetalleproductoPage {
   currentNumber = 1;
   id = null;
   combos: Combo[];
-  pedido1 = { estadoEliminado: "1", id_comercio: null, token: null };
+  pedido1 = {
+    estadoEliminado: "1",
+    id_comercio: null,
+    token: null,
+    pedidoDelivery: null,
+  };
   precio;
   tokenpedido = null;
-
+  pedidoDelivery;
   total;
   descripcion;
   id_comercio;
@@ -39,6 +44,7 @@ export class DetalleproductoPage {
     detalle: null,
     cantidad: null,
   };
+  detail;
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -55,6 +61,8 @@ export class DetalleproductoPage {
       console.log(token);
       this.tokenpedido = token;
     });
+    this.pedidoDelivery = this.activatedRoute.snapshot.params["pedidoDelivery"];
+
     this.id = this.activatedRoute.snapshot.params["id"];
   }
   verificar() {
@@ -85,6 +93,7 @@ export class DetalleproductoPage {
       estadoEliminado: "1",
       id_comercio: this.id_comercio,
       token: this.tokenpedido,
+      pedidoDelivery: this.pedidoDelivery,
     };
     this.storage.get(TOKEN_KEY).then((res) => {
       this.pedidoService.save(res, this.pedido1).subscribe((res) => {
@@ -97,7 +106,7 @@ export class DetalleproductoPage {
     this.orden1 = {
       id_combo: this.id,
       id_pedido: val,
-      detalle: this.descripcion,
+      detalle: this.detail,
       cantidad: this.currentNumber,
     };
     this.storage.get(TOKEN_KEY).then((res) => {

@@ -53,6 +53,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleLightContent();
       this.splashScreen.hide();
+      this.getInformacion();
 
       // subscribe to a topic
       // this.fcm.subscribeToTopic('Deals');

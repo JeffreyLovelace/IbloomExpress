@@ -65,6 +65,17 @@
       </ion-list>
     </div>
   </div>
+
+  <ion-row responsive-sm *ngIf="contador==0">
+    <ion-col col-12 width-50 text-center>
+      <img
+        class="user-avatar round"
+        style="height: auto; max-width: 23vh;"
+        src="https://image.flaticon.com/icons/svg/743/743280.svg"
+      />
+      <h2><strong>No hay pedidos en este momento</strong></h2>
+    </ion-col>
+  </ion-row>
   <div *ngIf="!pedidos">
     <ion-list>
       <ion-item>

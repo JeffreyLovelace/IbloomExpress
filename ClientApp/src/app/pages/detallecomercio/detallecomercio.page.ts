@@ -36,6 +36,8 @@ export class DetallecomercioPage implements OnInit {
   latitud;
   lattitude;
   longitude;
+  horarioEnt;
+  horarioSal;
   constructor(
     private geolocation: Geolocation,
     private loadingCtrl: LoadingController,
@@ -135,6 +137,8 @@ export class DetallecomercioPage implements OnInit {
             this.direccion = comercio.direccion;
             this.referencia = comercio.referencia;
             this.precioMinimo = comercio.precioMinimo;
+            this.horarioEnt = comercio.horarioEnt;
+            this.horarioSal = comercio.horarioSal;
 
             this.longitud = comercio.longitud;
             this.latitud = comercio.latitud;
