@@ -8,7 +8,8 @@ import { AuthService } from "./services/auth.service";
 import { Storage } from "@ionic/storage";
 import { Router } from "@angular/router";
 import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic/ngx";
-
+import { InformacionService } from "./services/informacion.service";
+import { Informacion } from "./interfaces/informacion";
 const TOKEN_KEY = "access_token";
 @Component({
   selector: "app-root",
@@ -16,6 +17,8 @@ const TOKEN_KEY = "access_token";
   styleUrls: ["app.component.scss"],
 })
 export class AppComponent {
+  informaciones: Informacion[];
+
   correo;
   name;
   constructor(
@@ -26,7 +29,8 @@ export class AppComponent {
     private router: Router,
     private storage: Storage,
     public alertController: AlertController,
-    private fcm: FCM
+    private fcm: FCM,
+    private informacionService: InformacionService
   ) {
     this.initializeApp();
     this.verificar();
@@ -35,6 +39,7 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       //this.verificar();
+      this.getInformacion();
 
       this.statusBar.styleLightContent();
 
@@ -77,5 +82,13 @@ export class AppComponent {
   logout() {
     this.authService.logout();
     console.log("salir");
+  }
+  telefono;
+  getInformacion() {
+    this.informacionService.get().subscribe((data: Informacion[]) => {
+      this.informaciones = data;
+      this.telefono = this.informaciones[0].telefono;
+      console.log("telefono" + this.telefono);
+    });
   }
 }

@@ -6,6 +6,8 @@ import { Storage } from "@ionic/storage";
 import { Router, ActivatedRoute } from "@angular/router";
 declare var google: any;
 import { ToastController } from "@ionic/angular";
+import { Informacion } from "../../interfaces/informacion";
+import { InformacionService } from "../../services/informacion.service";
 
 import { environment } from "../../../environments/environment";
 const TOKEN_KEY = "access_token";
@@ -19,6 +21,8 @@ myDate: new Date().getTime();
 export class ComerciosPage {
   servidor = environment.url;
   myDate: String = new Date().toISOString();
+  distanciaComercio;
+  informaciones: Informacion[];
 
   id = null;
   lattitude;
@@ -33,8 +37,13 @@ export class ComerciosPage {
     private activatedRoute: ActivatedRoute,
     private comercioService: ComercioService,
     private storage: Storage,
-    public toastController: ToastController
+    public toastController: ToastController,
+    private informacionService: InformacionService
   ) {
+    this.informacionService.get().subscribe((data: Informacion[]) => {
+      this.informaciones = data;
+      this.distanciaComercio = this.informaciones[0].distanciaComercio;
+    });
     this.storage.get("lattitude").then((val) => {
       this.lattitude = val;
     });
@@ -90,7 +99,7 @@ export class ComerciosPage {
           markerLoc,
           center
         ) / 1000;
-      if (distanceInKm < 100) {
+      if (distanceInKm < this.distanciaComercio) {
         console.log(comercio);
 
         this.mostrar.push(comercio);

@@ -3,12 +3,11 @@
     <ion-content>
       <div class="menu-header-bg"></div>
       <div class="header-content">
-        <img src="/assets/logo-amtrak.png" alt="" />
+        <img src="/assets/icon.png" alt="" />
         <ion-label>
           <h2>
-            {{ name }}
+            Ibloom Express
           </h2>
-          <p>{{ correo }}</p>
         </ion-label>
       </div>
 
@@ -25,11 +24,8 @@
           <ion-icon name="list" slot="start"></ion-icon>
           <ion-label>Mis pedidos</ion-label>
         </ion-item>
-        <ion-item routerLink="/mispedidos">
-          <ion-icon name="map" slot="start"></ion-icon>
-          <ion-label>Mis direcciones</ion-label>
-        </ion-item>
-        <ion-item routerLink="/mispedidos">
+
+        <ion-item href="https://api.whatsapp.com/send?phone=591{{ telefono }}">
           <ion-icon name="help-circle" slot="start"></ion-icon>
           <ion-label>Contactanos</ion-label>
         </ion-item>

@@ -7,7 +7,8 @@ import { AuthService } from "./services/auth.service";
 import { Storage } from "@ionic/storage";
 import { Router } from "@angular/router";
 import { LoadingController } from "@ionic/angular";
-
+import { InformacionService } from "./services/informacion.service";
+import { Informacion } from "./interfaces/informacion";
 const TOKEN_KEY = "access_token";
 @Component({
   selector: "app-root",
@@ -15,6 +16,7 @@ const TOKEN_KEY = "access_token";
   styleUrls: ["app.component.scss"],
 })
 export class AppComponent {
+  informaciones: Informacion[];
   existe;
   constructor(
     private platform: Platform,
@@ -24,7 +26,8 @@ export class AppComponent {
     private router: Router,
     private storage: Storage,
     public alertController: AlertController,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private informacionService: InformacionService
   ) {
     this.initializeApp();
   }
@@ -33,7 +36,7 @@ export class AppComponent {
     this.verificar();
     this.platform.ready().then(() => {
       this.statusBar.styleBlackTranslucent();
-
+      this.getInformacion();
       this.splashScreen.hide();
     });
   }
@@ -74,5 +77,13 @@ export class AppComponent {
     this.authService.logout();
 
     console.log("salir");
+  }
+  telefono;
+  getInformacion() {
+    this.informacionService.get().subscribe((data: Informacion[]) => {
+      this.informaciones = data;
+      this.telefono = this.informaciones[0].telefono;
+      console.log("telefono" + this.telefono);
+    });
   }
 }
