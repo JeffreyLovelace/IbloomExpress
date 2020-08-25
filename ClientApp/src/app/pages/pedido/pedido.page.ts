@@ -85,16 +85,17 @@ export class PedidoPage {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.ordenService.get(res).subscribe((data: Orden[]) => {
         this.ordenes = data;
-        this.idcomercio = this.ordenes[0].id_comercio;
-        this.getDetalleNegocio(this.ordenes[0].id_comercio);
         console.log(this.ordenes);
 
         for (let orden of this.ordenes) {
           if (orden.id_pedido == this.id_pedido) {
+            this.idcomercio = orden[0].id_comercio;
+
             this.sumarOrden =
               this.sumarOrden + Number(orden.cantidad) * Number(orden.precio);
           }
         }
+        this.getDetalleNegocio(this.idcomercio);
       });
     });
   }

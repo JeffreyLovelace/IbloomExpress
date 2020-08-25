@@ -50,32 +50,14 @@ export class InicioPage {
     storage.get("address").then((val) => {
       this.direccion = val;
     });
-    this.topStories = [
-      {
-        title: "Exploring San Francisco",
-        author: "Rea Ramsey",
-        body: "",
-        picture: "https://picsum.photos/500/400?image=693",
-      },
-      {
-        title: "Coffee the right way",
-        author: "Ellesha Hartley",
-        body: "",
-        picture: "https://picsum.photos/500/400?image=1060",
-      },
-      {
-        title: "Best Hiking In Yosemite",
-        author: "Vinnie Alexander",
-        body: "",
-        picture: "https://picsum.photos/500/400?image=1043",
-      },
-      {
-        title: "Astro Photography Guide",
-        author: "Greg Rakozy",
-        body: "",
-        picture: "https://picsum.photos/500/400?image=903",
-      },
-    ];
+  }
+  doRefresh(event) {
+    setTimeout(() => {
+      this.getNegocios();
+      this.getPromociones();
+      this.getPublicaciones();
+      event.target.complete();
+    }, 2000);
   }
   getPromociones() {
     this.storage.get(TOKEN_KEY).then((res) => {

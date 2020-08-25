@@ -51,7 +51,6 @@ export class UbicacionPage implements OnInit {
       // loaded
       loading.dismiss();
       this.addMarker(myLatLng.lat, myLatLng.lng);
-      this.getAddressFromCoords(myLatLng.lat, myLatLng.lng);
     });
   }
   private addMarker(lat: number, lng: number) {
@@ -62,12 +61,35 @@ export class UbicacionPage implements OnInit {
       },
       zoom: 8,
       map: this.mapRef,
+      animation: google.maps.Animation.DROP,
+      draggable: true,
+
       title: "Ubicación",
       icon: {
         url: "https://image.flaticon.com/icons/svg/1476/1476763.svg", // url
         scaledSize: new google.maps.Size(50, 50), // size
       },
-      draggable: true,
+    });
+    let content = "<h4>Mi ubicación</h4>";
+    this.getAddressFromCoords(lat, lng);
+
+    this.addInfoWindow(marker, content);
+  }
+  addInfoWindow(marker, content) {
+    let infoWindow = new google.maps.InfoWindow({
+      content: content,
+    });
+
+    google.maps.event.addListener(marker, "click", () => {
+      infoWindow.open(this.mapRef, marker);
+    });
+
+    google.maps.event.addListener(marker, "dragend", function () {
+      this.markerlatlong = marker.getPosition();
+
+      console.log("latlong   " + this.markerlatlong);
+      console.log("lat    " + marker.getPosition().lat());
+      console.log("long   " + marker.getPosition().lng());
     });
   }
   private async getLocation() {
