@@ -3,9 +3,7 @@
     <ion-buttons slot="start" mode="md">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>
-      Pedido: {{id_pedido}}
-    </ion-title>
+    <ion-title> Pedido: {{id_pedido}} </ion-title>
     <ion-button slot="end" size="small" routerLink="/orden/{{id_pedido}}"
       >Ver orden</ion-button
     >
@@ -79,8 +77,10 @@
       </p>
     </ion-item>
     <ion-item>
-      <ion-label> Detalle para el conductor </ion-label>
-      <p>{{nota}}</p>
+      <ion-label>
+        <h2>Detalle del pedido</h2>
+        <ion-textarea disabled> {{nota}}</ion-textarea>
+      </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

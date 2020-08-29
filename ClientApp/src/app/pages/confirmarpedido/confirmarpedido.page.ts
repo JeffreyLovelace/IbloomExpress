@@ -121,7 +121,6 @@ export class ConfirmarpedidoPage {
         });
       console.log(this.nombre);
       console.log(this.comercios);
-      this.totalDelivery = Number(this.total) + Number(this.envioTotal);
     });
   }
   verificarCantidad() {}
@@ -224,6 +223,7 @@ export class ConfirmarpedidoPage {
     if (this.km > 8) {
       this.envioTotal = this.envio * 5;
     }
+    this.totalDelivery = Number(this.total) + Number(this.envioTotal);
   }
   envioTotal;
   async presentAlert() {

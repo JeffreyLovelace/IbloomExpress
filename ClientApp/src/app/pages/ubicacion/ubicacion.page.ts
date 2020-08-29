@@ -20,7 +20,8 @@ declare var google;
 export class UbicacionPage implements OnInit {
   mapRef = null;
   address: string;
-
+  lat;
+  lng;
   constructor(
     private geolocation: Geolocation,
     private loadingCtrl: LoadingController,
@@ -51,6 +52,8 @@ export class UbicacionPage implements OnInit {
       // loaded
       loading.dismiss();
       this.addMarker(myLatLng.lat, myLatLng.lng);
+      this.cordenadas(myLatLng.lat, myLatLng.lng);
+      this.getAddressFromCoords(myLatLng.lat, myLatLng.lng);
     });
   }
   private addMarker(lat: number, lng: number) {
@@ -83,17 +86,26 @@ export class UbicacionPage implements OnInit {
       infoWindow.open(this.mapRef, marker);
     });
 
-    google.maps.event.addListener(marker, "dragend", function () {
-      this.markerlatlong = marker.getPosition();
-
-      console.log("latlong   " + this.markerlatlong);
+    google.maps.event.addListener(marker, "dragend", () => {
+      // console.log("latlong   " + this.markerlatlong);
       console.log("lat    " + marker.getPosition().lat());
       console.log("long   " + marker.getPosition().lng());
-      this.getAddressFromCoords(
-        marker.getPosition().lat(),
-        marker.getPosition().lng()
-      );
+      this.lat = marker.getPosition().lat();
+      this.lng = marker.getPosition().lng();
+      console.log("1 " + this.lat + " 2 " + this.lng);
+      this.cordenadas(this.lat, this.lng);
+      this.getAddressFromCoords(this.lat, this.lng);
+      /* this.getAddressFromCoords(
+        Number(marker.getPosition().lat()),
+        Number(marker.getPosition().lng())
+      );*/
     });
+    console.log("lat" + this.lat);
+  }
+  cordenadas(lat, lng) {
+    this.storage.set("lattitude", this.lat);
+    this.storage.set("longitude", this.lng);
+    console.log(this.address);
   }
   private async getLocation() {
     const rta = await this.geolocation.getCurrentPosition();
@@ -106,6 +118,9 @@ export class UbicacionPage implements OnInit {
     this.router.navigateByUrl("/inicio");
   }
   getAddressFromCoords(lattitude, longitude) {
+    this.lat = lattitude;
+    this.lng = longitude;
+
     console.log("getAddressFromCoords " + lattitude + " " + longitude);
     let options: NativeGeocoderOptions = {
       useLocale: true,
