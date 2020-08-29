@@ -27,7 +27,7 @@
   </ion-refresher>
   <div *ngFor="let pedido of pedidos">
     <div
-      *ngIf="pedido.id_comercio==idcomercio &&  pedido.id_estado==2 || pedido.id_estado==3 ||pedido.id_estado==4||pedido.id_estado==5"
+      *ngIf="pedido.id_comercio==id && pedido.id_estado==2 ||pedido.id_comercio==id && pedido.id_estado==3 ||pedido.id_comercio==id && pedido.id_estado==4 ||pedido.id_comercio==id && pedido.id_estado==5"
     >
       <ion-list>
         <ion-item routerLink="/detallepedido/{{pedido.id}}">
