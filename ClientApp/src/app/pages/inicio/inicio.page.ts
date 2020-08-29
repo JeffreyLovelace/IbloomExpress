@@ -52,10 +52,14 @@ export class InicioPage {
     });
   }
   doRefresh(event) {
+    this.c = 0;
+    this.getUser();
+    this.getNegocios();
+    this.getPromociones();
+    this.getPublicaciones();
     setTimeout(() => {
-      this.getNegocios();
-      this.getPromociones();
-      this.getPublicaciones();
+      console.log("Async operation has ended");
+
       event.target.complete();
     }, 2000);
   }

@@ -121,7 +121,7 @@ export class ConfirmarpedidoPage {
         });
       console.log(this.nombre);
       console.log(this.comercios);
-      this.totalDelivery = this.total + this.envioTotal;
+      this.totalDelivery = Number(this.total) + Number(this.envioTotal);
     });
   }
   verificarCantidad() {}

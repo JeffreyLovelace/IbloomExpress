@@ -71,7 +71,6 @@ export class UbicacionPage implements OnInit {
       },
     });
     let content = "<h4>Mi ubicación</h4>";
-    this.getAddressFromCoords(lat, lng);
 
     this.addInfoWindow(marker, content);
   }
@@ -90,6 +89,10 @@ export class UbicacionPage implements OnInit {
       console.log("latlong   " + this.markerlatlong);
       console.log("lat    " + marker.getPosition().lat());
       console.log("long   " + marker.getPosition().lng());
+      this.getAddressFromCoords(
+        marker.getPosition().lat(),
+        marker.getPosition().lng()
+      );
     });
   }
   private async getLocation() {
@@ -128,9 +131,6 @@ export class UbicacionPage implements OnInit {
 
         this.address = "Dirección no disponible!";
       });
-    this.storage.set("address", this.address);
-    this.storage.set("lattitude", lattitude);
-    this.storage.set("longitude", longitude);
   }
   enableLocation() {
     // the accuracy option will be ignored by iOS

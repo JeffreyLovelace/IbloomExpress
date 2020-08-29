@@ -28,7 +28,7 @@ export class PedidoPage {
   combos: Combo[];
   ordenes: Orden[];
   comercios: Comercio[];
-
+  pedidos: Pedido[];
   servidor = environment.url;
   pedido1 = {
     id_cliente: null,
@@ -81,6 +81,7 @@ export class PedidoPage {
     });
   }
 
+  idpedido;
   getOrden() {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.ordenService.get(res).subscribe((data: Orden[]) => {
@@ -89,13 +90,28 @@ export class PedidoPage {
 
         for (let orden of this.ordenes) {
           if (orden.id_pedido == this.id_pedido) {
-            this.idcomercio = orden[0].id_comercio;
-
+            console.log("id pedido de orden" + this.id_pedido);
+            this.idpedido = this.id_pedido;
             this.sumarOrden =
               this.sumarOrden + Number(orden.cantidad) * Number(orden.precio);
+
+            console.log("id pedido of" + this.idpedido);
+            this.getPedido(this.idpedido);
           }
         }
+      });
+    });
+  }
+  getPedido(idpedido) {
+    this.storage.get(TOKEN_KEY).then((res) => {
+      this.pedidoService.detalle(res, idpedido).subscribe((data: Pedido[]) => {
+        console.log("id pedido de pedido " + this.id_pedido);
+
+        this.pedidos = data;
+        this.idcomercio = this.pedidos[0].id_comercio;
         this.getDetalleNegocio(this.idcomercio);
+        console.log("id comercios" + this.idcomercio);
+        console.log(this.pedidos);
       });
     });
   }
@@ -125,7 +141,7 @@ export class PedidoPage {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.ordenService.edit(this.orden1, res, id).subscribe((res) => {
         console.log(res);
-        this.getOrden();
+        this.getDetallePedido();
       });
     });
 
@@ -140,7 +156,7 @@ export class PedidoPage {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.ordenService.edit(this.orden1, res, id).subscribe((res) => {
         console.log(res);
-        this.getOrden();
+        this.getDetallePedido();
       });
     });
   }
@@ -150,13 +166,14 @@ export class PedidoPage {
       console.log("pedido confirmado");
     });
   }
+  getDetallePedido() {}
   updatePedido() {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.pedidoService
         .edit(this.pedido1, res, this.id_pedido)
         .subscribe((res) => {
           console.log(res);
-          this.getOrden();
+          this.getDetallePedido();
         });
     });
   }
