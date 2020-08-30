@@ -55,12 +55,12 @@ export class LoginPage implements OnInit {
   enviarMensaje() {
     this.firebaseAuthentication
       .verifyPhoneNumber("+591" + this.number.toString(), 30000)
-      .then((verificationid) => {
-        alert(verificationid);
-        this.verificarCodigo(verificationid);
+      .then((verificationId) => {
+        this.verificarCodigo(verificationId);
       });
   }
-  async verificarCodigo(verificationid) {
+  async verificarCodigo(verificationId) {
+    alert(verificationId);
     const prompt = await this.alertController.create({
       mode: "ios",
       cssClass: "my-custom-class",
@@ -86,7 +86,7 @@ export class LoginPage implements OnInit {
           handler: (response) => {
             const smsCode = response.code;
             this.firebaseAuthentication
-              .signInWithVerificationId(verificationid, smsCode)
+              .signInWithVerificationId(verificationId, smsCode)
               .then(
                 (data) => this.saveNumber(),
                 (error) => alert("Código incorrecto")
