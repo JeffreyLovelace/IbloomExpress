@@ -56,7 +56,7 @@ export class LoginPage implements OnInit {
     this.firebaseAuthentication
       .verifyPhoneNumber("+591" + this.number.toString(), 30000)
       .then((verificationid) => {
-        //alert(verificationid);
+        alert(verificationid);
         this.verificarCodigo(verificationid);
       });
   }
