@@ -88,7 +88,7 @@ export class LoginPage implements OnInit {
             this.firebaseAuthentication
               .signInWithVerificationId(verificationId, smsCode)
               .then(
-                (data) => alert(data),
+                (data) => this.saveNumber(),
                 (error) => alert(error)
               );
           },
