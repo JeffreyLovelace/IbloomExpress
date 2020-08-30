@@ -5,9 +5,7 @@
     </ion-buttons>
 
     <ion-buttons slot="end"> </ion-buttons>
-    <ion-title>
-      Mi cuenta
-    </ion-title>
+    <ion-title> Mi cuenta </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -18,22 +16,22 @@
     </ion-toolbar>
   </ion-header>
   <ion-avatar class="avatar">
-    <img
-      src="http://www.precision-spine.com/wp-content/uploads/2015/09/person-icon.png"
-    />
+    <img src="https://image.flaticon.com/icons/svg/599/599305.svg" />
   </ion-avatar>
   <ion-row>
     <ion-col>
       <div class="ion-text-center">
         <h2><strong>{{nombre}} {{apellido}}</strong></h2>
-        {{correo}}
       </div>
     </ion-col>
   </ion-row>
   <ion-list mode="ios">
-    <ion-list-header>
-      Mis datos
-    </ion-list-header>
+    <ion-list-header> Mis datos </ion-list-header>
+    <ion-item>
+      <ion-label position="floating" color="primary">Celular</ion-label>
+      <ion-input [(ngModel)]="celular" value="celular"></ion-input>
+    </ion-item>
+    <!--
     <ion-item>
       <ion-label position="floating" color="primary">Nombre</ion-label>
       <ion-input [(ngModel)]="nombre" value="nombre"></ion-input>
@@ -42,14 +40,8 @@
       <ion-label position="floating" color="primary">Apellido</ion-label>
       <ion-input [(ngModel)]="apellido" value="apellido"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label position="floating" color="primary">Celular</ion-label>
-      <ion-input [(ngModel)]="celular" value="celular"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating" color="primary">Correo</ion-label>
-      <ion-input [(ngModel)]="correo" value="correo"></ion-input>
-    </ion-item>
+   
+   
     <ion-item>
       <ion-label position="floating" color="primary">Cumpleaños</ion-label>
       <ion-input
@@ -58,5 +50,6 @@
         value="cumpleanos"
       ></ion-input>
     </ion-item>
+    -->
   </ion-list>
 </ion-content>
