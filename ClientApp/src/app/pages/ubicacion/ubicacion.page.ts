@@ -109,6 +109,8 @@ export class UbicacionPage implements OnInit {
   }
   private async getLocation() {
     const rta = await this.geolocation.getCurrentPosition();
+    this.cordenadas(rta.coords.latitude, rta.coords.longitude);
+
     return {
       lat: rta.coords.latitude,
       lng: rta.coords.longitude,
@@ -120,6 +122,7 @@ export class UbicacionPage implements OnInit {
   getAddressFromCoords(lattitude, longitude) {
     this.lat = lattitude;
     this.lng = longitude;
+    this.cordenadas(lattitude, longitude);
 
     console.log("getAddressFromCoords " + lattitude + " " + longitude);
     let options: NativeGeocoderOptions = {

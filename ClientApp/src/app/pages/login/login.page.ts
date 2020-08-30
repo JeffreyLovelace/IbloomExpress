@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { LoadingController } from "@ionic/angular";
 
 import { AlertController } from "@ionic/angular";
 import { Router } from "@angular/router";
@@ -32,7 +33,8 @@ export class LoginPage implements OnInit {
     private googlePlus: GooglePlus,
     private storage: Storage,
     public alertController: AlertController,
-    private firebaseAuthentication: FirebaseAuthentication
+    private firebaseAuthentication: FirebaseAuthentication,
+    private loadingCtrl: LoadingController
   ) {
     /* this.firebaseAuthentication.onAuthStateChanged().subscribe((user) => {
       if (user) {
@@ -108,13 +110,16 @@ export class LoginPage implements OnInit {
       .then((res) => alert("bien " + res))
       .catch((err) => alert("mal " + err));
   }
-  saveNumber() {
+  async saveNumber() {
+    const loading = await this.loadingCtrl.create();
+    loading.present();
     this.telefono = {
       telefono: this.number,
     };
     this.authService.saveCellphone(this.telefono);
 
     this.router.navigateByUrl("/ubicacion");
+    loading.dismiss();
   }
   login() {
     this.authService.login1(this.credentials);

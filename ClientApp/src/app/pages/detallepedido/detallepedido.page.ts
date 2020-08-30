@@ -52,6 +52,7 @@ export class DetallepedidoPage implements OnInit {
   telefonoComercio;
   latitude;
   longitude;
+  apellido;
   UpdatePedido = {
     id_estado: null,
   };
@@ -87,7 +88,7 @@ export class DetallepedidoPage implements OnInit {
   ) {
     this.getDetalle();
   }
-
+  fotoVehiculo;
   ngOnInit() {}
   getDetalle() {
     this.id = this.activatedRoute.snapshot.params["id"];
@@ -117,15 +118,15 @@ export class DetallepedidoPage implements OnInit {
         this.telefonoComercio = this.pedidos[0].telefonoComercio;
         this.tiempoDelivery = this.pedidos[0].tiempoDelivery;
         this.fotoComercio = this.pedidos[0].fotoComercio;
-        this.conductor = this.pedidos[0].conductor;
+        this.conductor = this.pedidos[0].pNombre;
+        this.apellido = this.pedidos[0].pApellido;
         this.conductorTelefono = this.pedidos[0].conductorTelefono;
         this.conductorFoto = this.pedidos[0].conductorFoto;
-        this.conductorTipoVehiculo = this.pedidos[0].conductorTipoVehiculo;
+        this.conductorTipoVehiculo = this.pedidos[0].tipoVehiculo;
+        this.fotoVehiculo = this.pedidos[0].fotoVehiculo;
         // this.addMarker(this.latitud_pedido, this.longitud_pedido);
         this.loadMap();
         this.getFirebase(Number(this.id_conductor));
-
-        console.log(data);
       });
     });
   }
@@ -235,7 +236,6 @@ export class DetallepedidoPage implements OnInit {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.ordenService.get(res).subscribe((data: Orden[]) => {
         this.ordenes = data;
-        console.log(this.ordenes);
       });
     });
   }

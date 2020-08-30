@@ -33,7 +33,6 @@ export class PerfilPage {
   getUser() {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.authService.getUser(res).subscribe((data) => {
-        console.log(data);
         this.correo = data.email;
         this.getCliente(data.email);
       });
@@ -48,10 +47,8 @@ export class PerfilPage {
             this.apellido = cliente.pApellido;
             this.cumpleanos = cliente.fechaNacimiento;
             this.celular = cliente.telefono;
-            console.log("existeo puto!");
           }
         }
-        console.log(data);
       });
     });
   }

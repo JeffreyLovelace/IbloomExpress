@@ -105,13 +105,9 @@ export class PedidoPage {
   getPedido(idpedido) {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.pedidoService.detalle(res, idpedido).subscribe((data: Pedido[]) => {
-        console.log("id pedido de pedido " + this.id_pedido);
-
         this.pedidos = data;
         this.idcomercio = this.pedidos[0].id_comercio;
         this.getDetalleNegocio(this.idcomercio);
-        console.log("id comercios" + this.idcomercio);
-        console.log(this.pedidos);
       });
     });
   }
@@ -128,7 +124,6 @@ export class PedidoPage {
           this.lattitudec,
           this.longitudec
         );
-        console.log(this.ordenes);
       });
     });
   }
@@ -140,7 +135,6 @@ export class PedidoPage {
     };
     this.storage.get(TOKEN_KEY).then((res) => {
       this.ordenService.edit(this.orden1, res, id).subscribe((res) => {
-        console.log(res);
         this.getDetallePedido();
       });
     });
@@ -155,7 +149,6 @@ export class PedidoPage {
     };
     this.storage.get(TOKEN_KEY).then((res) => {
       this.ordenService.edit(this.orden1, res, id).subscribe((res) => {
-        console.log(res);
         this.getDetallePedido();
       });
     });
@@ -163,7 +156,6 @@ export class PedidoPage {
   confirmar() {
     this.storage.remove("pedido").then(() => {
       // this.router.navigateByUrl("/login");
-      console.log("pedido confirmado");
     });
   }
   getDetallePedido() {}
@@ -172,7 +164,6 @@ export class PedidoPage {
       this.pedidoService
         .edit(this.pedido1, res, this.id_pedido)
         .subscribe((res) => {
-          console.log(res);
           this.getDetallePedido();
         });
     });
@@ -185,9 +176,6 @@ export class PedidoPage {
     });
   }
   calculateDistance(lat1, ln1, lat2, lng2) {
-    console.log(lat1, ln1);
-    console.log(lat2, lng2);
-
     var gps1 = new google.maps.LatLng(Number(lat1), Number(ln1));
     var gps2 = new google.maps.LatLng(Number(lat2), Number(lng2));
 

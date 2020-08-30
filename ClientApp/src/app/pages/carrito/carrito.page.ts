@@ -46,7 +46,6 @@ export class CarritoPage {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.pedidoService.get(res).subscribe((data: Pedido[]) => {
         this.pedidos = data;
-        console.log(this.pedidos);
       });
     });
   }
@@ -54,8 +53,6 @@ export class CarritoPage {
   getUser() {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.authService.getUser(res).subscribe((data) => {
-        console.log(data);
-
         this.getCliente(data.email);
       });
     });
@@ -66,7 +63,6 @@ export class CarritoPage {
         for (let cliente of data) {
           if (cliente.correo == correo) {
             this.id_client = cliente.id;
-            console.log(this.id_client);
             this.gePedido();
             this.getCantidad();
           }
@@ -80,14 +76,12 @@ export class CarritoPage {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.pedidoService.get(res).subscribe((data: Pedido[]) => {
         this.pedidos = data;
-        console.log(this.id_client);
 
         for (let pedido of this.pedidos) {
           if (pedido.id_cliente == this.id_client && pedido.id_estado == "1") {
             this.c = this.c + 1;
           }
         }
-        console.log("cantidad" + this.c);
       });
     });
   }

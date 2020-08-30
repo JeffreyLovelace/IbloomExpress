@@ -145,7 +145,6 @@ export class DetallecomercioPage implements OnInit {
             this.loadMap();
           }
         }
-        console.log(data);
       });
     });
   }

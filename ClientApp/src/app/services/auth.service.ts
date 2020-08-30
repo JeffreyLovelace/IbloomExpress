@@ -110,7 +110,7 @@ export class AuthService {
               .set(TOKEN_KEY, `Bearer ${res[TOKEN_KEY]}`)
               .then((res) => {
                 this.authenticationState.next(true);
-                this.router.navigateByUrl("/inicio");
+                this.router.navigateByUrl("/ubicacion");
               });
           } else {
             const alert = await this.alertCtrl.create({

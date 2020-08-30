@@ -66,6 +66,35 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:238573758608:android:cba193edcac71320291015",
+        "android_client_info": {
+          "package_name": "com.ibloomdriver.myapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "238573758608-1kv7qn9nolah3tf4c8luecuhb9koo1ma.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpkI0NLY7sI1Au81vWRtlmXIe_DRkD450"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "238573758608-1kv7qn9nolah3tf4c8luecuhb9koo1ma.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:238573758608:android:040a04a2a61dfb3b291015",
         "android_client_info": {
           "package_name": "com.robot.solar"
