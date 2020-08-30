@@ -158,7 +158,7 @@ export class DetallepedidoPage implements OnInit {
       },
     });
     let content =
-      "<h5>Pedido</h5>" +
+      "Pedido" +
       '<a href="https://www.google.com/maps/dir/?api=1&origin=' +
       this.myltd +
       "," +
