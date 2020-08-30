@@ -29,6 +29,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { PedidosHistoricoComponent } from './pedidos-historico/pedidos-historico.component';
 import { MouseEvent } from '@agm/core';
+import { ModificarInformacionComponent } from './modificar-informacion/modificar-informacion.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { MouseEvent } from '@agm/core';
     ModificarAdministradorComponent,
     ModificarPedidoComponent,
     PedidosHistoricoComponent,
+    ModificarInformacionComponent,
     
   ],
 

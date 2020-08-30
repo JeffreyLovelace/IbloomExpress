@@ -16,6 +16,7 @@ import { ComerciosComponent } from './comercios/comercios.component';
 import { ModificarRestauranteComponent } from './modificar-restaurante/modificar-restaurante.component';
 import { ModificarAdministradorComponent } from './modificar-administrador/modificar-administrador.component';
 import { PedidosHistoricoComponent } from './pedidos-historico/pedidos-historico.component';
+import { ModificarInformacionComponent } from './modificar-informacion/modificar-informacion.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent},
@@ -33,7 +34,8 @@ const routes: Routes = [
   { path: 'pedidos', component: PedidosComponent},
   { path: 'comercios', component: DriversComponent},  
   { path: 'drivers', component: ComerciosComponent},
-  { path: 'pedidosHistorico', component: PedidosHistoricoComponent}
+  { path: 'pedidosHistorico', component: PedidosHistoricoComponent},
+  { path: 'informacion', component: ModificarInformacionComponent}
   
 ];
 

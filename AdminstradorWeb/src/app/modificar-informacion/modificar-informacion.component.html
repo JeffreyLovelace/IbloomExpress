@@ -1,0 +1,59 @@
+<app-menu></app-menu>
+<!-- product list-->
+<div class="row">
+    <div class="col">
+        <div class="card-body">
+            <h3>Modificar datos Generales</h3>
+            <form (ngSubmit)="modificar()">
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="maximoPedidos">Maximo Pedidos</label>
+                            <input [(ngModel)]="informacion.maximoPedidos" type="text" name="maximoPedidos" class="form-control" placeholder="Maximo Pedidos"
+                                required />
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="distanciaComercio">Distancia Comercio</label>
+                            <input [(ngModel)]="informacion.distanciaComercio" type="text" name="distanciaComercio" class="form-control" placeholder="Distancia Comercio"
+                                required />
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="distanciaDriver">Distancia Driver</label>
+                            <input [(ngModel)]="informacion.distanciaDriver" type="text" name="distanciaDriver" class="form-control" placeholder="Distancia Driver"
+                                required />
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="telefono">Telefono</label>
+                            <input [(ngModel)]="informacion.telefono" type="text" name="telefono" class="form-control" placeholder="Telefono"
+                                required />
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col align-self-center">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            Modificar
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    
+</div>

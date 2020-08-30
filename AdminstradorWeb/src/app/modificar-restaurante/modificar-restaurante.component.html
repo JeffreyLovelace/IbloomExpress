@@ -11,8 +11,8 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="correo">Correo</label>
-                            <input [(ngModel)]="conductor.correo" type="text" name="correo" class="form-control" placeholder="Correo"
-                                formControlName="correo" required />
+                            <input [(ngModel)]="conductor.correo" type="text" name="correo" class="form-control"
+                                placeholder="Correo" formControlName="correo" required />
                         </div>
                     </div>
                 </div>
@@ -21,8 +21,8 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="telefono">Telefono</label>
-                            <input [(ngModel)]="conductor.telefono" type="text" name="telefono" class="form-control" placeholder="Telefono"
-                                formControlName="telefono" required />
+                            <input [(ngModel)]="conductor.telefono" type="text" name="telefono" class="form-control"
+                                placeholder="Telefono" formControlName="telefono" required />
                         </div>
                     </div>
                 </div>
@@ -31,8 +31,8 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
-                            <input [(ngModel)]="conductor.nombre" type="text" name="nombre" class="form-control" placeholder="Nombre"
-                                formControlName="nombre" required />
+                            <input [(ngModel)]="conductor.nombre" type="text" name="nombre" class="form-control"
+                                placeholder="Nombre" formControlName="nombre" required />
                         </div>
                     </div>
                 </div>
@@ -41,8 +41,9 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="id_tipoComercio">Tipo Comercio</label>
-                            <input [(ngModel)]="conductor.id_tipoComercio" type="text" name="id_tipoComercio" class="form-control" placeholder="Tipo Comercio"
-                                formControlName="id_tipoComercio" required />
+                            <input [(ngModel)]="conductor.id_tipoComercio" type="text" name="id_tipoComercio"
+                                class="form-control" placeholder="Tipo Comercio" formControlName="id_tipoComercio"
+                                required />
                         </div>
                     </div>
                 </div>
@@ -51,7 +52,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="fotoLogo">Foto Logo</label>
-                            <input  type="file" (change)="onFileChange($event)" name="fotoLogo" class="form-control" />
+                            <input type="file" (change)="onFileChange($event)" name="fotoLogo" class="form-control" />
                         </div>
                     </div>
                 </div>
@@ -60,27 +61,42 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="fotoBaner">Foto Baner</label>
-                            <input  type="file" (change)="onFileChange($event)" name="fotoBaner" class="form-control" />
+                            <input type="file" (change)="onFileChange($event)" name="fotoBaner" class="form-control" />
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="envio">Envio</label>
-                            <input [(ngModel)]="conductor.envio" type="text" name="envio" class="form-control" placeholder="Envio"
-                                formControlName="envio" required />
+                            <input [(ngModel)]="conductor.envio" type="text" name="envio" class="form-control"
+                                placeholder="Envio" formControlName="envio" required />
                         </div>
                     </div>
-                </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="horarioEnt">Horario Entrada</label>
+                            <input [(ngModel)]="conductor.horarioEnt" type="time" name="horarioEnt" class="form-control" placeholder="Horario Salida"
+                                formControlName="horarioEnt" required />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="horarioSal">Horario Salida</label>
+                            <input [(ngModel)]="conductor.horarioSal" type="time" name="horarioSal" class="form-control" placeholder="Horario Entrada"
+                                formControlName="horarioSal" required />
+                        </div>
+                    </div>
 
+                    
+                </div>
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
                             <label for="direccion">Direccion</label>
-                            <input [(ngModel)]="conductor.direccion" type="text" name="direccion" class="form-control" placeholder="Direccion"
-                                formControlName="direccion" required />
+                            <input [(ngModel)]="conductor.direccion" type="text" name="direccion" class="form-control"
+                                placeholder="Direccion" formControlName="direccion" required />
                         </div>
                     </div>
                 </div>
@@ -90,8 +106,8 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="referencia">Referencia</label>
-                            <input [(ngModel)]="conductor.referencia" type="text" name="referencia" class="form-control" placeholder="referencia"
-                                formControlName="referencia" required />
+                            <input [(ngModel)]="conductor.referencia" type="text" name="referencia" class="form-control"
+                                placeholder="referencia" formControlName="referencia" required />
                         </div>
                     </div>
                 </div>
@@ -109,5 +125,5 @@
             </form>
         </div>
     </div>
-    
+
 </div>

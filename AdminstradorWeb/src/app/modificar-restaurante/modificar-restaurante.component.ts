@@ -30,7 +30,11 @@ export class ModificarRestauranteComponent implements OnInit {
     'fotoBaner':null, 
     'envio':null,
     'direccion':null, 
-    'referencia':null
+    'referencia':null,
+    'horarioSal':null,
+    'horarioEnt':null
+    
+
   };
   constructor(
     private RestaurantService: RestaurantService,
@@ -52,6 +56,8 @@ export class ModificarRestauranteComponent implements OnInit {
       envio: new FormControl('', Validators.required),
       direccion: new FormControl('', Validators.required),
       referencia: new FormControl('', Validators.required),
+      horarioSal: new FormControl('', Validators.required),
+      horarioEnt: new FormControl('', Validators.required),
     });
     this.get();
   }
