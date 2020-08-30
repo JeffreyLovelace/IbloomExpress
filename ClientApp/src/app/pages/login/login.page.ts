@@ -18,6 +18,9 @@ export class LoginPage implements OnInit {
     password: "cliente",
     remember_me: true,
   };
+  telefono = {
+    telefono: "",
+  };
   windowRef: any;
   prefix: any;
   line: any;
@@ -83,7 +86,7 @@ export class LoginPage implements OnInit {
             this.firebaseAuthentication
               .signInWithVerificationId(verificationid, smsCode)
               .then(
-                (data) => this.login(),
+                (data) => this.saveNumber(),
                 (error) => alert("Código incorrecto")
               );
           },
@@ -104,6 +107,14 @@ export class LoginPage implements OnInit {
       })
       .then((res) => alert("bien " + res))
       .catch((err) => alert("mal " + err));
+  }
+  saveNumber() {
+    this.telefono = {
+      telefono: this.number,
+    };
+    this.authService.saveCellphone(this.telefono);
+
+    this.router.navigateByUrl("/ubicacion");
   }
   login() {
     this.authService.login1(this.credentials);

@@ -97,6 +97,34 @@ export class AuthService {
         (error) => this.presentAlert("Credenciales incorrectas.")
       );
   }
+  saveCellphone(numero) {
+    return this.http
+      .post(`${this.servidor}/api/auth/signupTel`, numero)
+      .subscribe(
+        async (res) => {
+          if (res) {
+            this.token = res[TOKEN_KEY];
+            console.log(res);
+
+            return this.storage
+              .set(TOKEN_KEY, `Bearer ${res[TOKEN_KEY]}`)
+              .then((res) => {
+                this.authenticationState.next(true);
+                this.router.navigateByUrl("/inicio");
+              });
+          } else {
+            const alert = await this.alertCtrl.create({
+              mode: "ios",
+              header: "Error de inicio de sesión",
+              message: "Vuelva a intentarlo",
+              buttons: ["Aceptar"],
+            });
+            await alert.present();
+          }
+        },
+        (error) => this.presentAlert("Credenciales incorrectas.")
+      );
+  }
   getUser(token): Observable<any> {
     let headers = new HttpHeaders().set("Authorization", token);
     return this.http.get(this.servidor + "/api/auth/user", {

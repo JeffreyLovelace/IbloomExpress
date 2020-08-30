@@ -153,6 +153,7 @@ export class ConfirmarpedidoPage {
         console.log(data);
 
         this.getCliente(data.email);
+        console.log(data.email);
       });
     });
   }
