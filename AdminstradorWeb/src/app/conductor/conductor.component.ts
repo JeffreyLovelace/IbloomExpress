@@ -38,12 +38,24 @@ export class ConductorComponent implements OnInit {
       telefono: new FormControl('', Validators.required),
       foto: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
+
+      fotoVehiculo: new FormControl('', Validators.required),
+      modelo: new FormControl('', Validators.required),
+      tipoVehiculo: new FormControl('', Validators.required),
+      color: new FormControl('', Validators.required),
+      año: new FormControl('', Validators.required),
+
+
     });
     this.get();
   }
   onFileChange(event) {
     const file = event.target.files[0];
     this.formGroup.get('foto').setValue(file);
+  }
+  onFileChanges(event) {
+    const files = event.target.files[0];
+    this.formGroup.get('fotoVehiculo').setValue(files);
   }
   ngOnInit(): void {
   }
@@ -59,6 +71,12 @@ export class ConductorComponent implements OnInit {
     asd.append('password', this.formGroup.get('password').value);
     asd.append('telefono', this.formGroup.get('telefono').value);
     asd.append('foto', this.formGroup.get('foto').value);
+
+    asd.append('fotoVehiculo', this.formGroup.get('fotoVehiculo').value);
+    asd.append('modelo', this.formGroup.get('modelo').value);
+    asd.append('tipoVehiculo', this.formGroup.get('tipoVehiculo').value);
+    asd.append('color', this.formGroup.get('color').value);
+    asd.append('año', this.formGroup.get('año').value);
   
     var datos={
       'email':this.formGroup.get('correo').value,

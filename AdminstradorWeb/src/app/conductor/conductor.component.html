@@ -92,11 +92,62 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="correo">Foto Conductor</label>
+                            <label for="foto">Foto Conductor</label>
                             <input type="file" (change)="onFileChange($event)" name="foto" class="form-control" />
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="fotoVehiculo">Foto Vehiculo</label>
+                            <input type="file" (change)="onFileChanges($event)" name="fotoVehiculo" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="modelo">Modelo</label>
+                            <input type="text" name="modelo" class="form-control" placeholder="Modelo"
+                                formControlName="modelo" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="tipoVehiculo">Tipo Vehiculo</label>
+                            <input type="text" name="tipoVehiculo" class="form-control" placeholder="Tipo Vehiculo"
+                                formControlName="tipoVehiculo" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="color">Color</label>
+                            <input type="text" name="color" class="form-control" placeholder="Color"
+                                formControlName="color" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="año">Año</label>
+                            <input type="text" name="año" class="form-control" placeholder="Año"
+                                formControlName="año" required />
+                        </div>
+                    </div>
+                </div>
+  
+                
                 <br>
                 <div class="row">
                     <div class="col align-self-center">
