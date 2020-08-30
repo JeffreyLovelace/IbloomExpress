@@ -22,6 +22,7 @@ export class LoginPage implements OnInit {
   telefono = {
     telefono: "",
   };
+  respuesta;
   windowRef: any;
   prefix: any;
   line: any;
@@ -87,9 +88,8 @@ export class LoginPage implements OnInit {
             this.firebaseAuthentication
               .signInWithVerificationId(verificationId, smsCode)
               .then(
-                (res) => alert(res)
-                // (data) => this.saveNumber(),
-                // (error) => alert("Código incorrecto")
+                (data) => alert(data),
+                (error) => alert(error)
               );
           },
         },
