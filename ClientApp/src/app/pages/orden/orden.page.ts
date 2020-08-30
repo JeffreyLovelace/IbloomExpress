@@ -29,7 +29,6 @@ export class OrdenPage {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.ordenService.get(res).subscribe((data: Orden[]) => {
         this.ordenes = data;
-        console.log(this.ordenes);
       });
     });
   }

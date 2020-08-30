@@ -13,6 +13,7 @@ import { ClienteService } from "../../services/cliente.service";
 import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic/ngx";
 import { OrdenService } from "../../services/orden.service";
 import { AlertController } from "@ionic/angular";
+import { LoadingController } from "@ionic/angular";
 
 import { Comercio } from "../../interfaces/comercio";
 import { Orden } from "../../interfaces/orden";
@@ -78,7 +79,8 @@ export class ConfirmarpedidoPage {
     private authService: AuthService,
     private clienteService: ClienteService,
     private alertController: AlertController,
-    private fcm: FCM
+    private fcm: FCM,
+    private loadingCtrl: LoadingController
   ) {
     this.getDetalleNegocio();
     this.storage.get("lattitude").then((val) => {
@@ -88,7 +90,6 @@ export class ConfirmarpedidoPage {
       this.longitude = val;
     });
     this.fcm.getToken().then((token) => {
-      console.log(token);
       this.tokenpedido = token;
     });
     this.total = this.activatedRoute.snapshot.params["total"];
@@ -119,8 +120,6 @@ export class ConfirmarpedidoPage {
             this.longitudec
           );
         });
-      console.log(this.nombre);
-      console.log(this.comercios);
     });
   }
   verificarCantidad() {}
@@ -147,13 +146,15 @@ export class ConfirmarpedidoPage {
       );
     });
   }
-  getUser() {
+  async getUser() {
+    const loading = await this.loadingCtrl.create();
+    loading.present();
     this.storage.get(TOKEN_KEY).then((res) => {
       this.authService.getUser(res).subscribe((data) => {
         console.log(data);
 
         this.getCliente(data.email);
-        console.log(data.email);
+        loading.dismiss();
       });
     });
   }
@@ -165,7 +166,6 @@ export class ConfirmarpedidoPage {
             this.pedido(cliente.id);
           }
         }
-        console.log(data);
       });
     });
   }

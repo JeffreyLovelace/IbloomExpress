@@ -46,7 +46,6 @@ export class MispedidosPage {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.pedidoService.get(res).subscribe((data: Pedido[]) => {
         this.pedidos = data;
-        console.log(this.pedidos);
       });
     });
   }
@@ -66,12 +65,10 @@ export class MispedidosPage {
         for (let cliente of data) {
           if (cliente.correo == correo) {
             this.id_client = cliente.id;
-            console.log(this.id_client);
             this.gePedido();
             this.getCantidad();
           }
         }
-        console.log(data);
       });
     });
   }
@@ -80,14 +77,12 @@ export class MispedidosPage {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.pedidoService.get(res).subscribe((data: Pedido[]) => {
         this.pedidos = data;
-        console.log(this.id_client);
 
         for (let pedido of this.pedidos) {
           if (pedido.id_cliente == this.id_client && pedido.id_estado == "1") {
             this.c = this.c + 1;
           }
         }
-        console.log("cantidad" + this.c);
       });
     });
   }

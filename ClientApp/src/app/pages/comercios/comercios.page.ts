@@ -105,7 +105,6 @@ export class ComerciosPage {
         this.mostrar.push(comercio);
       }
     }
-    console.log(this.mostrar);
   }
   FilterJSONData(ev: any) {
     this.getComercio();

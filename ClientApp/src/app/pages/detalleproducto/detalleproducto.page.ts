@@ -68,10 +68,8 @@ export class DetalleproductoPage {
   verificar() {
     this.storage.get("pedido").then((val) => {
       if (val) {
-        console.log(val);
         this.orden(val);
       } else {
-        console.log("no existe");
         this.pedido();
       }
     });
@@ -84,7 +82,6 @@ export class DetalleproductoPage {
         this.id_comercio = this.combos[0].id_comercio;
         this.precio = this.combos[0].precio;
         this.total = this.currentNumber * this.precio;
-        console.log(this.combos);
       });
     });
   }
@@ -111,7 +108,6 @@ export class DetalleproductoPage {
     };
     this.storage.get(TOKEN_KEY).then((res) => {
       this.ordenService.save(this.orden1, res).subscribe((res) => {
-        console.log(res);
         this.backClicked();
       });
     });

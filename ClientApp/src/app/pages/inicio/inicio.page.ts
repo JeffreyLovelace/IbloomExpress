@@ -58,8 +58,6 @@ export class InicioPage {
     this.getPromociones();
     this.getPublicaciones();
     setTimeout(() => {
-      console.log("Async operation has ended");
-
       event.target.complete();
     }, 2000);
   }
@@ -69,7 +67,6 @@ export class InicioPage {
         .getPromocion(res)
         .subscribe((data: Promocion[]) => {
           this.promociones = data;
-          console.log(data);
         });
     });
   }
@@ -79,7 +76,6 @@ export class InicioPage {
         .getPublicacion(res)
         .subscribe((data: Publicacion[]) => {
           this.publicaciones = data;
-          console.log(data);
         });
     });
   }
@@ -91,7 +87,6 @@ export class InicioPage {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.negocioService.get(res).subscribe((data: Tipocomercio[]) => {
         this.tipocomercios = data;
-        console.log(data);
       });
     });
   }

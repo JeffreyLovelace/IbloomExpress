@@ -66,14 +66,11 @@ export class PlatosPage {
     this.latitud = this.activatedRoute.snapshot.params["latitud"];
     this.longitud = this.activatedRoute.snapshot.params["longitud"];
 
-    console.log(this.router.url);
     this.getCombos();
   }
 
   segmentChanged(event) {
     console.log(this.segmentModel);
-
-    console.log(event);
   }
 
   back() {
@@ -104,10 +101,8 @@ export class PlatosPage {
     console.log("ionViewWillEnter");
     this.storage.get("pedido").then((val) => {
       if (val) {
-        console.log("hay pedido");
         this.pedido = true;
       } else {
-        console.log("no hay pedido");
         this.pedido = false;
       }
       // this.id_pedido = val;
