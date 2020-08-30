@@ -60,7 +60,6 @@ export class LoginPage implements OnInit {
       });
   }
   async verificarCodigo(verificationId) {
-    alert(verificationId);
     const prompt = await this.alertController.create({
       mode: "ios",
       cssClass: "my-custom-class",
@@ -88,8 +87,9 @@ export class LoginPage implements OnInit {
             this.firebaseAuthentication
               .signInWithVerificationId(verificationId, smsCode)
               .then(
-                (data) => this.saveNumber(),
-                (error) => alert("Código incorrecto")
+                (res) => alert(res)
+                // (data) => this.saveNumber(),
+                // (error) => alert("Código incorrecto")
               );
           },
         },
