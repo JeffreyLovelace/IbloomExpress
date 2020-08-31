@@ -37,14 +37,18 @@ export class LoginPage implements OnInit {
     private firebaseAuthentication: FirebaseAuthentication,
     private loadingCtrl: LoadingController
   ) {
-    /* this.firebaseAuthentication.onAuthStateChanged().subscribe((user) => {
+    this.firebaseAuthentication.onAuthStateChanged().subscribe((user) => {
       if (user) {
-        alert(JSON.stringify(user));
+        this.telefono = {
+          telefono: this.number,
+        };
+        this.authService.saveCellphone(this.telefono);
+
+        this.router.navigateByUrl("/ubicacion");
+
         this.alertController.dismiss;
-        alert("estamos aca");
-        this.login();
       }
-    });*/
+    });
   }
 
   //Initiate windowRef from WindowService
@@ -87,10 +91,7 @@ export class LoginPage implements OnInit {
             const smsCode = response.code;
             this.firebaseAuthentication
               .signInWithVerificationId(verificationId, smsCode)
-              .then(
-                (data) => this.saveNumber(),
-                (error) => alert(error)
-              );
+              .then((res) => alert(res));
           },
         },
       ],
