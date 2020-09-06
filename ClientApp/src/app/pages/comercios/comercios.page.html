@@ -4,9 +4,7 @@
       <ion-icon slot="start" name="arrow-back-outline" color="dark"></ion-icon>
     </ion-button>
 
-    <ion-title>
-      {{nombre}}
-    </ion-title>
+    <ion-title> {{nombre}} </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -43,11 +41,9 @@
           <ion-label>
             <h2><strong>{{comercio.nombre}}</strong></h2>
             <div>
-              <ion-button fill="clear">
-                <ion-icon mode="ios" slot="icon-only" name="cash-outline">
-                  > </ion-icon
-                >Minímo: BS. {{comercio.precioMinimo}}
-              </ion-button>
+              <p>Minímo: Bs. {{comercio.precioMinimo}}</p>
+              <p>Horario: {{comercio.horarioEnt}} - {{comercio.horarioSal}}</p>
+
               <ion-button
                 slot="end"
                 size="small"
@@ -78,11 +74,8 @@
           <ion-label>
             <h2><strong>{{comercio.nombre}}</strong></h2>
             <div>
-              <ion-button fill="clear">
-                <ion-icon mode="ios" slot="icon-only" name="cash-outline">
-                  > </ion-icon
-                >Minímo: BS. {{comercio.precioMinimo}}
-              </ion-button>
+              <p>Minímo: Bs. {{comercio.precioMinimo}}</p>
+              <p>Horario: {{comercio.horarioEnt}} - {{comercio.horarioSal}}</p>
               <ion-button
                 slot="end"
                 size="small"
@@ -103,7 +96,7 @@
     <ion-list>
       <ion-list-header>
         <ion-label>
-          <ion-skeleton-text animated style="width: 20%;"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
         </ion-label>
       </ion-list-header>
       <ion-item>
@@ -112,13 +105,13 @@
         </ion-avatar>
         <ion-label>
           <h3>
-            <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
           </h3>
           <p>
-            <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
           </p>
           <p>
-            <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
           </p>
         </ion-label>
       </ion-item>
@@ -128,31 +121,31 @@
         </ion-thumbnail>
         <ion-label>
           <h3>
-            <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
           </h3>
           <p>
-            <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
           </p>
           <p>
-            <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
           </p>
         </ion-label>
       </ion-item>
       <ion-item>
         <ion-skeleton-text
           animated
-          style="width: 27px; height: 27px;"
+          style="width: 27px; height: 27px"
           slot="start"
         ></ion-skeleton-text>
         <ion-label>
           <h3>
-            <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
           </h3>
           <p>
-            <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
           </p>
           <p>
-            <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
           </p>
         </ion-label>
       </ion-item>

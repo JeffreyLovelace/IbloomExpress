@@ -4,18 +4,7 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
 
-    <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon
-          slot="icon-only"
-          ios="search-outline"
-          md="search-sharp"
-        ></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>
-      Información
-    </ion-title>
+    <ion-title> Información </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -27,9 +16,7 @@
   </ion-header>
   <div id="map1"></div>
   <ion-list>
-    <ion-list-header mode="ios">
-      {{nombre}}
-    </ion-list-header>
+    <ion-list-header mode="ios"> {{nombre}} </ion-list-header>
     <ion-item slot="start" lines="none">
       <ion-thumbnail slot="start">
         <img src="{{servidor}}/imagenes/{{ fotoLogo }}" />
@@ -53,9 +40,7 @@
   </ion-list>
 
   <ion-list>
-    <ion-list-header mode="ios">
-      Horarios
-    </ion-list-header>
+    <ion-list-header mode="ios"> Horarios </ion-list-header>
     <ion-item>
       <ion-label>Lunes</ion-label>
       <p slot="end" color="success">

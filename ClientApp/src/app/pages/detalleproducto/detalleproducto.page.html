@@ -4,15 +4,6 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
 
-    <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon
-          slot="icon-only"
-          ios="search-outline"
-          md="search-sharp"
-        ></ion-icon>
-      </ion-button>
-    </ion-buttons>
     <ion-title>Detalles </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -29,19 +20,11 @@
     <ion-item slot="start" lines="none">
       <ion-label>
         <h1>{{combo.nombre}}</h1>
-        <ion-textarea disabled>{{combo.descripcion}} </ion-textarea>
         <p>Bs. {{combo.precio}}</p>
+        <ion-textarea disabled>{{combo.descripcion}} </ion-textarea>
       </ion-label>
     </ion-item>
   </ion-list>
-  <ion-item>
-    <ion-textarea
-      [(ngModel)]="detail"
-      placeholder="Detalle para la orden"
-    ></ion-textarea>
-  </ion-item>
-  <hr />
-  <hr />
   <ion-list style="text-align: center" mode="ios">
     <ion-button color="danger" (click)="decrement()" *ngIf="currentNumber > 1">
       <ion-icon name="remove-outline"></ion-icon>
@@ -52,10 +35,14 @@
       <ion-icon name="add-outline"></ion-icon>
     </ion-button>
   </ion-list>
-  <hr />
-  <hr />
-  <hr />
-  <hr />
+
+  <ion-item>
+    <ion-textarea
+      [(ngModel)]="detail"
+      placeholder="Detalle para la orden"
+    ></ion-textarea>
+  </ion-item>
+
   <ion-button
     mode="ios"
     expand="block"
