@@ -42,11 +42,11 @@ export class LoginPage implements OnInit {
         this.telefono = {
           telefono: this.number,
         };
+        this.alertController.dismiss;
+
         this.authService.saveCellphone(this.telefono);
 
         this.router.navigateByUrl("/ubicacion");
-
-        this.alertController.dismiss;
       }
     });
   }
@@ -66,7 +66,6 @@ export class LoginPage implements OnInit {
   }
   async verificarCodigo(verificationId) {
     const prompt = await this.alertController.create({
-      mode: "ios",
       cssClass: "my-custom-class",
       header: "Ingrese el código de verificación",
       inputs: [
