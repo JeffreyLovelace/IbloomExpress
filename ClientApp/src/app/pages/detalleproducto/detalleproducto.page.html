@@ -29,6 +29,7 @@
     <ion-item slot="start" lines="none">
       <ion-label>
         <h1>{{combo.nombre}}</h1>
+        <ion-textarea disabled>{{combo.descripcion}} </ion-textarea>
         <p>Bs. {{combo.precio}}</p>
       </ion-label>
     </ion-item>
@@ -41,15 +42,11 @@
   </ion-item>
   <hr />
   <hr />
-  <ion-list style="text-align: center;" mode="ios">
+  <ion-list style="text-align: center" mode="ios">
     <ion-button color="danger" (click)="decrement()" *ngIf="currentNumber > 1">
       <ion-icon name="remove-outline"></ion-icon>
     </ion-button>
-    <ion-button color="light">
-      <h2>
-        {{currentNumber}}
-      </h2></ion-button
-    >
+    <ion-button color="light"> <h2>{{currentNumber}}</h2></ion-button>
 
     <ion-button color="success" (click)="increment()">
       <ion-icon name="add-outline"></ion-icon>
