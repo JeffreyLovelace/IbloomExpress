@@ -5,13 +5,13 @@
     <div class="col-md-12">
         <div class="card-body">
             <h3>Modificar Pedido</h3>
-            <form (ngSubmit)="modificar()">
+            <form [formGroup]="formGroup" (ngSubmit)="modificar()">
 
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="nit">Nit</label>
-                            <input [(ngModel)]="pedidos.nit" type="text" name="nit" class="form-control" placeholder="Nit"
+                            <input [(ngModel)]="pedidos.nit" type="text" name="nit" class="form-control" placeholder="Nit" formControlName="nit"
                                 required />
                         </div>
                     </div>
@@ -20,7 +20,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="razonSocial">Razon Social</label>
-                            <input [(ngModel)]="pedidos.razonSocial" type="text" name="razonSocial" class="form-control" placeholder="Razon Social"
+                            <input [(ngModel)]="pedidos.razonSocial" type="text" name="razonSocial" class="form-control" placeholder="Razon Social" formControlName="razonSocial"
                                 required />
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="nota">Nota</label>
-                            <input [(ngModel)]="pedidos.nota" type="text" name="nota" class="form-control" placeholder="Nota"
+                            <input [(ngModel)]="pedidos.nota" type="text" name="nota" class="form-control" placeholder="Nota" formControlName="nota"
                                 required />
                         </div>
                     </div>
@@ -38,31 +38,46 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="tiempoDelivery">Tiempo Delivery</label>
-                            <input [(ngModel)]="pedidos.tiempoDelivery" type="tiempoDelivery" name="nit" class="form-control" placeholder="Tiempo Delivery"
+                            <input [(ngModel)]="pedidos.tiempoDelivery" type="tiempoDelivery" name="tiempoDelivery" class="form-control" placeholder="Tiempo Delivery" formControlName="tiempoDelivery"
                                 required />
                         </div>
                     </div>
                 </div>
+
+                
 
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="id_estado">Estado</label>
-                            <input [(ngModel)]="pedidos.id_estado" type="text" name="id_estado" class="form-control" placeholder="Estado"
-                                required />
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="id_conductor">Condutor</label>
-                            <input [(ngModel)]="pedidos.id_conductor" type="text" name="id_conductor" class="form-control" placeholder="Conductor"
-                                required />
+
+
+                            <select [(ngModel)]="pedidos.id_estado"class="form-control" id="inlineFormCustomSelect" formControlName="id_estado">
+                                <option *ngFor="let estado of estados" value={{estado.id}}>
+                                    {{estado.nombre}}</option>
+                            </select>
+
                         </div>
                     </div>
                 </div>
 
+            
+
+
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="id_conductor">Estado</label>
+
+                            <select [(ngModel)]="pedidos.id_conductor"class="form-control" id="id_conductor" formControlName="id_conductor">
+                                <option *ngFor="let conductor of conductores" value={{conductor.id}}>
+                                    {{conductor.correo}}</option>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
 
 
                 <br>

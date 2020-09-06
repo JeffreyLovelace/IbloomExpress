@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConductorService } from '../services/conductor.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import {environment} from '../../environments/environment'
+import { environment } from '../../environments/environment'
 import {
   Form,
   FormArray,
@@ -21,17 +21,16 @@ export class ConductorComponent implements OnInit {
   files: any[];
   p: number = 1;
   conductores;
-  url=environment.url;
-  constructor(  
+  url = environment.url;
+  constructor(
     private ConductorService: ConductorService,
     private formBuilder: FormBuilder,
-    ) 
-    { 
+  ) {
     this.formGroup = this.formBuilder.group({
       pNombre: new FormControl('', Validators.required),
-      sNombre: new FormControl('', Validators.required),
+      sNombre: new FormControl(''),
       pApellido: new FormControl('', Validators.required),
-      sApellido: new FormControl('', Validators.required),
+      sApellido: new FormControl(''),
       fechaNacimiento: new FormControl('', Validators.required),
       direccion: new FormControl('', Validators.required),
       correo: new FormControl('', Validators.required),
@@ -60,46 +59,49 @@ export class ConductorComponent implements OnInit {
   ngOnInit(): void {
   }
   save() {
-    const asd = new FormData();
-    asd.append('pNombre', this.formGroup.get('pNombre').value);
-    asd.append('sNombre', this.formGroup.get('sNombre').value);
-    asd.append('pApellido', this.formGroup.get('pApellido').value);
-    asd.append('sApellido', this.formGroup.get('sApellido').value);
-    asd.append('fechaNacimiento', this.formGroup.get('fechaNacimiento').value);
-    asd.append('direccion', this.formGroup.get('direccion').value);
-    asd.append('correo', this.formGroup.get('correo').value);
-    asd.append('password', this.formGroup.get('password').value);
-    asd.append('telefono', this.formGroup.get('telefono').value);
-    asd.append('foto', this.formGroup.get('foto').value);
+    if (this.formGroup.valid) {
+      const asd = new FormData();
+      asd.append('pNombre', this.formGroup.get('pNombre').value);
+      asd.append('sNombre', this.formGroup.get('sNombre').value);
+      asd.append('pApellido', this.formGroup.get('pApellido').value);
+      asd.append('sApellido', this.formGroup.get('sApellido').value);
+      asd.append('fechaNacimiento', this.formGroup.get('fechaNacimiento').value);
+      asd.append('direccion', this.formGroup.get('direccion').value);
+      asd.append('correo', this.formGroup.get('correo').value);
+      asd.append('password', this.formGroup.get('password').value);
+      asd.append('telefono', this.formGroup.get('telefono').value);
+      asd.append('foto', this.formGroup.get('foto').value);
 
-    asd.append('fotoVehiculo', this.formGroup.get('fotoVehiculo').value);
-    asd.append('modelo', this.formGroup.get('modelo').value);
-    asd.append('tipoVehiculo', this.formGroup.get('tipoVehiculo').value);
-    asd.append('color', this.formGroup.get('color').value);
-    asd.append('año', this.formGroup.get('año').value);
-  
-    var datos={
-      'email':this.formGroup.get('correo').value,
-      'password':this.formGroup.get('password').value,
-      'id_rol':"2"
-    };
-    this.ConductorService.saveUsers(datos).subscribe((data) => {
-      this.ConductorService.save(asd).subscribe((data) => {
-        alert('GUARDADO');
-        this.get();
+      asd.append('fotoVehiculo', this.formGroup.get('fotoVehiculo').value);
+      asd.append('modelo', this.formGroup.get('modelo').value);
+      asd.append('tipoVehiculo', this.formGroup.get('tipoVehiculo').value);
+      asd.append('color', this.formGroup.get('color').value);
+      asd.append('año', this.formGroup.get('año').value);
+
+      var datos = {
+        'email': this.formGroup.get('correo').value,
+        'password': this.formGroup.get('password').value,
+        'id_rol': "2"
+      };
+      this.ConductorService.saveUsers(datos).subscribe((data) => {
+        this.ConductorService.save(asd).subscribe((data) => {
+          alert('GUARDADO');
+          this.get();
+        }, () => {
+          alert('Ocurrió un error guardar');
+
+        });
+
       }, () => {
         alert('Ocurrió un error guardar');
-
       });
-
-    }, () => {
-      alert('Ocurrió un error guardar');
-    });
-
+    } else {
+      alert("Ingrese todos los datos");
+    }
   }
-  get(){
+  get() {
     this.ConductorService.get().subscribe((data) => {
-      this.conductores=data;
+      this.conductores = data;
     }, () => {
       alert('Ocurrió un error al mostrar datos');
     });

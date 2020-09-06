@@ -58,11 +58,12 @@
 
                 <tr *ngFor="let publicacion of publicaciones | paginate: { itemsPerPage: 5, currentPage: p }">
                     <th class="text-center">{{publicacion.nombre}}</th>
-                    <th class="text-center">{{publicacion.foto}}</th>
-                    <td class="text-center"><a class="btn btn-info btn-sm"
+                    <th class="text-center">
+                        <img width="80px" src="http://134.122.18.6/imagenes/{{publicacion.foto}}" alt="">
+                    </th>                    <td class="text-center"><a class="btn btn-info btn-sm"
                             routerLink="/nuevasala/{{publicacion.id}}">Ver-Editar</a></td>
                     <td class="text-center"><a class="btn btn-danger btn-sm"
-                            routerLink="/nuevasala/{{publicacion.id}}">Eliminar</a></td>
+                        (click)="eliminar(publicacion.id)">Eliminar</a></td>
                 </tr>
 
             </tbody>

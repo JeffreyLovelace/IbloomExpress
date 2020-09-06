@@ -54,6 +54,14 @@ export class PublicacionesComponent implements OnInit {
       });
 
   }
+  eliminar(id) {
+    this.PublicacionesService.eliminar(id).subscribe((data) => {
+      this.publicaciones = data;
+      this.get();
+    }, () => {
+      alert('Ocurrió un error al eliminar el dato');
+    });
+  }
   get(){
     this.PublicacionesService.get().subscribe((data) => {
       this.publicaciones=data;

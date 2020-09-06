@@ -21,6 +21,7 @@ export class ModificarRestauranteComponent implements OnInit {
   files: any[];
   p: number = 1;
   id: any;
+  tipoNegocios;
   conductor={
     'correo':null, 
     'telefono':null,
@@ -33,8 +34,6 @@ export class ModificarRestauranteComponent implements OnInit {
     'referencia':null,
     'horarioSal':null,
     'horarioEnt':null
-    
-
   };
   constructor(
     private RestaurantService: RestaurantService,
@@ -60,6 +59,7 @@ export class ModificarRestauranteComponent implements OnInit {
       horarioEnt: new FormControl('', Validators.required),
     });
     this.get();
+    this.gettipoNegocios()
   }
   onFileChange(event) {
     const file = event.target.files[0];
@@ -84,4 +84,11 @@ export class ModificarRestauranteComponent implements OnInit {
       alert('Ocurrió un error al mostrar datos');
     });
   } 
+  gettipoNegocios() {
+    this.RestaurantService.gettipoNegocios().subscribe((data) => {
+      this.tipoNegocios = data;
+    }, () => {
+      alert('Ocurrió un error al mostrar datos');
+    });
+  }
 }

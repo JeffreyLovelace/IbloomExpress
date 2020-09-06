@@ -37,13 +37,19 @@
                     </div>
                 </div>
 
+                
+                
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="id_tipoComercio">Tipo Comercio</label>
-                            <input [(ngModel)]="conductor.id_tipoComercio" type="text" name="id_tipoComercio"
-                                class="form-control" placeholder="Tipo Comercio" formControlName="id_tipoComercio"
-                                required />
+
+
+                            <select [(ngModel)]="conductor.id_tipoComercio" class="form-control" id="inlineFormCustomSelect" formControlName="id_tipoComercio">
+                                <option *ngFor="let tipoNegocio of tipoNegocios" value={{tipoNegocio.id}}>
+                                    {{tipoNegocio.nombre}}</option>
+                            </select>
+
                         </div>
                     </div>
                 </div>

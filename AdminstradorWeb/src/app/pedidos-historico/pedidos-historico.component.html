@@ -19,11 +19,8 @@
                 <label for="id_comercio"> Negocio:</label>
                 <select class="form-control" (change)="get()" id="id_comercio" [(ngModel)]="id_comercio"
                     name="id_comercio">
-                    <option value='comercio'>Comercio</option>
-                    <option value='nit'>Nit</option>
-                    <option value='razonSocial'>Razon Social</option>
-                    <option value='cliente'>Cliente</option>
-                    <option value='conductor'>Conductor</option>
+                    <option *ngFor="let comercio of comercios" value={{comercio.id}}>
+                        {{comercio.nombre}}</option>
                 </select>
             </div>
         </div>
@@ -52,7 +49,6 @@
         <tr>
             <th scope="col" class="text-center">Nit</th>
             <th scope="col" class="text-center">Razon Social</th>
-            <th scope="col" class="text-center">Orden</th>
             <th scope="col" class="text-center">Fecha</th>
             <th scope="col" class="text-center">Total</th>
             <th scope="col" class="text-center">Ganacia</th>
@@ -65,14 +61,13 @@
         <tr *ngFor="let pedido of pedidos | pedido: filtertext: selected">
             <th class="text-center">{{pedido.nit}}</th>
             <th class="text-center">{{pedido.razonSocial}}</th>
-            <th class="text-center">{{pedido.id_pedido}}</th>
             <th class="text-center">{{pedido.created_at}}</th>
             <th class="text-center">{{pedido.total}}</th>
             <th class="text-center">{{pedido.total*porcentaje/100}}</th>
 
         </tr>
         <tr>
-            <th COLSPAN="4" class="text-center">Total</th>
+            <th COLSPAN="3" class="text-center">Total</th>
             <th class="text-center">{{total}}</th>
             <th class="text-center">{{total*porcentaje/100}}</th>
         </tr>

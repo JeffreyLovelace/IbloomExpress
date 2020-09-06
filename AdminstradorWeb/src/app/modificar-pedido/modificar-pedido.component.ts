@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidosService } from '../services/pedidos.service';
+import { EstadoService } from '../services/estado.service';
+import { ConductorService } from '../services/conductor.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import {
@@ -21,6 +23,8 @@ export class ModificarPedidoComponent implements OnInit {
   files: any[];
   p: number = 1;
   id: any;
+  estados;
+  conductores;
   pedidos={
     'nit':null, 
     'razonSocial':null, 
@@ -33,13 +37,24 @@ export class ModificarPedidoComponent implements OnInit {
     private PedidosService: PedidosService,
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private EstadoService: EstadoService,
+    private ConductorService:ConductorService
 
   ) {
 
     this.id = this.activatedRoute.snapshot.params['id'];
-
+    this.formGroup = this.formBuilder.group({
+      id_estado: new FormControl('', Validators.required),
+      nit: new FormControl('', Validators.required),
+      razonSocial: new FormControl('', Validators.required),
+      nota: new FormControl('', Validators.required),
+      tiempoDelivery: new FormControl('', Validators.required),
+      id_conductor: new FormControl('', Validators.required),
+    });
     this.get();
+    this.getEstado();
+    this.getConductor();
   }
   ngOnInit(): void {
   }
@@ -60,4 +75,18 @@ export class ModificarPedidoComponent implements OnInit {
       alert('Ocurrió un error al mostrar datos');
     });
   } 
+  getEstado() {
+    this.EstadoService.get().subscribe((data) => {
+      this.estados = data;
+    }, () => {
+      alert('Ocurrió un error al mostrar datos');
+    });
+  }
+  getConductor() {
+    this.ConductorService.get().subscribe((data) => {
+      this.conductores = data;
+    }, () => {
+      alert('Ocurrió un error al mostrar datos');
+    });
+  }
 }

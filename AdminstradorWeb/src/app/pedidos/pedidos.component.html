@@ -5,30 +5,7 @@
         <br>
         <h3>Pedidos</h3>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="input-group ">
-
-                <label for="selected"> Buscar por: 
-                </label>
-                <select class="form-control" id="selected" [(ngModel)]="selected">
-                    <option value='comercio'>Comercio</option>
-                    <option value='nit'>Nit</option>
-                    <option value='razonSocial'>Razon Social</option>
-                    <option value='cliente'>Cliente</option>
-                    <option value='conductor'>Conductor</option>
-                </select>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="input-group ">
-                    <input [(ngModel)]="filtertext" class="form-control" type="text" name=""
-                        placeholder="Nombre, apellido, teléfono, cargo...">
-
-                </div>
-            </div>
-        </div><br>
+        
 
 
         <table class="table table-bordered table-striped">
@@ -48,7 +25,7 @@
             <tbody>
 
                 <tr
-                    *ngFor=" let pedido of pedidos | paginate: { itemsPerPage: 5, currentPage: p } | pedido: filtertext: selected">
+                    *ngFor=" let pedido of pedidos | paginate: { itemsPerPage: 10, currentPage: p } | pedido: filtertext: selected">
                     <th class="text-center">{{pedido.comercio}}</th>
                     <th class="text-center">{{pedido.nit}}</th>
                     <th class="text-center">{{pedido.razonSocial}}</th>
