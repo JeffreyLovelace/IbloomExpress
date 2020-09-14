@@ -32,6 +32,9 @@
           <ion-label>
             <h2>Pedido Nr. {{pedido.id}}</h2>
             <h3>Cliente: +591 {{pedido.telefono}}</h3>
+            <p displayFormat="DD/MMM/YYYY HH:mm">
+              Fecha: {{pedido.created_at}}
+            </p>
           </ion-label>
           <ion-badge *ngIf="pedido.id_estado==1" color="warning" slot="end"
             >Espera</ion-badge
