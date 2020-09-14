@@ -63,11 +63,28 @@ export class ModificarRestauranteComponent implements OnInit {
   }
   onFileChange(event) {
     const file = event.target.files[0];
-    this.formGroup.get('foto').setValue(file);
+    this.formGroup.get('fotoLogo').setValue(file);
   }
   ngOnInit(): void {
   }
   modificar() {
+    const asd = new FormData();
+    asd.append('correo', this.formGroup.get('correo').value);
+    asd.append('telefono', this.formGroup.get('telefono').value);
+    asd.append('nombre', this.formGroup.get('nombre').value);
+    asd.append('id_tipoComercio', this.formGroup.get('id_tipoComercio').value);
+    asd.append('correo', this.formGroup.get('correo').value);
+    asd.append('telefono', this.formGroup.get('telefono').value);
+    asd.append('nombre', this.formGroup.get('nombre').value);
+    asd.append('id_tipoComercio', this.formGroup.get('id_tipoComercio').value);
+    asd.append('fotoLogo', this.formGroup.get('fotoLogo').value);
+    asd.append('fotoBaner', this.formGroup.get('fotoBaner').value);
+    asd.append('envio', this.formGroup.get('envio').value);
+    asd.append('direccion', this.formGroup.get('direccion').value);
+    asd.append('referencia', this.formGroup.get('referencia').value);
+    asd.append('horarioSal', this.formGroup.get('horarioSal').value);
+    asd.append('horarioEnt', this.formGroup.get('horarioEnt').value);
+
 
     this.RestaurantService.actualizar(this.id, this.conductor).subscribe((data) => {
       alert("GUARDADO");
