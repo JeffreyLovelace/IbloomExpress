@@ -1,56 +1,39 @@
-<ion-content>
-  <hr />
-  <hr />
-  <hr />
-  <hr />
-  <hr />
-  <hr />
-  <hr />
-  <hr />
-  <div class="center">
-    <img class="header-img" src="/assets/banner.png" />
-  </div>
-  <hr />
-  <hr />
-  <ion-item lines="none">
-    <ion-label position="stacked">Correo</ion-label>
-    <ion-input
-      type="email"
-      placeholder="Correo"
-      name="email"
-      [(ngModel)]="credentials.email"
-    ></ion-input>
-  </ion-item>
+<ion-content padding color="primary">
+    <div class="ion-padding">
+        <ion-label>
+            <h1 slot="start">
+                <strong>¡Bienvenido a <br />DUNNE Commerce!</strong>
+            </h1>
+        </ion-label>
 
-  <ion-item lines="none">
-    <ion-label position="stacked">Contraseña</ion-label>
-    <ion-input
-      type="password"
-      placeholder="Contraseña"
-      name="password"
-      [(ngModel)]="credentials.password"
-    >
-    </ion-input>
-  </ion-item>
-  <hr />
-  <hr />
-  <ion-button mode="ios" expand="block" shape="round" (click)="login()"
-    >Iniciar sesión</ion-button
-  >
+        <div class="center">
+            <img class="header-img" src="/assets/icon.png" />
+        </div>
+        <hr />
+        <hr />
+        <ion-item lines="none" color="primary">
+            <ion-label>Correo</ion-label>
+            <br />
+            <ion-input type="email" placeholder="Correo" name="email" [(ngModel)]="credentials.email"></ion-input>
+        </ion-item>
 
-  <hr />
-  <hr />
-  <hr />
-  <hr />
-  <ion-button
-    href="https://api.whatsapp.com/send?phone=591{{telefono}}"
-    mode="ios"
-    expand="block"
-    type="submit"
-    shape="round"
-    fill="outline"
-  >
-    <ion-icon name="logo-whatsapp" slot="start"></ion-icon
-    >Contactanos</ion-button
-  >
+        <ion-item lines="none" color="primary">
+            <ion-label>Contraseña</ion-label>
+            <br />
+            <ion-input type="password" placeholder="Contraseña" name="password" [(ngModel)]="credentials.password">
+            </ion-input>
+        </ion-item>
+        <hr />
+        <hr />
+        <ion-button mode="ios" expand="block" shape="round" (click)="login()" color="secondary">
+            <strong>Iniciar sesión</strong></ion-button>
+
+        <hr />
+        <hr />
+        <hr />
+
+        <hr />
+        <ion-button href="https://api.whatsapp.com/send?phone=591{{telefono}}" mode="ios" expand="block" type="submit" shape="round" fill="outline" color="secondary">
+            <ion-icon name="logo-whatsapp" slot="start"></ion-icon>Contactanos</ion-button>
+    </div>
 </ion-content>

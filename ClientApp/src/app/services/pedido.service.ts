@@ -55,16 +55,16 @@ export class PedidoService {
       headers: headers,
     });
   }
-  notification() {
+  notification(tokenComercio) {
     this.dato = {
       notification: {
-        title: "Ibloom Express",
+        title: "DUNNE",
         body: "Nuevo pedido registrado",
         sound: "default",
         click_action: "FCM_PLUGIN_ACTIVITY",
         icon: "fcm_push_icon",
       },
-      to: "/topics/drivers",
+      to: tokenComercio,
       priority: "high",
     };
     let headers = new HttpHeaders().set(

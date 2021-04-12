@@ -64,6 +64,8 @@ export class ConfirmarpedidoPage {
   precioMinimo;
   total;
   desc;
+  token;
+  errorSocial = false;
   idcomercio;
   comercios: Comercio[];
   totalDelivery;
@@ -110,9 +112,11 @@ export class ConfirmarpedidoPage {
           this.direccion = this.comercios[0].direccion;
           this.referencia = this.comercios[0].referencia;
           this.precioMinimo = this.comercios[0].precioMinimo;
-
+          this.token = this.comercios[0].token;
           this.lattitudec = this.comercios[0].latitud;
           this.longitudec = this.comercios[0].longitud;
+          console.log("tokjen" + this.token);
+
           this.calculateDistance(
             this.lattitude,
             this.longitude,
@@ -124,27 +128,32 @@ export class ConfirmarpedidoPage {
   }
   verificarCantidad() {}
   pedido(id) {
-    this.pedido1 = {
-      id_cliente: id,
-      id_estado: 1,
-      latitud: this.lattitude,
-      longitud: this.longitude,
-      nit: this.nit,
-      razonSocial: this.razonSocial,
-      total: this.total,
-      nota: this.desc,
-      tiempoDelivery: this.tiempo,
-    };
+    if (this.razonSocial != null) {
+      this.errorSocial = true;
+      this.pedido1 = {
+        id_cliente: id,
+        id_estado: 1,
+        latitud: this.lattitude,
+        longitud: this.longitude,
+        nit: this.nit,
+        razonSocial: this.razonSocial,
+        total: this.total,
+        nota: this.desc,
+        tiempoDelivery: this.tiempo,
+      };
 
-    this.storage.get("pedido").then((val) => {
-      this.id_pedido = val;
-    });
-    this.storage.get(TOKEN_KEY).then((res) => {
-      this.pedidoService.edit(this.pedido1, res, this.id_pedido).subscribe(
-        (data) => this.presentAlert(),
-        (error) => this.presentAlertError()
-      );
-    });
+      this.storage.get("pedido").then((val) => {
+        this.id_pedido = val;
+      });
+      this.storage.get(TOKEN_KEY).then((res) => {
+        this.pedidoService.edit(this.pedido1, res, this.id_pedido).subscribe(
+          (data) => this.presentAlert(),
+          (error) => this.presentAlertError()
+        );
+      });
+    } else {
+      this.errorSocial = false;
+    }
   }
   async getUser() {
     const loading = await this.loadingCtrl.create();
@@ -152,7 +161,6 @@ export class ConfirmarpedidoPage {
     this.storage.get(TOKEN_KEY).then((res) => {
       this.authService.getUser(res).subscribe((data) => {
         console.log(data);
-
         this.getCliente(data.email);
         loading.dismiss();
       });
@@ -164,6 +172,10 @@ export class ConfirmarpedidoPage {
         for (let cliente of data) {
           if (cliente.correo == correo) {
             this.pedido(cliente.id);
+
+            console.log(cliente.id);
+          } else {
+            console.log("algo salio mal");
           }
         }
       });
@@ -228,7 +240,7 @@ export class ConfirmarpedidoPage {
   }
   envioTotal;
   async presentAlert() {
-    this.pedidoService.notification().subscribe((res) => {
+    this.pedidoService.notification(this.token).subscribe((res) => {
       console.log(res);
     });
 
@@ -244,14 +256,14 @@ export class ConfirmarpedidoPage {
         "Su pedido se registro correctamente. Nos pondremos en contacto cuando el pedido este en su puerta. También, puede observar el estado del pedido en el carrito de compras. ",
       buttons: ["OK"],
     });
-    this.pedidoService.notification();
+    this.pedidoService.notification(this.token);
     await alert.present();
   }
   async presentAlertError() {
     const alert = await this.alertController.create({
       mode: "ios",
       cssClass: "my-custom-class",
-      header: "Algo salió mal :(",
+      header: "Algo salió mal, vuelva intentarlo por favor",
       buttons: ["OK"],
     });
 

@@ -15,8 +15,8 @@ import { GooglePlus } from "@ionic-native/google-plus/ngx";
 })
 export class LoginPage implements OnInit {
   credentials = {
-    email: "cliente@gmail.com",
-    password: "cliente",
+    email: "mardarina@gmail.com",
+    password: "mardarina123",
     remember_me: true,
   };
   telefono = {

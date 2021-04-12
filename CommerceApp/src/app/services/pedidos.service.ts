@@ -54,4 +54,72 @@ export class PedidoService {
       headers: headers,
     });
   }
+  dato;
+  enPreparacion(token) {
+    this.dato = {
+      notification: {
+        title: "Su pedido esta en preparación",
+        body: "Puede revisar el estado en el carrito de compras.",
+        sound: "default",
+        click_action: "FCM_PLUGIN_ACTIVITY",
+        icon: "fcm_push_icon",
+      },
+      to: token,
+      priority: "high",
+    };
+    let headers = new HttpHeaders().set(
+      "Authorization",
+      "key=AAAAN4waqJA:APA91bGyHIgTqk9zdVYH7ZdssvG_rrQCPznyx5oq7xN5kW2u-jNE36nN3Vhh-iydzF-YVPTO1n8bScAQYylWlctANayXjZVEkKa8FfWiAb-S5yA8ijLOB4puX-QcFYpScbzGq144f-NC"
+    );
+    headers = headers.append("Content-Type", "application/json");
+
+    return this.http.post("https://fcm.googleapis.com/fcm/send", this.dato, {
+      headers: headers,
+    });
+  }
+
+  rechazado(token) {
+    this.dato = {
+      notification: {
+        title: "Su pedido fue rechazado",
+        body: "El pedido fue cancelado.",
+        sound: "default",
+        click_action: "FCM_PLUGIN_ACTIVITY",
+        icon: "fcm_push_icon",
+      },
+      to: token,
+      priority: "high",
+    };
+    let headers = new HttpHeaders().set(
+      "Authorization",
+      "key=AAAAN4waqJA:APA91bGyHIgTqk9zdVYH7ZdssvG_rrQCPznyx5oq7xN5kW2u-jNE36nN3Vhh-iydzF-YVPTO1n8bScAQYylWlctANayXjZVEkKa8FfWiAb-S5yA8ijLOB4puX-QcFYpScbzGq144f-NC"
+    );
+    headers = headers.append("Content-Type", "application/json");
+
+    return this.http.post("https://fcm.googleapis.com/fcm/send", this.dato, {
+      headers: headers,
+    });
+  }
+  enPreparacionDrivers() {
+    this.dato = {
+      notification: {
+        title: "Su pedido esta en preparación",
+        body: "Puede revisar el estado en el carrito de compras.",
+        sound: "default",
+        click_action: "FCM_PLUGIN_ACTIVITY",
+        icon: "fcm_push_icon",
+      },
+      to: "/topics/drivers",
+      priority: "high",
+    };
+    let headers = new HttpHeaders().set(
+      "Authorization",
+      "key=AAAAN4waqJA:APA91bGyHIgTqk9zdVYH7ZdssvG_rrQCPznyx5oq7xN5kW2u-jNE36nN3Vhh-iydzF-YVPTO1n8bScAQYylWlctANayXjZVEkKa8FfWiAb-S5yA8ijLOB4puX-QcFYpScbzGq144f-NC"
+    );
+    headers = headers.append("Content-Type", "application/json");
+
+    return this.http.post("https://fcm.googleapis.com/fcm/send", this.dato, {
+      headers: headers,
+    });
+  }
 }

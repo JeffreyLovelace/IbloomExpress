@@ -10,6 +10,8 @@ export class Comercio {
     public fotoBaner: string,
     public envio: string,
     public direccion: string,
+    public token: string,
+
     public referencia: string,
     public precioMinimo: string,
     public longitud: string,

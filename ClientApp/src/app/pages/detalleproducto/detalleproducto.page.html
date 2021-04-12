@@ -1,55 +1,42 @@
 <ion-header mode="ios">
-  <ion-toolbar>
-    <ion-buttons slot="start" mode="md">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-
-    <ion-title>Detalles </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start" mode="md">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header mode="ios" collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large"> Detalles </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <img class="header-img" src="{{servidor}}/imagenes/{{ foto}}" />
+<ion-content fullscreen>
+    <img class="header-img" *ngIf="foto" src="{{servidor}}/imagenes/{{ foto}}" style="margin-top: -13%" />
+    <img class="header-img" *ngIf="!foto" src="../../../assets/icon.png" style="margin-top: -13%" />
 
-  <ion-list *ngFor="let combo of combos">
-    <ion-item slot="start" lines="none">
-      <ion-label>
-        <h1>{{combo.nombre}}</h1>
-        <p>Bs. {{combo.precio}}</p>
-        <ion-textarea disabled>{{combo.descripcion}} </ion-textarea>
-      </ion-label>
+    <ion-list *ngFor="let combo of combos">
+        <div class="ion-padding">
+            <h1>{{combo.nombre}}</h1>
+
+            <p>Bs. {{combo.precio}}</p>
+
+            <ion-textarea disabled>{{combo.descripcion}} </ion-textarea>
+        </div>
+    </ion-list>
+    <ion-list style="text-align: center" mode="ios">
+        <ion-button color="danger" (click)="decrement()" *ngIf="currentNumber > 1">
+            <ion-icon name="remove-outline"></ion-icon>
+        </ion-button>
+        <ion-button color="light">
+            <h2>{{currentNumber}}</h2>
+        </ion-button>
+
+        <ion-button color="success" (click)="increment()">
+            <ion-icon name="add-outline"></ion-icon>
+        </ion-button>
+    </ion-list>
+
+    <ion-item>
+        <ion-textarea [(ngModel)]="detail" placeholder="Detalle para la orden"></ion-textarea>
     </ion-item>
-  </ion-list>
-  <ion-list style="text-align: center" mode="ios">
-    <ion-button color="danger" (click)="decrement()" *ngIf="currentNumber > 1">
-      <ion-icon name="remove-outline"></ion-icon>
+
+    <ion-button mode="ios" expand="block" type="submit" shape="round" (click)="verificar()">Agregar Bs. {{total}}
+        <ion-back-button></ion-back-button>
     </ion-button>
-    <ion-button color="light"> <h2>{{currentNumber}}</h2></ion-button>
-
-    <ion-button color="success" (click)="increment()">
-      <ion-icon name="add-outline"></ion-icon>
-    </ion-button>
-  </ion-list>
-
-  <ion-item>
-    <ion-textarea
-      [(ngModel)]="detail"
-      placeholder="Detalle para la orden"
-    ></ion-textarea>
-  </ion-item>
-
-  <ion-button
-    mode="ios"
-    expand="block"
-    type="submit"
-    shape="round"
-    (click)="verificar()"
-    >Agregar Bs. {{total}}
-    <ion-back-button></ion-back-button>
-  </ion-button>
 </ion-content>

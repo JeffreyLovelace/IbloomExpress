@@ -1,38 +1,28 @@
-<ion-content padding>
-  <hr />
-  <hr />
-  <hr />
-  <hr />
-  <hr />
-  <hr />
-  <hr />
-  <hr />
-  <div class="center">
-    <img class="header-img" src="/assets/banner.png" />
-  </div>
-  <hr />
-  <hr />
-  <ion-item lines="none">
-    <ion-label>+591 </ion-label>
+<ion-content padding color="primary">
+    <div class="ion-padding">
+        <ion-label>
+            <h1 slot="start">
+                <strong>¡Bienvenido a <br />DUNNE!</strong>
+            </h1>
+        </ion-label>
 
-    <ion-input
-      clearInput
-      type="number"
-      placeholder="Número de celular"
-      [(ngModel)]="number"
-    >
-    </ion-input>
-  </ion-item>
+        <div class="center">
+            <img class="header-img" src="/assets/icon.png" />
+        </div>
+        <hr />
+        <hr />
+        <ion-item lines="none" color="primary">
+            <ion-label>+591 </ion-label>
 
-  <hr />
-  <hr />
-  <hr />
-  <ion-button
-    mode="ios"
-    expand="block"
-    type="submit"
-    shape="round"
-    (click)="enviarMensaje()"
-    >Enviar</ion-button
-  >
+            <ion-input clearInput type="number" placeholder="Número de celular" [(ngModel)]="number">
+            </ion-input>
+        </ion-item>
+
+        <hr />
+        <hr />
+        <hr />
+
+        <ion-button mode="ios" expand="block" shape="round" (click)="enviarMensaje()" color="secondary">
+            <strong>Ingresar</strong></ion-button>
+    </div>
 </ion-content>

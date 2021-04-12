@@ -8,6 +8,7 @@ import { environment } from "../../../environments/environment";
 import { ComercioService } from "../../services/comercio.service";
 import { PedidoService } from "../../services/pedido.service";
 import { Location } from "@angular/common";
+import { LoadingController } from "@ionic/angular";
 
 import { OrdenService } from "../../services/orden.service";
 import { Pedido } from "../../interfaces/pedido";
@@ -46,6 +47,7 @@ export class DetalleproductoPage {
   };
   detail;
   constructor(
+    private loadingCtrl: LoadingController,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private storage: Storage,
@@ -74,7 +76,9 @@ export class DetalleproductoPage {
       }
     });
   }
-  getCombo() {
+  async getCombo() {
+    const loading = await this.loadingCtrl.create();
+    loading.present();
     this.storage.get(TOKEN_KEY).then((res) => {
       this.comboService.detail(res, this.id).subscribe((data: Combo[]) => {
         this.combos = data;
@@ -82,6 +86,7 @@ export class DetalleproductoPage {
         this.id_comercio = this.combos[0].id_comercio;
         this.precio = this.combos[0].precio;
         this.total = this.currentNumber * this.precio;
+        loading.dismiss();
       });
     });
   }

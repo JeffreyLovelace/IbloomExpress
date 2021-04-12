@@ -24,7 +24,8 @@ declare var google;
 })
 export class DetallepedidoPage implements OnInit {
   mapRef = null;
-
+  lat2: any;
+  lng2: any;
   pedido1 = {
     id_estado: null,
   };
@@ -44,16 +45,15 @@ export class DetallepedidoPage implements OnInit {
   id_conductor;
   delivery;
   nota;
-  lat2: any;
-  lng2: any;
+  token;
   nombreCompercio;
   pedidoDelivery;
   pNombre;
   markers: Marker[] = [
     {
       position: {
-        lat: this.lat2,
-        lng: this.lng2,
+        lat: null,
+        lng: null,
       },
       dirrecion: "Parque Simón Bolivar2",
     },
@@ -100,6 +100,7 @@ export class DetallepedidoPage implements OnInit {
         this.nota = this.pedidos[0].nota;
         this.conductorTelefono = this.pedidos[0].conductorTelefono;
         this.delivery = this.pedidos[0].delivery;
+        this.token = this.pedidos[0].token;
 
         this.nombreCompercio = this.pedidos[0].nombreCompercio;
         this.pNombre = this.pedidos[0].pNombre;
@@ -224,6 +225,62 @@ export class DetallepedidoPage implements OnInit {
         url: "https://image.flaticon.com/icons/svg/2833/2833394.svg", // url
         scaledSize: new google.maps.Size(50, 50), // size
       },
+    });
+  }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: "Estado",
+      mode: "ios",
+      cssClass: "my-custom-class",
+      buttons: [
+        {
+          text: "Aceptar",
+          //  role: "destructive",
+          icon: "car-sport",
+          handler: () => {
+            this.tomarPedido(2);
+            this.pedidoService.enPreparacion(this.token).subscribe((res) => {
+              console.log(res);
+            });
+            this.pedidoService.enPreparacionDrivers().subscribe((res) => {
+              console.log(res);
+            });
+          },
+        },
+        {
+          text: "Rechazar",
+          icon: "locate",
+          handler: () => {
+            this.tomarPedido(6);
+            this.pedidoService.rechazado(this.token).subscribe((res) => {
+              console.log(res);
+            });
+          },
+        },
+
+        {
+          text: "Cancel",
+          icon: "close",
+          role: "cancel",
+          handler: () => {
+            console.log("Cancel clicked");
+          },
+        },
+      ],
+    });
+    await actionSheet.present();
+  }
+
+  tomarPedido(id_estado) {
+    this.pedido1 = {
+      id_estado: id_estado,
+    };
+    this.storage.get(TOKEN_KEY).then((res) => {
+      this.pedidoService.edit(this.pedido1, res, this.id).subscribe(
+        (data) => this.getDetalle(),
+        (error) => console.log()
+      );
     });
   }
 }

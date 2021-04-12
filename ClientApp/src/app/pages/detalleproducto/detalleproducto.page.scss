@@ -1,19 +1,25 @@
 .red:before {
-  color: red;
+    color: red;
 }
 
 .green:before {
-  color: green;
+    color: green;
 }
 
 .flex_row {
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: row;
-  flex-direction: row;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
 }
+
 .center {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+ion-toolbar {
+    --background: transparent;
+    --ion-color-base: transparent !important;
 }

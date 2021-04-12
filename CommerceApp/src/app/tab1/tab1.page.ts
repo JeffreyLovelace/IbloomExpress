@@ -4,6 +4,7 @@ import { Pedido } from "../interfaces/pedido";
 
 import { ComercioService } from "../services/comercio.service";
 import { PedidoService } from "../services/pedidos.service";
+import { AlertController } from "@ionic/angular";
 
 import { AuthService } from "../services/auth.service";
 import { Router, ActivatedRoute, Params } from "@angular/router";
@@ -27,7 +28,8 @@ export class Tab1Page {
     private comercioService: ComercioService,
     private authService: AuthService,
     private storage: Storage,
-    private pedidoService: PedidoService
+    private pedidoService: PedidoService,
+    public alertController: AlertController
   ) {}
   ionViewWillEnter() {
     this.getUser();
@@ -65,5 +67,31 @@ export class Tab1Page {
         this.pedidos = data;
       });
     });
+  }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      cssClass: "my-custom-class",
+      header: "Nuevo pedido!",
+      message: "Message <strong>text</strong>!!!",
+      buttons: [
+        {
+          text: "Cancel",
+          role: "cancel",
+          cssClass: "secondary",
+          handler: (blah) => {
+            console.log("Confirm Cancel: blah");
+          },
+        },
+        {
+          text: "Okay",
+          handler: () => {
+            console.log("Confirm Okay");
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }

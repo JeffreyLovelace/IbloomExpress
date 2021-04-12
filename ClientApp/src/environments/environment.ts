@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: "http://134.122.18.6",
+  url: "http://dunnedelivery.com:8000",
   firebaseConfig: {
     apiKey: "AIzaSyDo2NMNimUHRIBT6AIOWPSjl0LITLr-6kk",
     authDomain: "ibloomexpress-2a20a.firebaseapp.com",

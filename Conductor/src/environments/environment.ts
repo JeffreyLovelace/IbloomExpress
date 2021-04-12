@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: "http://134.122.18.6",
+  url: "http://dunnedelivery.com:8000",
 };
 
 /*

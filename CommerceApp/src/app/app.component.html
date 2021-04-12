@@ -1,47 +1,45 @@
 <ion-app>
-  <ion-menu side="start" menuId="main-menu" contentId="main">
-    <ion-content>
-      <div class="menu-header-bg"></div>
-      <div class="header-content">
-        <img src="/assets/comercio.png" alt="" />
-        <ion-label>
-          <h2>
-            Ibloom Express
-          </h2>
-        </ion-label>
-      </div>
+    <ion-menu side="start" menuId="main-menu" contentId="main">
+        <ion-content>
+            <div class="menu-header-bg"></div>
+            <div class="header-content">
+                <img src="/assets/icon.png" alt="" />
+                <ion-label>
+                    <h2>DUNNE</h2>
+                </ion-label>
+            </div>
 
-      <ion-list lines="none" class="menu-items">
-        <ion-item [routerLink]="['/tabs/tab3']">
-          <ion-icon name="person" slot="start"></ion-icon>
-          <ion-label>Comercio</ion-label>
-        </ion-item>
-        <ion-item [routerLink]="['/tabs/tab1']">
-          <ion-icon name="bicycle" slot="start"></ion-icon>
-          <ion-label>Pedidos</ion-label>
-        </ion-item>
-        <ion-item [routerLink]="['/tabs/tab2']">
-          <ion-icon name="fast-food" slot="start"></ion-icon>
-          <ion-label>Productos</ion-label>
-        </ion-item>
-        <ion-item [routerLink]="['/historial']">
-          <ion-icon name="list" slot="start"></ion-icon>
-          <ion-label>Historial</ion-label>
-        </ion-item>
-        <ion-item href="https://api.whatsapp.com/send?phone=591{{ telefono }}">
-          <ion-icon name="logo-whatsapp" slot="start"></ion-icon>
-          <ion-label>Contactar</ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-content>
+            <ion-list lines="none" class="menu-items">
+                <ion-item [routerLink]="['/tabs/tab3']">
+                    <ion-icon name="person" slot="start"></ion-icon>
+                    <ion-label>Comercio</ion-label>
+                </ion-item>
+                <ion-item [routerLink]="['/tabs/tab1']">
+                    <ion-icon name="bicycle" slot="start"></ion-icon>
+                    <ion-label>Pedidos</ion-label>
+                </ion-item>
+                <ion-item [routerLink]="['/tabs/tab2']">
+                    <ion-icon name="fast-food" slot="start"></ion-icon>
+                    <ion-label>Productos</ion-label>
+                </ion-item>
+                <ion-item [routerLink]="['/historial']">
+                    <ion-icon name="list" slot="start"></ion-icon>
+                    <ion-label>Historial</ion-label>
+                </ion-item>
+                <ion-item href="https://api.whatsapp.com/send?phone=591{{ telefono }}">
+                    <ion-icon name="logo-whatsapp" slot="start"></ion-icon>
+                    <ion-label>Contactar</ion-label>
+                </ion-item>
+            </ion-list>
+        </ion-content>
 
-    <ion-toolbar>
-      <img class="header-img" src="/assets/banner.png" />
-      <ion-item (click)="logout()">
-        <ion-icon name="exit" slot="start"></ion-icon>
-        <ion-label>Cerrar sesión</ion-label>
-      </ion-item>
-    </ion-toolbar>
-  </ion-menu>
-  <ion-router-outlet id="main"></ion-router-outlet>
+        <ion-toolbar>
+            <ion-item (click)="logout()">
+                <ion-icon name="exit" slot="start"></ion-icon>
+                <ion-label>Cerrar sesión</ion-label>
+            </ion-item>
+            <p>v.1.1</p>
+        </ion-toolbar>
+    </ion-menu>
+    <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>

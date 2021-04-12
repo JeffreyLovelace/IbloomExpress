@@ -22,6 +22,14 @@ const TOKEN_KEY = "access_token";
 })
 export class InicioPage {
   @ViewChild("slides") slides;
+  topStories: any;
+  sponsor: any;
+  slideOptsOne = {
+    initialSlide: 0,
+    slidesPerView: 1,
+    autoplay: true,
+    speed: 3000,
+  };
   pedidos: Pedido[];
   promociones: Promocion[];
 
@@ -29,7 +37,6 @@ export class InicioPage {
 
   servidor = environment.url;
   c = 0;
-  topStories: any;
   direccion;
   tipocomercios: Tipocomercio[];
   id = null;
