@@ -31,7 +31,15 @@ export class AppComponent {
     private informacionService: InformacionService
   ) {
     this.initializeApp();
-    this.verificar();
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
+      this.statusBar.styleLightContent();
+      this.splashScreen.hide();
+      this.getInformacion();
+      this.verificar();
+    });
   }
   verificar() {
     this.storage.get(TOKEN_KEY).then((res) => {
@@ -49,26 +57,6 @@ export class AppComponent {
       }
     });
   }
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleLightContent();
-      this.splashScreen.hide();
-      this.getInformacion();
-
-      // subscribe to a topic
-      // this.fcm.subscribeToTopic('Deals');
-
-      // get FCM token
-
-      // refresh the FCM token
-      /*   this.fcm.onTokenRefresh().subscribe((token) => {
-        console.log(token);
-      });*/
-
-      // unsubscribe from a topic
-      // this.fcm.unsubscribeFromTopic('offers');
-    });
-  }
   async presentAlert() {
     const alert = await this.alertController.create({
       mode: "ios",
@@ -83,14 +71,12 @@ export class AppComponent {
   }
   logout() {
     this.authService.logout();
-    console.log("salir");
   }
   telefono;
   getInformacion() {
     this.informacionService.get().subscribe((data: Informacion[]) => {
       this.informaciones = data;
       this.telefono = this.informaciones[0].telefono;
-      console.log("telefono" + this.telefono);
     });
   }
 }

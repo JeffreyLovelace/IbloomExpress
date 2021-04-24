@@ -81,8 +81,8 @@ export class PedidoService {
   rechazado(token) {
     this.dato = {
       notification: {
-        title: "Su pedido fue rechazado",
-        body: "El pedido fue cancelado.",
+        title: "Su pedido fue cancelado",
+        body: "El comercio presento algun error ",
         sound: "default",
         click_action: "FCM_PLUGIN_ACTIVITY",
         icon: "fcm_push_icon",
@@ -103,8 +103,8 @@ export class PedidoService {
   enPreparacionDrivers() {
     this.dato = {
       notification: {
-        title: "Su pedido esta en preparación",
-        body: "Puede revisar el estado en el carrito de compras.",
+        title: "Nuevo pedido registrado",
+        body: "Dunne registro un nuevo pedido.",
         sound: "default",
         click_action: "FCM_PLUGIN_ACTIVITY",
         icon: "fcm_push_icon",

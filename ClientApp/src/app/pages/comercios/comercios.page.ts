@@ -23,7 +23,7 @@ export class ComerciosPage {
   myDate: String = new Date().toISOString();
   distanciaComercio;
   informaciones: Informacion[];
-
+  filterTerm;
   id = null;
   lattitude;
   longitude;

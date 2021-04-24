@@ -24,7 +24,7 @@ export class Tab3Page {
   direccion = null;
   referencia = null;
   precioMinimo = null;
-  estadoTrabajo: boolean;
+  estadoTrabajo;
   horarioEnt;
   horarioSal;
   public tracking: boolean = false;

@@ -36,17 +36,19 @@
                         <h2>Pedido Nr. {{pedido.id}}</h2>
                         <h3>{{pedido.nombreCompercio}}</h3>
                     </ion-label>
-                    <ion-badge *ngIf="pedido.id_estado==1" color="warning" slot="end">Espera</ion-badge>
+                    <ion-badge *ngIf="pedido.id_estado==2" color="warning" slot="end">En preparación</ion-badge>
                 </ion-item>
             </ion-list>
         </div>
     </div>
 
     <ion-row responsive-sm *ngIf="contador==0">
+        <ion-col> </ion-col>
         <ion-col style="text-align: center">
-            <img class="user-avatar round" style="height: auto; max-width: 23vh" src="https://image.flaticon.com/icons/svg/743/743280.svg" />
+            <img class="user-avatar round" style="height: auto; max-width: 23vh" src="../../assets/sad.svg" />
             <h2><strong>No hay pedidos en este momento</strong></h2>
         </ion-col>
+        <ion-col> </ion-col>
     </ion-row>
     <div *ngIf="!pedidos">
         <ion-list>

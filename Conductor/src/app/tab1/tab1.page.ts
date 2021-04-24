@@ -76,6 +76,10 @@ export class Tab1Page {
     private zone: NgZone,
     private informacionService: InformacionService
   ) {
+    this.fcm.getToken().then((token) => {
+      console.log(token);
+    });
+    this.fcm.subscribeToTopic("drivers");
     this.informacionService.get().subscribe((data: Informacion[]) => {
       this.informaciones = data;
       this.distanciaDriver = this.informaciones[0].distanciaDriver;
@@ -149,7 +153,7 @@ export class Tab1Page {
           markerLoc,
           center
         ) / 1000;
-      if (distanceInKm < this.distanciaDriver && comercio.id_estado == "1") {
+      if (distanceInKm < this.distanciaDriver && comercio.id_estado == "2") {
         console.log(comercio);
         this.contador++;
         this.mostrar.push(comercio);
@@ -199,7 +203,7 @@ export class Tab1Page {
       startForeground: true,
       stopOnStillActivity: true,
       activityType: "AutomotiveNavigation",
-      notificationTitle: "Ibloom Express",
+      notificationTitle: "Dunne Delivery",
       notificationText: this.nombre + " esta activo ",
     };
 
@@ -331,17 +335,13 @@ export class Tab1Page {
                   .subscribe((res) => {
                     console.log(res);
                   });
-                this.pedidoService
-                  .notificarcomercio(tokencomercio)
-                  .subscribe((res) => {
-                    console.log(res);
-                  });
-                if (data[0].id_estado != "1") {
+
+                if (data[0].id_estado != "2") {
                   this.presentAlertError();
                 } else {
                   this.pedido1 = {
                     id_conductor: this.id_client,
-                    id_estado: 2,
+                    id_estado: 3,
                   };
                   this.storage.get(TOKEN_KEY).then((res) => {
                     this.pedidoService

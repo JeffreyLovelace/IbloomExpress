@@ -148,7 +148,7 @@ export class PedidoService {
     this.dato = {
       notification: {
         title: "Pedido entregado",
-        body: "Gracias por usar Ibloom Express",
+        body: "Gracias por usar Dunne Delivery",
         sound: "default",
         click_action: "FCM_PLUGIN_ACTIVITY",
         icon: "fcm_push_icon",
