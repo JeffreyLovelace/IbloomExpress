@@ -90,7 +90,8 @@ export class LoginPage implements OnInit {
             const smsCode = response.code;
             this.firebaseAuthentication
               .signInWithVerificationId(verificationId, smsCode)
-              .then((res) => alert(res));
+              .then((res) => console.log(res))
+              .catch((err) => this.presentAlert());
           },
         },
       ],
@@ -124,5 +125,19 @@ export class LoginPage implements OnInit {
   login() {
     this.authService.login1(this.credentials);
     this.router.navigateByUrl("/ubicacion");
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      cssClass: "my-custom-class",
+      header: "Algo salió mal",
+      message: "Algo salio mal intentelo mas tarde por favor.",
+      buttons: ["OK"],
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    console.log("onDidDismiss resolved with role", role);
   }
 }

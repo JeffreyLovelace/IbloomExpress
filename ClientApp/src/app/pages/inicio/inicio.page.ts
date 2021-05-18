@@ -10,6 +10,7 @@ import { PedidoService } from "../../services/pedido.service";
 import { PublicacionesService } from "../../services/publicaciones.service";
 import { Promocion } from "../../interfaces/promocion";
 import { Publicacion } from "../../interfaces/publicacion";
+import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic/ngx";
 
 import { Pedido } from "../../interfaces/pedido";
 import { environment } from "../../../environments/environment";
@@ -49,8 +50,11 @@ export class InicioPage {
     private authService: AuthService,
     private clienteService: ClienteService,
     private pedidoService: PedidoService,
-    private publicacionesService: PublicacionesService
+    private publicacionesService: PublicacionesService,
+    private fcm: FCM
   ) {
+    this.fcm.subscribeToTopic("users");
+
     this.getNegocios();
     this.getPromociones();
     this.getPublicaciones();

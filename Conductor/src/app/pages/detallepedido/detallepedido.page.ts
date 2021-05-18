@@ -54,6 +54,7 @@ export class DetallepedidoPage implements OnInit {
   tiempoDelivery;
   longitude;
   pedidoDelivery;
+  envio;
   UpdatePedido = {
     id_estado: null,
   };
@@ -103,6 +104,7 @@ export class DetallepedidoPage implements OnInit {
         this.token = this.pedidos[0].token;
         this.telefono = this.pedidos[0].telefono;
         this.telefonoComercio = this.pedidos[0].telefonoComercio;
+        this.envio = this.pedidos[0].envio;
         // this.addMarker(this.latitud_pedido, this.longitud_pedido);
         this.loadMap();
 

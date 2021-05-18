@@ -126,6 +126,10 @@ const routes: Routes = [
     path: 'mispedidos',
     loadChildren: () => import('./pages/mispedidos/mispedidos.module').then( m => m.MispedidosPageModule)
   },
+  {
+    path: 'payment-information',
+    loadChildren: () => import('./pages/payment-information/payment-information.module').then( m => m.PaymentInformationPageModule)
+  },
 ];
 
 @NgModule({

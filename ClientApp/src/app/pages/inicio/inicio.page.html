@@ -57,88 +57,21 @@
         </ion-card>
     </div>
 
-    <div *ngIf="!tipocomercios">
-        <ion-list>
-            <ion-item>
-                <ion-thumbnail slot="start">
-                    <ion-skeleton-text animated></ion-skeleton-text>
-                </ion-thumbnail>
-                <ion-label>
-                    <h3>
-                        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
-                    </h3>
-                    <p>
-                        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
-                    </p>
-                    <p>
-                        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-                    </p>
-                </ion-label>
-            </ion-item>
-            <ion-item>
-                <ion-thumbnail slot="start">
-                    <ion-skeleton-text animated></ion-skeleton-text>
-                </ion-thumbnail>
-                <ion-label>
-                    <h3>
-                        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
-                    </h3>
-                    <p>
-                        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
-                    </p>
-                    <p>
-                        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-                    </p>
-                </ion-label>
-            </ion-item>
-            <ion-item>
-                <ion-thumbnail slot="start">
-                    <ion-skeleton-text animated></ion-skeleton-text>
-                </ion-thumbnail>
-                <ion-label>
-                    <h3>
-                        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
-                    </h3>
-                    <p>
-                        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
-                    </p>
-                    <p>
-                        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-                    </p>
-                </ion-label>
-            </ion-item>
-            <ion-item>
-                <ion-thumbnail slot="start">
-                    <ion-skeleton-text animated></ion-skeleton-text>
-                </ion-thumbnail>
-                <ion-label>
-                    <h3>
-                        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
-                    </h3>
-                    <p>
-                        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
-                    </p>
-                    <p>
-                        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-                    </p>
-                </ion-label>
-            </ion-item>
-            <ion-item>
-                <ion-thumbnail slot="start">
-                    <ion-skeleton-text animated></ion-skeleton-text>
-                </ion-thumbnail>
-                <ion-label>
-                    <h3>
-                        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
-                    </h3>
-                    <p>
-                        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
-                    </p>
-                    <p>
-                        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-                    </p>
-                </ion-label>
-            </ion-item>
-        </ion-list>
+    <div style="margin-left: 3%" *ngIf="!tipocomercios">
+        <ion-thumbnail style="min-width: 97%; min-height: 12rem">
+            <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <br />
+
+        <ion-grid no-padding *ngFor="let skeleton of [0,1,2,4]">
+            <ion-row>
+                <ion-col size="4" *ngFor="let skeleton of [0,1,2]">
+                    <ion-thumbnail style="min-width: 6rem; min-height: 7rem">
+                        <ion-skeleton-text animated></ion-skeleton-text>
+                    </ion-thumbnail>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <br />
     </div>
 </ion-content>

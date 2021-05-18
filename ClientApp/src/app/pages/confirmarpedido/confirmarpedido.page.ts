@@ -45,6 +45,7 @@ export class ConfirmarpedidoPage {
     total: null,
     nota: null,
     tiempoDelivery: null,
+    envio: null,
   };
   id_pedido;
   logo;
@@ -67,6 +68,8 @@ export class ConfirmarpedidoPage {
   token;
   errorSocial = false;
   idcomercio;
+  paymant;
+
   comercios: Comercio[];
   totalDelivery;
   constructor(
@@ -126,6 +129,10 @@ export class ConfirmarpedidoPage {
         });
     });
   }
+  radioGroupChange(event) {
+    console.log("radioGroupChange", event.detail.value);
+    this.paymant = event.detail.value;
+  }
   verificarCantidad() {}
   pedido(id) {
     if (this.razonSocial != null) {
@@ -140,6 +147,7 @@ export class ConfirmarpedidoPage {
         total: this.total,
         nota: this.desc,
         tiempoDelivery: this.tiempo,
+        envio: this.paymant,
       };
 
       this.storage.get("pedido").then((val) => {

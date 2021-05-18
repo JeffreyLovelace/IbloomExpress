@@ -84,6 +84,19 @@
             <ion-label position="floating">¿Quieres aclarar algo?</ion-label>
             <ion-input [(ngModel)]="desc" placeholder="Detalles de la casa, # de puerta, etc."></ion-input>
         </ion-item>
+        <ion-item>
+            <ion-label>Metodo de pago</ion-label>
+        </ion-item>
+        <ion-radio-group value="efectivo" color="primary" (ionChange)="radioGroupChange($event)">
+            <ion-item color="none" class="card-style">
+                <ion-label>Efectivo</ion-label>
+                <ion-radio slot="end" value="efectivo"></ion-radio>
+            </ion-item>
+            <ion-item color="none">
+                <ion-label>QR</ion-label>
+                <ion-radio slot="end" value=""></ion-radio>
+            </ion-item>
+        </ion-radio-group>
     </ion-list>
 </ion-content>
 <ion-footer line="none" (click)="presentAlertConfirm()">

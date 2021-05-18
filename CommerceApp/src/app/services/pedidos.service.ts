@@ -105,7 +105,7 @@ export class PedidoService {
       notification: {
         title: "Nuevo pedido registrado",
         body: "Dunne registro un nuevo pedido.",
-        sound: "default",
+        sound: "sound.mp3",
         click_action: "FCM_PLUGIN_ACTIVITY",
         icon: "fcm_push_icon",
       },

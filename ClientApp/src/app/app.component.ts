@@ -1,13 +1,11 @@
 import { Component } from "@angular/core";
 import { AlertController } from "@ionic/angular";
-
+import { NavController } from "@ionic/angular";
 import { Platform } from "@ionic/angular";
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
 import { AuthService } from "./services/auth.service";
 import { Storage } from "@ionic/storage";
-import { Router } from "@angular/router";
-import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic/ngx";
 import { InformacionService } from "./services/informacion.service";
 import { Informacion } from "./interfaces/informacion";
 const TOKEN_KEY = "access_token";
@@ -26,34 +24,30 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private authService: AuthService,
-    private router: Router,
     private storage: Storage,
     public alertController: AlertController,
-    private fcm: FCM,
+    private navController: NavController,
     private informacionService: InformacionService
   ) {
     this.initializeApp();
-    this.verificar();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      //this.verificar();
-      this.getInformacion();
-
       this.statusBar.styleLightContent();
+      this.verificar();
 
+      this.getInformacion();
       this.splashScreen.hide();
-      this.fcm.subscribeToTopic("users");
-      console.log("driver suscribe");
     });
   }
+
   verificar() {
     this.storage.get(TOKEN_KEY).then((res) => {
       if (res) {
         this.authService.getUser(res).subscribe((response) => {
           if (response.id_rol == "1") {
-            this.router.navigate(["ubicacion"]);
+            this.navController.navigateForward(["ubicacion"]);
             this.correo = response.email;
             this.name = response.name;
           } else {
@@ -62,7 +56,7 @@ export class AppComponent {
           }
         });
       } else {
-        this.router.navigate(["/login"]);
+        this.navController.navigateForward(["/login"]);
       }
     });
   }
@@ -81,14 +75,13 @@ export class AppComponent {
   }
   logout() {
     this.authService.logout();
-    console.log("salir");
   }
+
   telefono;
   getInformacion() {
     this.informacionService.get().subscribe((data: Informacion[]) => {
       this.informaciones = data;
       this.telefono = this.informaciones[0].telefono;
-      console.log("telefono" + this.telefono);
     });
   }
 }

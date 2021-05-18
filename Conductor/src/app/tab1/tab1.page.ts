@@ -330,11 +330,9 @@ export class Tab1Page {
             this.pedidoService
               .detalle(res, pedido_id)
               .subscribe((data: Pedido[]) => {
-                this.pedidoService
-                  .enPreparacion(tokenpedido)
-                  .subscribe((res) => {
-                    console.log(res);
-                  });
+                this.pedidoService.tomarPedido(tokenpedido).subscribe((res) => {
+                  console.log(res);
+                });
 
                 if (data[0].id_estado != "2") {
                   this.presentAlertError();
