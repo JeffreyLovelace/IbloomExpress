@@ -85,16 +85,16 @@
             <ion-input [(ngModel)]="desc" placeholder="Detalles de la casa, # de puerta, etc."></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label>Metodo de pago</ion-label>
+            <ion-label> <strong> Metodo de pago</strong> </ion-label>
         </ion-item>
-        <ion-radio-group value="efectivo" color="primary" (ionChange)="radioGroupChange($event)">
+        <ion-radio-group value="Efectivo" color="primary" (ionChange)="radioGroupChange($event)">
             <ion-item color="none" class="card-style">
                 <ion-label>Efectivo</ion-label>
-                <ion-radio slot="end" value="efectivo"></ion-radio>
+                <ion-radio slot="end" value="Efectivo"></ion-radio>
             </ion-item>
             <ion-item color="none">
                 <ion-label>QR</ion-label>
-                <ion-radio slot="end" value=""></ion-radio>
+                <ion-radio slot="end" value="QR"></ion-radio>
             </ion-item>
         </ion-radio-group>
     </ion-list>

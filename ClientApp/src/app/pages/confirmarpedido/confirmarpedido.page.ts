@@ -135,6 +135,8 @@ export class ConfirmarpedidoPage {
   }
   verificarCantidad() {}
   pedido(id) {
+    console.log("pago"+this.paymant);
+    
     if (this.razonSocial != null) {
       this.errorSocial = true;
       this.pedido1 = {
