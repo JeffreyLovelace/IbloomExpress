@@ -34,14 +34,14 @@ import * as firebase from "firebase";
     AppRoutingModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp({
-      apiKey: "AIzaSyDo2NMNimUHRIBT6AIOWPSjl0LITLr-6kk",
-      authDomain: "ibloomexpress-2a20a.firebaseapp.com",
-      databaseURL: "https://ibloomexpress-2a20a.firebaseio.com",
-      projectId: "ibloomexpress-2a20a",
-      storageBucket: "ibloomexpress-2a20a.appspot.com",
-      messagingSenderId: "238573758608",
-      appId: "1:238573758608:web:cca05f7d5c54022b291015",
-      measurementId: "G-NSE47FPJYG",
+      apiKey: "AIzaSyC9g69oJi5NuwQfOSLKo7FiuHFAVXDcPrI",
+      authDomain: "klausux-b5c54.firebaseapp.com",
+      databaseURL: "https://klausux-b5c54-default-rtdb.firebaseio.com",
+      projectId: "klausux-b5c54",
+      storageBucket: "klausux-b5c54.appspot.com",
+      messagingSenderId: "14368813630",
+      appId: "1:14368813630:web:0f11d1706a739f2a4a976f",
+      measurementId: "G-PKGY7FZK5K",
     }),
 
     IonicStorageModule.forRoot({

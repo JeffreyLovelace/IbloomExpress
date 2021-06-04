@@ -45,7 +45,6 @@ export class ConfirmarpedidoPage {
     total: null,
     nota: null,
     tiempoDelivery: null,
-    envio: null,
   };
   id_pedido;
   logo;
@@ -135,8 +134,8 @@ export class ConfirmarpedidoPage {
   }
   verificarCantidad() {}
   pedido(id) {
-    console.log("pago"+this.paymant);
-    
+    console.log("pago" + this.paymant);
+
     if (this.razonSocial != null) {
       this.errorSocial = true;
       this.pedido1 = {
@@ -149,7 +148,6 @@ export class ConfirmarpedidoPage {
         total: this.total,
         nota: this.desc,
         tiempoDelivery: this.tiempo,
-        envio: this.paymant,
       };
 
       this.storage.get("pedido").then((val) => {
@@ -259,12 +257,11 @@ export class ConfirmarpedidoPage {
       console.log("pedido confirmado");
     });
     const alert = await this.alertController.create({
-      mode: "ios",
       cssClass: "my-custom-class",
       header: "Exito!",
       message:
         "Su pedido se registro correctamente. Nos pondremos en contacto cuando el pedido este en su puerta. También, puede observar el estado del pedido en el carrito de compras. ",
-      buttons: ["OK"],
+      buttons: ["Aceptar"],
     });
     this.pedidoService.notification(this.token);
     await alert.present();

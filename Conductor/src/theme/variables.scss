@@ -5,19 +5,19 @@
 
 :root {
     /** primary **/
-    --ion-color-primary: #69cdd0;
+    --ion-color-primary: #0075b5;
     --ion-color-primary-rgb: 56, 128, 255;
     --ion-color-primary-contrast: #ffffff;
     --ion-color-primary-contrast-rgb: 255, 255, 255;
-    --ion-color-primary-shade: #83eff3;
-    --ion-color-primary-tint: #96f0f3;
+    --ion-color-primary-shade: #04679d;
+    --ion-color-primary-tint: #0583c8;
     /** secondary **/
-    --ion-color-secondary: #f77f4b;
+    --ion-color-secondary: #46acea;
     --ion-color-secondary-rgb: 12, 209, 232;
     --ion-color-secondary-contrast: #ffffff;
     --ion-color-secondary-contrast-rgb: 255, 255, 255;
-    --ion-color-secondary-shade: #eb9b79;
-    --ion-color-secondary-tint: #eeb095;
+    --ion-color-secondary-shade: #3ea0db;
+    --ion-color-secondary-tint: #46acea;
     /** tertiary **/
     --ion-color-tertiary: #7044ff;
     --ion-color-tertiary-rgb: 112, 68, 255;
@@ -71,9 +71,9 @@
 
 
 /*
-* Dark Colors
-* -------------------------------------------
-*/
+ * Dark Colors
+ * -------------------------------------------
+ */
 
 body.dark {
     --ion-color-primary: #428cff;
@@ -134,9 +134,9 @@ body.dark {
 
 
 /*
-* iOS Dark Theme
-* -------------------------------------------
-*/
+ * iOS Dark Theme
+ * -------------------------------------------
+ */
 
 .ios body.dark {
     --ion-background-color: #000000;
@@ -169,9 +169,9 @@ body.dark {
 
 
 /*
-* Material Design Dark Theme
-* -------------------------------------------
-*/
+ * Material Design Dark Theme
+ * -------------------------------------------
+ */
 
 .md body.dark {
     --ion-background-color: #121212;

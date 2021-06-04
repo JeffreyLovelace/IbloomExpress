@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "238573758608",
-    "firebase_url": "https://ibloomexpress-2a20a.firebaseio.com",
-    "project_id": "ibloomexpress-2a20a",
-    "storage_bucket": "ibloomexpress-2a20a.appspot.com"
+    "project_number": "14368813630",
+    "firebase_url": "https://klausux-b5c54-default-rtdb.firebaseio.com",
+    "project_id": "klausux-b5c54",
+    "storage_bucket": "klausux-b5c54.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:238573758608:android:39031e247e32dbe4291015",
+        "mobilesdk_app_id": "1:14368813630:android:52c8ed54ac0c6f414a976f",
         "android_client_info": {
-          "package_name": "com.driver.myapp"
+          "package_name": "com.klausux.clien"
         }
       },
       "oauth_client": [
         {
-          "client_id": "238573758608-1kv7qn9nolah3tf4c8luecuhb9koo1ma.apps.googleusercontent.com",
+          "client_id": "14368813630-2g3na3livqnqh7bc07ced5ia342md4kv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDpkI0NLY7sI1Au81vWRtlmXIe_DRkD450"
+          "current_key": "AIzaSyCz2x90DEGpCzxUjeDZLxR95g3MwVj3foc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "238573758608-1kv7qn9nolah3tf4c8luecuhb9koo1ma.apps.googleusercontent.com",
+              "client_id": "14368813630-2g3na3livqnqh7bc07ced5ia342md4kv.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -37,27 +37,27 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:238573758608:android:f7f0ce89a7b17f33291015",
+        "mobilesdk_app_id": "1:14368813630:android:965ec8f690d43e774a976f",
         "android_client_info": {
-          "package_name": "com.ibloomcommerce.myapp"
+          "package_name": "com.klausux.commerce"
         }
       },
       "oauth_client": [
         {
-          "client_id": "238573758608-1kv7qn9nolah3tf4c8luecuhb9koo1ma.apps.googleusercontent.com",
+          "client_id": "14368813630-2g3na3livqnqh7bc07ced5ia342md4kv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDpkI0NLY7sI1Au81vWRtlmXIe_DRkD450"
+          "current_key": "AIzaSyCz2x90DEGpCzxUjeDZLxR95g3MwVj3foc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "238573758608-1kv7qn9nolah3tf4c8luecuhb9koo1ma.apps.googleusercontent.com",
+              "client_id": "14368813630-2g3na3livqnqh7bc07ced5ia342md4kv.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -66,56 +66,27 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:238573758608:android:cba193edcac71320291015",
+        "mobilesdk_app_id": "1:14368813630:android:b25a80e76ddd75484a976f",
         "android_client_info": {
-          "package_name": "com.ibloomdriver.myapp"
+          "package_name": "com.klausux.driver"
         }
       },
       "oauth_client": [
         {
-          "client_id": "238573758608-1kv7qn9nolah3tf4c8luecuhb9koo1ma.apps.googleusercontent.com",
+          "client_id": "14368813630-2g3na3livqnqh7bc07ced5ia342md4kv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDpkI0NLY7sI1Au81vWRtlmXIe_DRkD450"
+          "current_key": "AIzaSyCz2x90DEGpCzxUjeDZLxR95g3MwVj3foc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "238573758608-1kv7qn9nolah3tf4c8luecuhb9koo1ma.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:238573758608:android:040a04a2a61dfb3b291015",
-        "android_client_info": {
-          "package_name": "com.robot.solar"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "238573758608-1kv7qn9nolah3tf4c8luecuhb9koo1ma.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDpkI0NLY7sI1Au81vWRtlmXIe_DRkD450"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "238573758608-1kv7qn9nolah3tf4c8luecuhb9koo1ma.apps.googleusercontent.com",
+              "client_id": "14368813630-2g3na3livqnqh7bc07ced5ia342md4kv.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -30,7 +30,6 @@ export class Pedido {
     public cliente: string,
     public fotoComercio: string,
     public tokenComercio: string,
-    public pedidoDelivery: string,
-    public envio: string
+    public pedidoDelivery: string
   ) {}
 }

@@ -35,9 +35,9 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleLightContent();
-      this.verificar();
+      this.verificar1();
 
-      this.getInformacion();
+      //this.getInformacion();
       this.splashScreen.hide();
     });
   }
@@ -60,7 +60,19 @@ export class AppComponent {
       }
     });
   }
-
+  verificar1() {
+    this.storage.get(TOKEN_KEY).then((res) => {
+      if (res) {
+        this.authService.getUser(res).subscribe((response) => {
+          this.navController.navigateForward(["ubicacion"]);
+          this.correo = response.email;
+          this.name = response.name;
+        });
+      } else {
+        this.navController.navigateForward(["/login"]);
+      }
+    });
+  }
   async presentAlert() {
     const alert = await this.alertController.create({
       mode: "ios",

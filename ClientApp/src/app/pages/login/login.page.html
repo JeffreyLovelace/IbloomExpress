@@ -1,28 +1,26 @@
-<ion-content padding color="primary">
+<ion-content padding>
     <div class="ion-padding">
         <ion-label>
-            <h1 slot="start">
-                <strong>¡Bienvenido a <br />DUNNE!</strong>
+            <h1 slot="start" style="color: #0075b6">
+                <strong>¡Bienvenido a <br />KLAUSUX!</strong>
             </h1>
         </ion-label>
 
-        <div class="center">
-            <img class="header-img" src="/assets/icon.png" />
+        <div class="center" style="text-align: center; margin-top: 20%">
+            <img class="header-img" style="width: 60%" src="/assets/icon.png" />
         </div>
         <hr />
         <hr />
-        <ion-item lines="none" color="primary">
-            <ion-label>+591 </ion-label>
+        <ion-item lines="none" style="margin-top: 15%">
+            <ion-label class="text">+591 </ion-label>
 
             <ion-input clearInput type="number" placeholder="Número de celular" [(ngModel)]="number">
             </ion-input>
         </ion-item>
 
         <hr />
-        <hr />
-        <hr />
 
-        <ion-button mode="ios" expand="block" shape="round" (click)="enviarMensaje()" color="secondary">
+        <ion-button mode="ios" expand="block" shape="round" (click)="login()" color="secondary">
             <strong>Ingresar</strong></ion-button>
     </div>
 </ion-content>

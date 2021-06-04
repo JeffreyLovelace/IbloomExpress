@@ -1,7 +1,0 @@
-{
-  "name": "IbloomDriver",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "angular"
-}

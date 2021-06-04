@@ -58,7 +58,7 @@ export class PedidoService {
   notification(tokenComercio) {
     this.dato = {
       notification: {
-        title: "DUNNE",
+        title: "KLAUSUX",
         body: "Nuevo pedido registrado",
         sound: "default",
         click_action: "FCM_PLUGIN_ACTIVITY",
@@ -69,7 +69,7 @@ export class PedidoService {
     };
     let headers = new HttpHeaders().set(
       "Authorization",
-      "key=AAAAN4waqJA:APA91bGyHIgTqk9zdVYH7ZdssvG_rrQCPznyx5oq7xN5kW2u-jNE36nN3Vhh-iydzF-YVPTO1n8bScAQYylWlctANayXjZVEkKa8FfWiAb-S5yA8ijLOB4puX-QcFYpScbzGq144f-NC"
+      "key=AAAAA1hysj4:APA91bG7oneU1TwNwbzeT8LQV1vHqtXBJuPRY6lXIHfwJO4S9vYyrQEj3s3N190fbixUX23qx3CS1kw8TnHS2HXx9d6gaFOdVrVF6RF-w4L2vt0IFtPT8PGV65MYYnqPWKllf57Y0UcT"
     );
     headers = headers.append("Content-Type", "application/json");
 
